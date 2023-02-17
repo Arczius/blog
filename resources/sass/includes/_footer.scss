@@ -1,0 +1,33 @@
+
+.footer {
+    background-color: #ffffff;
+    padding: 0.7rem;
+
+    &__inner {
+
+        display: flex;
+        justify-content: space-between;
+        width: 98.5%;
+    }
+
+    &__left,
+    &__right {
+        align-items: center;
+        display: flex;
+    }
+
+    &__right {
+        a {
+            color: $blue-colour;
+        }
+    }
+
+    &__left {
+        h3 {
+            color: $orange-colour;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+    }
+}
+
