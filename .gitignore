@@ -14,3 +14,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+# these files are auto generated and machine specific, so we'll be adding them to the gitignore
+public/js/*
+public/mix-manifest.json
