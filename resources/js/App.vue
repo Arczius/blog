@@ -1,7 +1,5 @@
 <template>
     <Header/>
-    <router-link to="/" exact>home</router-link>
-    <router-link to="/about">about</router-link>
     <router-view></router-view>
     <Footer/>
 </template>

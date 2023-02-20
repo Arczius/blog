@@ -1,0 +1,9 @@
+@mixin orange_button {
+    background: $orange-colour;
+    color: $white-colour;
+
+    &:hover {
+        background: darken($orange-colour, 15%);
+        color: darken($white-colour, 15%);
+    }
+}

@@ -2,7 +2,7 @@
     <header class="header">
         <div class="header__inner">
             <div class="header__left">
-                <img :src="logo" class="header__left--image"> Blog.
+                <img :src="logo" class="header__left--image"> <strong>Blog.</strong>
             </div>
             <div class="header__right">
                 <router-link to="/home">Home</router-link>

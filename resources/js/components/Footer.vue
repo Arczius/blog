@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer">
+    <footer :class="'footer ' + footerClassList">
         <div class="footer__inner">
 
             <div class="footer__left">
@@ -15,4 +15,30 @@
 </template>
 
 <style scoped>
+
 </style>
+
+<script>
+export default {
+    data(){
+        return {
+            'footerClassList': null,
+        }
+    },
+    methods: {
+        footerWindowHeightCheck(){
+
+            this.footerClassList = (window.innerHeight > document.body.offsetHeight)
+            ? "footer__sticky footer__sticky--bottom"
+                : null
+
+        }
+    },
+    mounted(){
+        this.footerWindowHeightCheck()
+    },
+    updated(){
+        this.footerWindowHeightCheck()
+    }
+}
+</script>

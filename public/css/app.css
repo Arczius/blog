@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+@import url(https://fonts.cdnfonts.com/css/chunkfive-ex);
 * {
   margin: 0;
   padding: 0;
@@ -6,11 +8,35 @@
 
 body {
   background-color: #f4f4f4;
-  font-family: sans-serif;
+  font-family: "Work Sans", sans-serif;
+}
+
+button {
+  font-family: "Work Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong {
+  font-family: "ChunkFive Ex", sans-serif;
+  font-weight: 400;
 }
 
 a {
   text-decoration: none;
+}
+
+button {
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  padding: 8px 20px;
+  transition-duration: 0.3s;
 }
 
 .header {
@@ -52,4 +78,95 @@ a {
   -o-object-position: center center;
      object-position: center center;
   width: 40px;
+}
+
+.footer {
+  background-color: #ffffff;
+  padding: 0.7rem;
+}
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  width: 98.5%;
+}
+.footer__left, .footer__right {
+  align-items: center;
+  display: flex;
+}
+.footer__right a {
+  color: #111b4e;
+}
+.footer__left h3 {
+  color: #d66d35;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.login__holder {
+  align-items: flex-end;
+  background: #111b4e;
+  display: flex;
+  height: 95vh;
+  justify-content: center;
+  position: relative;
+}
+.login__background-image {
+  aspect-ratio: 1/1;
+  bottom: 10%;
+  bottom: 2.5rem;
+  height: 90%;
+  left: 2.5rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+}
+.login__form {
+  background-color: #ffffff;
+  border-radius: 2.43rem 2.43rem 0 0;
+  display: grid;
+  gap: 1rem;
+  min-width: 450px;
+  padding: 3rem;
+  position: relative;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.login__title {
+  color: #111b4e;
+  font-size: 2rem;
+}
+.login__input--username, .login__input--password {
+  border: solid 2px lightgray;
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+.login__button {
+  background: #d66d35;
+  color: #ffffff;
+}
+.login__button:hover {
+  background: #9e4c20;
+  color: #d9d9d9;
+}
+.login__spacer {
+  height: 7rem;
+}
+.login__bottom-links {
+  display: flex;
+  justify-content: center;
+}
+.login__bottom-links--password-forget {
+  color: #cdcdcd;
+}
+.login__bottom-links--password-forget img {
+  height: 1rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 1rem;
+}
+.login__bottom-links--register {
+  color: #d66d35;
 }

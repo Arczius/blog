@@ -1,0 +1,76 @@
+.login {
+
+
+    &__holder {
+        align-items: flex-end;
+        background: $blue-colour;
+        display: flex;
+        height: 95vh;
+        justify-content: center;
+        position: relative;
+    }
+
+    &__background-image{
+        aspect-ratio: 1/1;
+        bottom: 10%;
+        bottom: 2.5rem;
+        height: 90%;
+        left: 2.5rem;
+        object-fit: contain;
+        position: absolute;
+    }
+
+    &__form {
+        background-color: $white-colour;
+        border-radius: 2.43rem 2.43rem 0 0;
+        display: grid;
+        gap: 1rem;
+        min-width: 450px;
+        padding: 3rem;
+        position: relative;
+        width: max-content;
+    }
+
+    &__title {
+        color: $blue-colour;
+        font-size: 2rem;
+    }
+
+    &__input {
+        &--username, &--password {
+            border: solid 2px lightgray;
+            border-radius: 0.5rem;
+            outline: none;
+            padding: 0.5rem 1rem;
+            width: 100%;
+        }
+    }
+
+    &__button {
+        @include orange_button;
+    }
+
+    &__spacer {
+        height: 7rem;
+    }
+
+    &__bottom-links {
+        display: flex;
+        justify-content: center;
+
+        &--password-forget {
+            color: $gray-colour;
+
+            img {
+                height: 1rem;
+                object-fit: contain;
+                width: 1rem;
+            }
+        }
+
+        &--register {
+            color: $orange-colour;
+        }
+    }
+
+}
