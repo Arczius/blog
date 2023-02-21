@@ -18,6 +18,6 @@ class Categories extends Model
 
     // a category can have multiple posts
     public function post(){
-        return $this->hasMany(Posts::class);
+        return $this->belongsToMany(Posts::class, 'categories_posts', 'category_id', 'post_id');
     }
 }

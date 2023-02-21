@@ -29,4 +29,5 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 
 Route::prefix('category')->controller(CategoriesController::class)->group(function () {
     Route::get('', 'getAllCategories');
+    Route::get('/top', 'getTopCategories');
 });

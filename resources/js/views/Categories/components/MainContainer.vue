@@ -37,7 +37,6 @@ export default {
             axios.get('/api/category')
                 .then((response) => {
                     this.categories = response.data.categories
-                    console.log(this.categories)
                 })
                 .catch((error) => {
                     console.warn(error)

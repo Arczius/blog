@@ -18,4 +18,15 @@ class CategoriesController extends Controller
             'categories' => Categories::all(),
         ]);
     }
+
+    public function getTopCategories() : JsonResponse
+    {
+        $categories = Categories::withCount('post')->orderBy('post_count', 'desc')->limit(6)->get();
+
+        return response()->json(
+            [
+                'top_categories' => $categories,
+            ]
+        );
+    }
 }
