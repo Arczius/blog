@@ -25,7 +25,6 @@ class AuthController extends Controller
                 'handle'            =>  'required|string|unique:users,handle|max:255',
                 'email'             =>  'email|required|unique:users,email|max:255',
                 'password'          =>  'required|string|max:255',
-                'about_me'          =>  'nullable|string|max:255',
             ]);
 
             if($validatedUser->fails()){
@@ -40,7 +39,6 @@ class AuthController extends Controller
                 'handle'    =>  $request->handle,
                 'email'     =>  $request->email,
                 'password'  =>  Hash::make($request->password),
-                'about_me'  =>  $request->about_me,
             ]);
 
             return response()->json([
@@ -80,9 +78,8 @@ class AuthController extends Controller
             ];
 
             if(Auth::attempt($credentials)) {
-                Session::put($credentials);
-                Session::save($credentials);
-
+                $user = Auth::user();
+                
                 return response()->json([
                     'status' => 'success',
                     'handle' => $request->handle

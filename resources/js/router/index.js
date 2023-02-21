@@ -7,9 +7,9 @@ const routes = [
         component: () => import('../views/Index/Index.vue')
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () => import("../views/about")
+        path: '/register',
+        name: 'Register',
+        component: async () => await import('../views/Register/Index.vue')
     }
 ]
 
