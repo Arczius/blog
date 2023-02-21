@@ -9,6 +9,7 @@
 body {
   background-color: #f4f4f4;
   font-family: "Work Sans", sans-serif;
+  overflow-x: hidden;
 }
 
 button {
@@ -102,7 +103,8 @@ button {
   font-weight: 800;
 }
 
-.login__holder {
+.login__holder,
+.register__holder {
   align-items: flex-end;
   background: #111b4e;
   display: flex;
@@ -110,7 +112,8 @@ button {
   justify-content: center;
   position: relative;
 }
-.login__background-image {
+.login__background-image,
+.register__background-image {
   aspect-ratio: 1/1;
   bottom: 10%;
   bottom: 2.5rem;
@@ -120,7 +123,8 @@ button {
      object-fit: contain;
   position: absolute;
 }
-.login__form {
+.login__form,
+.register__form {
   background-color: #ffffff;
   border-radius: 2.43rem 2.43rem 0 0;
   display: grid;
@@ -132,41 +136,66 @@ button {
   width: -moz-max-content;
   width: max-content;
 }
-.login__title {
+.login__title,
+.register__title {
   color: #111b4e;
   font-size: 2rem;
 }
-.login__input--username, .login__input--password {
+.login__errors,
+.register__errors {
+  display: grid;
+  gap: 0.7rem;
+}
+.login__errors--error,
+.register__errors--error {
+  border: solid 1px #FF9494;
+  border-radius: 0.4rem;
+  color: #FF9494;
+  font-weight: 800;
+  padding: 0.8rem 1rem;
+}
+.login__input--username, .login__input--password, .login__input--name, .login__input--email,
+.register__input--username,
+.register__input--password,
+.register__input--name,
+.register__input--email {
   border: solid 2px lightgray;
   border-radius: 0.5rem;
   outline: none;
   padding: 0.5rem 1rem;
   width: 100%;
 }
-.login__button {
+.login__button,
+.register__button {
   background: #d66d35;
   color: #ffffff;
 }
-.login__button:hover {
+.login__button:hover,
+.register__button:hover {
   background: #9e4c20;
   color: #d9d9d9;
 }
-.login__spacer {
+.login__spacer,
+.register__spacer {
   height: 7rem;
 }
-.login__bottom-links {
+.login__bottom-links,
+.register__bottom-links {
   display: flex;
   justify-content: center;
 }
-.login__bottom-links--password-forget {
+.login__bottom-links--password-forget,
+.register__bottom-links--password-forget {
   color: #cdcdcd;
 }
-.login__bottom-links--password-forget img {
+.login__bottom-links--password-forget img,
+.register__bottom-links--password-forget img {
   height: 1rem;
   -o-object-fit: contain;
      object-fit: contain;
   width: 1rem;
 }
-.login__bottom-links--register {
+.login__bottom-links--register,
+.register__bottom-links--register {
   color: #d66d35;
 }

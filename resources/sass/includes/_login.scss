@@ -1,4 +1,5 @@
-.login {
+.login,
+.register {
 
 
     &__holder {
@@ -36,8 +37,24 @@
         font-size: 2rem;
     }
 
+    &__errors {
+        display: grid;
+        gap: 0.7rem;
+
+        &--error {
+            border: solid 1px #{$error-colour};
+            border-radius: 0.4rem;
+            color: $error-colour;
+            font-weight: 800;
+            padding: 0.8rem 1rem;
+        }
+    }
+
     &__input {
-        &--username, &--password {
+        &--username,
+        &--password,
+        &--name,
+        &--email {
             border: solid 2px lightgray;
             border-radius: 0.5rem;
             outline: none;
