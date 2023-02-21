@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Posts;
+use App\Models\Comments;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,21 +29,16 @@ class User extends Authenticatable
         'profile_header',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-    ];
+    public function posts(){
+        return $this->hasMany(Posts::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comments::class);
+    }
 }
