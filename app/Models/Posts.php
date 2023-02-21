@@ -8,12 +8,10 @@ use App\Models\Category;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class Post extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'title',
@@ -22,14 +20,17 @@ class Post extends Model
         'timestamp',
     ];
 
+    // a post belongs to one user
     public function author(){
         return $this->belongsTo(User::class);
     }
 
+    // a post can have multiple comments
     public function postComments(){
         return $this->hasMany(Comment::class);
     }
 
+    // a post can have one category
     public function postCategory(){
         return $this->hasOne(Category::class);
     }

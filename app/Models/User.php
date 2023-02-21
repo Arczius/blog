@@ -7,18 +7,12 @@ use App\Models\Comments;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'username',
         'handle',
@@ -34,10 +28,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // a user can have multiple posts
     public function posts(){
         return $this->hasMany(Posts::class);
     }
 
+    // a user can have multiple comments
     public function comments(){
         return $this->hasMany(Comments::class);
     }

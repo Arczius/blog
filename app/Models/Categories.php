@@ -6,18 +6,17 @@ use App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class Category extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'name',
         'picture',
     ];
 
+    // a category can have multiple posts
     public function post(){
         return $this->hasMany(Posts::class);
     }

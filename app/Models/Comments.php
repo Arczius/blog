@@ -7,21 +7,21 @@ use App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class Comment extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'Comment',
     ];
 
+    // a comment belongs to one user
     public function author(){
         return $this->belongsTo(User::class);
     }
 
+    // a comment belongs to one post
     public function post(){
         return $this->belongsTo(Posts::class);
     }
