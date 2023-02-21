@@ -55,7 +55,7 @@ class AuthController extends Controller
         }
     }
 
-    public function loginUser(Request $request)
+    public function loginUser(Request $request) : JsonResponse
     {
         try {
 
@@ -79,7 +79,7 @@ class AuthController extends Controller
 
             if(Auth::attempt($credentials)) {
                 $user = Auth::user();
-                
+
                 return response()->json([
                     'status' => 'success',
                     'handle' => $request->handle

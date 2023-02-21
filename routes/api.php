@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,8 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/create', 'createUser');
     Route::post('/login', 'loginUser');
     Route::post('', 'authorizeUser');
+});
+
+Route::prefix('category')->controller(CategoriesController::class)->group(function () {
+    Route::get('', 'getAllCategories');
 });
