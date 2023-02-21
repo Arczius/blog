@@ -7,10 +7,10 @@ const routes = [
         component: () => import('../views/Index/Index.vue')
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () => import("../views/about")
-    }
+        path: '/create',
+        name: 'create',
+        component: () => import('../views/BlogCreate/Index.vue')
+    },
 ]
 
 const router = createRouter({
