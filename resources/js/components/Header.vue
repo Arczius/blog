@@ -8,7 +8,7 @@
                 <router-link to="/home">Home</router-link>
                 <router-link to="/explore">Ontdek</router-link>
                 <router-link to="/following">Volgend</router-link>
-                <router-link to="/categories">Categorieen</router-link>
+                <router-link to="/categories">Categorieën</router-link>
                 <router-link to="/posts/top">Top posts</router-link>
 
 
