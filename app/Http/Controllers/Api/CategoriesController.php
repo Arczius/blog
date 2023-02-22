@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-// use App\Models\Categories;
 use App\Models\Categories;
 
 class CategoriesController extends Controller
