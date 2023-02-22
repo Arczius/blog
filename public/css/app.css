@@ -199,3 +199,60 @@ button {
 .register__bottom-links--register {
   color: #d66d35;
 }
+
+.profile__banner {
+  height: 350px;
+  width: 100%;
+}
+.profile__banner--image {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.profile__picture {
+  display: flex;
+  padding: 3rem;
+}
+.profile__picture--image {
+  border-radius: 100%;
+  border: 10px solid #ffffff;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  padding: 0rem;
+  position: relative;
+  top: -175px;
+  width: 300px;
+}
+.profile__user {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+  padding-bottom: 1rem;
+  padding-left: 3rem;
+  position: relative;
+  top: -100px;
+  width: 400px;
+}
+.profile__user--name {
+  color: #d66d35;
+  font-weight: 800;
+  padding-bottom: 0.2rem;
+}
+.profile__user--username {
+  color: #111b4e;
+  font-weight: 800;
+}
+.profile__user--description {
+  color: lightgray;
+  font-size: 1rem;
+}
+.profile__user__button {
+  background-color: #111b4e;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+  width: 200px;
+}
