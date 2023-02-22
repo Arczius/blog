@@ -1,14 +1,16 @@
 <template>
-    <div class="create__form">
-        <div>
-            <img class="create__image" :src="ProfilePicture">
-        </div>
+    <div class="create__holder">
+        <div class="create__form">
+            <div>
+                <img class="create__image" :src="ProfilePicture">
+            </div>
 
-        <div>
-            <button @onclick="toggleComponent" class="create__input">Maak een blog</button>
+            <router-link :to="{ name: 'blogDetails'}">
+                <div class="create__input">
+                    Maak een blog
+                </div>
+            </router-link>
         </div>
-
-        <detail-component v-if="showComponent"/>
     </div>
 </template>
 
@@ -17,22 +19,16 @@
 </script>
 
 <script>
-export default {
-    name: "BlogCreate",
-    components: {
-        BlogDetail,
-    },
+    export default {
+        name: "BlogCreate",
 
-    data(){
-        return {
-            showComponent: false,
-        }
-    },
+        data() {
+            return {
+            }
+        },
 
-    methods: {
-        toggleComponent () {
-            this.showComponent = !this.showComponent;
-        }
-    },
-}
+        methods: {
+
+        },
+    }
 </script>

@@ -7,9 +7,14 @@ const routes = [
         component: () => import('../views/Index/Index.vue')
     },
     {
-        path: '/create',
+        path: '/post/create',
         name: 'create',
         component: () => import('../views/BlogCreate/Index.vue')
+    },
+    {
+        path: '/post/details',
+        name: 'blogDetails',
+        component: () => import('../views/BlogDetails/Index.vue')
     },
 ]
 
