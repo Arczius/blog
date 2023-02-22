@@ -28,4 +28,11 @@ class CategoriesController extends Controller
             ]
         );
     }
+
+    public function getCategoriesByAmount(String $amount)
+    {
+        return response()->json([
+            'categories' => Categories::limit($amount)->get()
+        ]);
+    }
 }
