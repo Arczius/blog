@@ -37,6 +37,9 @@ export default {
                 .then((response) => {
                     this.categories = response.data.categories
                 })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
         }
     },
     mounted(){
@@ -44,4 +47,3 @@ export default {
     }
 }
 </script>
-

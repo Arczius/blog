@@ -4,12 +4,13 @@
     </section>
 
     <section>
-
+        <SideBarTopPosts/>
     </section>
 </template>
 
 <script setup>
 import SideBarCategories from './SideBarCategories.vue';
+import SideBarTopPosts from './SideBarTopPosts.vue';
 </script>
 
 
