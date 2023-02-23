@@ -5,7 +5,7 @@
                 <img class="create__image" :src="ProfilePicture">
             </div>
 
-            <router-link :to="{ name: 'blogDetails'}">
+            <router-link :to="{ name: 'store'}">
                 <div class="create__input">
                     Maak een blog
                 </div>

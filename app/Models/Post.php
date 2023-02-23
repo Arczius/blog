@@ -17,7 +17,6 @@ class Post extends Model
         'title',
         'description',
         'picture',
-        'timestamp',
     ];
 
     // a post belongs to one user

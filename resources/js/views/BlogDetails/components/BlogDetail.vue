@@ -3,41 +3,78 @@
         <div class="create__details">
             <div class="create__header">
                 <p class="create__header create__header--title">Post aanmaken</p>
-                <router-link :to="{ name: 'create'}">
+                <router-link :to="{name: 'create'}">
                     <button class="create__header create__header__discard">X</button>
                 </router-link>
             </div>
 
             <label for="create__details--title">Titel</label>
             <div>
-                <input class="create__details--title" type="text" placeholder="Post titel">
+                <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
             </div>
 
             <label for="create__details--description">Beschrijving</label>
             <div>
-                <textarea class="create__details--description" type="text" placeholder="Post beschrijving"></textarea>
+                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
             </div>
 
             <label for="create__details--image">Afbeelding</label>
             <div class="create_details--image">
-                <input type="file" accept="image/png, image/jpeg">
-                <!-- <img src="#" alt="uploaded image"> -->
+                <input v-on:change="getFile()" type="file" ref="files">
             </div>
 
             <div>
-                <button class="create__details--button">Maak post</button>
+                <button @click='sendRequest()' class="create__details--button">Maak post</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
-        name: "BlogDetail",
+        name: "store",
         data() {
             return {
-        
+                'title': null,
+                'description': null,
+                'picture': null,
             };
+        },
+
+        methods: {
+            getFile() {
+			    this.file = this.$refs.files.files[0]
+		    },
+
+            sendRequest() {
+			    axios.post('/api/blog/store', {
+                    'title': this.title,
+                    'description': this.description,
+				},
+				{
+					headers: { "Content-Type" : "application/json"}
+				}
+				)
+                .then(function (response) {  
+                    console.log(response)  
+                })  
+                .catch(function (error) {  
+                    console.log(error);
+                });
+				
+				if(this.file) {
+					axios.post('/api/blog/file', {
+						'file': this.file
+					},
+					{
+						headers: {"Content-Type" : "multipart/form-data"}
+					})
+					.then((response) => {
+						console.log(response)
+					})
+				}
+			}
         }
     };
 </script>
