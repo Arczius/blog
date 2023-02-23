@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
@@ -17,7 +16,14 @@ class PostsCommentsSeeder extends Seeder
     public function run()
     {
         $data = [
-            []
+            [
+                "post_id" => 1,
+                "comment_id" => 1,
+            ],
+            [
+                "post_id" => 2,
+                "comment_id" => 2,
+            ]
         ];
 
         foreach($data as $item) {
