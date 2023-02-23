@@ -99,15 +99,11 @@ class AuthController extends Controller
         }
     }
 
-    public function authorizeUser(Request $request) {
-        $user = $request->user;
-
-        $authUser = Auth::user();
-
+    public function authorizeUser() {
+        $user = Auth::user();
 
         $data = [
-            'user' => $user,
-            'auth_user' => $authUser
+            'auth_user' => $user,
         ];
 
         return response()->json($data);
