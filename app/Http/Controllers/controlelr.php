@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,39 +10,92 @@ use App\Models\Songs;
 use App\Models\Genres;
 use App\Models\GenresSongs;
 
-use Barryvdh\Debugbar\Facades\Debugbar;
-use Barryvdh\Debugbar\Twig\Extension\Debug;
-
-class SongController extends Controller
+class SongsController extends Controller
 {
-
-    protected function newSongRequest(Request $request)
+    public function newSong(Request $request) : JsonResponse
     {
         $validated = $request->validate([
             'song_name' => 'required|max:255',
             'artist_name' => 'required|max:255',
-            'song_mp3' => 'mimes:mp3,wav,ogg'
+        ]);
+        $genreList = $request->genreList;
+
+        $checkSong = Songs::where([
+            [
+                'song_name', '=', $validated['song_name']
+            ],
+            [
+                'artist_name', '=', $validated['artist_name']
+            ]
+        ])->first();
+
+        if(!isset($checkSong)){
+            Songs::insert([
+                'song_name' => $validated['song_name'],
+                'artist_name' => $validated['artist_name'],
+            ]);
+            $response['status'] = "success";
+        }
+        else{
+            $response['status'] = "failed";
+        }
+
+        $song = Songs::where([
+            [
+                'song_name', '=', $validated['song_name']
+            ],
+            [
+                'artist_name', '=', $validated['artist_name']
+            ]
         ]);
 
-        $name = $validated['song_name'];
-        $artist = $validated['artist_name'];
-        $file = isset($validated['song_mp3']) ? $validated['song_mp3']: null;
+        $response['songid'] = $song->id;
 
-        $file = $request->file('song_mp3');
+        foreach($genreList as $genre){
+            GenresSongs::insert(
+                [
+                    'song_id' => $song->id,
+                    'genre_id' => $genre,
+                ]
+            );
+        }
 
-        $song_data = [
-            "song_name" => $name,
-            "artist_name" => $artist,
-            "has_song_file" => isset($file),
-            "song_file_type" => isset($file) ? $file->extension() : null,
-        ];
+        return response()->json($response);
+    }
 
-        Songs::insert($song_data);
+
+
+
+
+
+
+    public function editSongFile(Request $request, String $songid)
+    {
+
+        $validated = $request->validate([
+            'file' => 'mimes:mp3,wav,ogg'
+        ]);
+
+        $file = $validated['file'];
+
+        $song = Songs::where('id', $songid)->first();
+
+        $data['status'] = 'failed';
 
         if(isset($file)){
-            $fileName = $song->id . "." . $file->extension();
+            if($song->has_song_file){
+                Storage::disk('local')->delete('public/audio/' . $song->id . "." . $song->song_file_type );
+            }
 
+            $fileName = $song->id . "." . $file->extension();
             $file->storeAs('public/audio', $fileName, 'local');
+            Songs::where('id', $song->id)->update([
+                'has_song_file' => true,
+                'song_file_type' => $file->extension(),
+            ]);
+            $data['status'] = 'success';
         }
+
+        return response()->json($data);
     }
 }

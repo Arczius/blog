@@ -39,6 +39,7 @@
                 'title': null,
                 'description': null,
                 'picture': null,
+                'blogid': null,
             };
         },
 
@@ -56,15 +57,13 @@
 					headers: { "Content-Type" : "application/json"}
 				}
 				)
-                .then(function (response) {  
-                    console.log(response)  
-                })  
-                .catch(function (error) {  
-                    console.log(error);
-                });
-				
-				if(this.file) {
-					axios.post('/api/blog/file', {
+                .then((response) =>  {  
+                    console.log(response)
+                    this.blogid = response.data.id 
+                })
+                .then(() => {
+                    if(this.file) {
+					axios.post('/api/blog/file/' + this.blogid, {
 						'file': this.file
 					},
 					{
@@ -74,6 +73,12 @@
 						console.log(response)
 					})
 				}
+                })  
+                .catch(function (error) {  
+                    console.log(error);
+                });
+				
+				
 			}
         }
     };
