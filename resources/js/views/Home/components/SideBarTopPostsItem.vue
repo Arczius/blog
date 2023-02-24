@@ -4,7 +4,7 @@
             <img class="item__left--image" :src="(user !== null) ? user.profile_picture : Tyler" alt="">
         </div>
         <div class="item__right">
-            <h4>@{{ (user !== null) ? user.handle : "Gebruikersnaam" }}</h4>
+            <h5>@{{ (user !== null) ? user.handle : "Gebruikersnaam" }}</h5>
             <h2>{{ post.title }}</h2>
             <p>{{ post.description }}</p>
         </div>
@@ -34,15 +34,17 @@ import Tyler from "../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg"
     }
 
     &__right {
-        h4 {
-
+        flex-grow: 1;
+        h5 {
+            color: blue;
         }
 
         h2 {
-
+            color: blue;
         }
 
         p {
+            color: gray;
             width: 80%;
             display: -webkit-inline-box;
             -webkit-box-orient: vertical;

@@ -23,6 +23,7 @@
     width: 20%;
     height: 100%;
 }
+
 .skeleton__item--left div {
     height: 50px;
     width: 50px;
