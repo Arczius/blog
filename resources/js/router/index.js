@@ -16,6 +16,15 @@ const routes = [
         name: 'ShowBlog',
         component: async () => await import('../views/ShowBlog/Index.vue')
     }
+        path: '/create',
+        name: 'create',
+        component: () => import('../views/BlogCreate/Index.vue')
+    },
+    {
+        path: '/store',
+        name: 'store',
+        component: () => import('../views/BlogDetails/Index.vue')
+    },
 ]
 
 const router = createRouter({

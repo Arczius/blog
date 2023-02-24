@@ -16,8 +16,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'description',
-        'picture',
-        'timestamp',
+        'file',
     ];
 
     // a post belongs to one user
