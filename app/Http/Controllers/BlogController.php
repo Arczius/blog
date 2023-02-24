@@ -8,17 +8,20 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 
-
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Post as Posts;
 
-use Carbon\Carbon;
-
-
 class BlogController extends Controller
 {
+    public function getAllBlogs() : JsonResponse
+    {   
+        return response()->json([
+            'blogs' => Posts::all(),
+        ]);
+    }
+
     /**
     * store the created post in the database
     *
@@ -32,7 +35,7 @@ class BlogController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($data);
+            return response()->json($response);
         }
 
         $blog = new Posts();
@@ -58,7 +61,7 @@ class BlogController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($data);
+            return response()->json($response);
         }
 
         $file = $request->file;
@@ -89,7 +92,24 @@ class BlogController extends Controller
     *
     * @return 
     */
-    public function destroy (Request $request) {
+    public function destroy (Request $request, String $id) : JsonResponse
+    {
+        dd('test');
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json($response);
+        }
+
+        $blog = Posts::where('id', $id)->first();
+
+        $file = $blog->file;
+        Storage::disk('public')->delete("blogPictures/" . $file);  
+
+        $blog->delete();
+
+        return response()->json($response);
     }
 }
