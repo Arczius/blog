@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="blog__holder">
         <div class="blog__header">
             <!-- <img class="blog__header__image--profilePicture" v-if="user.profile_picture !== ''" :src="user.profile_picture" alt="" loading="lazy"> 
             <img class="blog__header__image--profilePicture" v-else :src="DefaultProfilePicture" alt="" loading="lazy"> 

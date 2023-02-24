@@ -1,8 +1,11 @@
 <template>
     <main>
-        <MainContainerItemSkeleton v-if="blogs === null"/>
+        <div class="container--tyler">
+            <MainContainerItemSkeleton v-if="blogs === null"/>
 
-        <MainContainerItem v-else v-for="blog in blogs" :blog="blog"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog"/>
+        </div>
+        
     </main>
 </template>
 

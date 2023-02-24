@@ -1,7 +1,5 @@
 <template>
-    <div class="blog__holder">
-        <MainContainer/>
-    </div>
+     <MainContainer/>
 </template>
 
 <script setup>
