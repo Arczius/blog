@@ -7,6 +7,15 @@ const routes = [
         component: () => import('../views/Index/Index.vue')
     },
     {
+        path: '/create',
+        name: 'create',
+        component: () => import('../views/BlogCreate/Index.vue')
+    },
+    {
+        path: '/store',
+        name: 'store',
+        component: () => import('../views/BlogDetails/Index.vue')
+    },
         path: '/register',
         name: 'Register',
         component: async () => await import('../views/Register/Index.vue')

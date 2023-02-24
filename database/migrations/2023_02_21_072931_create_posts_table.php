@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->string('picture')->nullable()->default(null);
+            $table->string('file')->nullable()->default(null);
             $table->timestamps();
         });
     }
