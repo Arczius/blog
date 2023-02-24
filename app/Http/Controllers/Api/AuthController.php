@@ -99,7 +99,8 @@ class AuthController extends Controller
         }
     }
 
-    public function authorizeUser() {
+    public function authorizeUser() : JsonResponse
+    {
         $user = Auth::user();
 
         $data = [

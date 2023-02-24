@@ -36,4 +36,5 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 
 Route::prefix('post')->controller(PostsController::class)->group(function () {
     Route::get('/top', 'topPosts');
+    Route::get('/top/{amount}', 'topPosts');
 });

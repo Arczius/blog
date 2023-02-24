@@ -27,7 +27,7 @@ class Posts extends Model
 
     // a post can have multiple comments
     public function postComments(){
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(Comments::class, 'posts_comments', 'post_id', 'comment_id');
     }
 
     // a post can have one category
