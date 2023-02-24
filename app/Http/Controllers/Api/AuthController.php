@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
 
@@ -24,7 +25,6 @@ class AuthController extends Controller
                 'handle'            =>  'required|string|unique:users,handle|max:255',
                 'email'             =>  'email|required|unique:users,email|max:255',
                 'password'          =>  'required|string|max:255',
-                'about_me'          =>  'nullable|string|max:255',
             ]);
 
             if($validatedUser->fails()){
@@ -39,12 +39,10 @@ class AuthController extends Controller
                 'handle'    =>  $request->handle,
                 'email'     =>  $request->email,
                 'password'  =>  Hash::make($request->password),
-                'about_me'  =>  $request->about_me,
             ]);
 
             return response()->json([
                 'status' => 'success',
-                'token' => $user->createToken($request->handle)->plainTextToken
             ]);
 
         }
@@ -57,52 +55,52 @@ class AuthController extends Controller
         }
     }
 
-    public function loginUser(Request $request) : JsonResponse
+    public function loginUser(Request $request)
     {
         try {
-            $validateUser = Validator::make($request->all(),
+
+            $validatedCredentials = Validator::make($request->all(),
             [
                 'handle' => 'required',
-                'password' => 'required'
+                'password' => 'required',
             ]);
 
-            if($validateUser->fails()){
+            if($validatedCredentials->fails()){
                 return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
-                ], 401);
+                    'status' => 'validation failed',
+                    'errors' => $validatedCredentials->errors()
+                ], 400);
             }
 
-            if(!Auth::attempt($request->only(['handle', 'password']))){
+            $credentials = [
+                'handle' => $request->handle,
+                'password' => $request->password,
+            ];
+
+            if(Auth::attempt($credentials)) {
+                $user = Auth::user();
+                
                 return response()->json([
-                    'status' => false,
-                    'message' => 'Handle & Password does not match with our record.',
-                ], 401);
+                    'status' => 'success',
+                    'handle' => $request->handle
+                ]);
             }
-
-            $user = User::where('handle', $request->handle)->first();
-
-            $user->tokens()->delete();
 
             return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
-                'token' => $user->createToken($user->handle)->plainTextToken,
-                'current_token' => $user->tokens()->first(),
-            ], 200);
+                'status' => 'failed'
+            ]);
 
         }
+
         catch (\Throwable $th) {
             return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
+                'status' => 'server error',
+                'errors' => $th->getMessage()
             ], 500);
         }
     }
 
-    public function authorizeUser(Request $request)
-    {
+    public function authorizeUser(Request $request) {
         $user = $request->user;
 
         $authUser = Auth::user();

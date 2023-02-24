@@ -2,6 +2,12 @@
     <div class="login__form">
         <h3 class="login__title">Inloggen</h3>
 
+        <div v-if="errors !== null" class="register__errors">
+            <div v-for="error in errors" class="register__errors--error">
+                {{ error[0] }}
+            </div>
+        </div>
+
         <div>
             <input class="login__input login__input--username" v-model="handle" type="text" placeholder="Gebruikersnaam">
         </div>
@@ -41,11 +47,11 @@
 </template>
 
 <script setup>
-    import PadLock from '../../../../assets/padlock.png'
+import PadLock from '../../../../assets/padlock.png'
+import axios from 'axios'
 </script>
 
 <script>
-import axios from 'axios'
 
 export default {
     name: "LoginForm",
@@ -55,6 +61,7 @@ export default {
             'handle': null,
             'password': null,
             'checkbox': false,
+            'errors': null
         }
     },
 
@@ -69,7 +76,11 @@ export default {
                         console.log(response.data)
                     })
                     .catch((error) => {
-                        console.warn(error)
+                        switch(error.response.status){
+                            case 400:
+                                this.errors = error.response.data.errors
+                                break;
+                        }
                     })
             }
             else {
