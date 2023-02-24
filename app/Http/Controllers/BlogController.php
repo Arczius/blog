@@ -40,7 +40,6 @@ class BlogController extends Controller
         $blog->description = $request->description;
         $blog->save();
 
-        // $response['id'] = $blog->id;
         $response = [
             'id' => $blog->id
         ];
@@ -53,7 +52,7 @@ class BlogController extends Controller
     *
     * @return 
     */
-    public function getBlogImage (Request $request, $id) {
+    public function getBlogImage (Request $request, String $id) {
         $validator = Validator::make($request->all(), [
             'file' => ['mimes:png,jpg,jpeg']
         ]);
@@ -64,24 +63,33 @@ class BlogController extends Controller
 
         $file = $request->file;
 
-        $blogPost = Posts::where('id', $id)->get();
+        $blogPost = Posts::where('id', $id)->first();
 
         $data['status'] = 'failed';
 
-        if(isset($file)){
-            if($blogPost->has_image_file){
-                Storage::disk('public')->delete('public/BlogPictures/' . $blogPost->id . "." . $blogPost->blogPost_file_type );
-            }
+        /* stores image in public/blogPictures folder */
+        if (isset($file)) {
+            $file->store('blogPictures', 'public');
+        }
 
+        if(isset($file)){
             $fileName = $blogPost->id . "." . $file->extension();
             $file->storeAs('public/BlogPictures', $fileName, 'local');
-            blogPosts::where('id', $blogPost->id)->update([
-                'has_image_file' => true,
-                'blogPost_file_type' => $file->extension(),
+            Posts::where('id', $blogPost->id)->update([
+                'file' => $fileName,
             ]);
             $data['status'] = 'success';
         }
 
         return response()->json($data);
+    }
+
+    /**
+    * delete the blog from the database
+    *
+    * @return 
+    */
+    public function destroy (Request $request) {
+
     }
 }

@@ -17,12 +17,12 @@ class PostSeeder extends Seeder
             [
                 'title' => "Amazing post",
                 'description' => 'This is an amazing description',
-                'picture' => '',
+                'file' => '',
             ],
             [
                 'title' => "Amazing post 2",
                 'description' => 'This is another amazing description',
-                'picture' => '',
+                'file' => '',
             ]
         ];
 

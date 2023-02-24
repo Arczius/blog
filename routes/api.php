@@ -28,6 +28,6 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 });
 
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
-    Route::post('/store', 'store')->name('blog.store');
+    Route::post('/store', 'store');
     Route::post('/file/{id}', 'getBlogImage');
 });
