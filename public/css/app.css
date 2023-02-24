@@ -16,10 +16,6 @@ button {
   font-family: "Work Sans", sans-serif;
 }
 
-aside {
-  width: 20%;
-}
-
 h1,
 h2,
 h3,
@@ -294,4 +290,27 @@ button {
   margin: 10px;
   outline: none;
   padding: 0.5rem 1rem;
+}
+
+.home-sidebar {
+  background-color: #ffffff;
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  margin-left: 2rem;
+  margin-top: 2.5rem;
+  padding: 1.8rem;
+  width: calc(33.3333333333% - 2rem);
+}
+.home-sidebar__categories {
+  position: relative;
+}
+.home-sidebar__categories::after {
+  content: "";
+  background-color: #cdcdcd;
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
 }

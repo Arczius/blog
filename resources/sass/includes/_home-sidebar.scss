@@ -1,0 +1,29 @@
+.home-sidebar {
+    background-color: $white-colour;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    margin-left: 2rem;
+    margin-top: 2.5rem;
+    padding: 1.8rem;
+    width: calc(calc(100% / 3) - 2rem);
+
+    &__categories {
+        position:  relative;
+
+        &::after {
+            content: "";
+            background-color: $gray-colour;
+            height: 3px;
+            width: 100%;
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+        }
+    }
+
+    &__top-posts {
+
+    }
+
+}

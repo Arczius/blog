@@ -1,6 +1,6 @@
 <template>
     <div>
-        <aside>
+        <aside class="home-sidebar">
             <SideBar/>
         </aside>
 

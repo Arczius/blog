@@ -1,9 +1,9 @@
 <template>
-    <section>
+    <section class="home-sidebar__categories">
         <SideBarCategories/>
     </section>
 
-    <section>
+    <section class="home-sidebar__top-posts">
         <SideBarTopPosts/>
     </section>
 </template>
