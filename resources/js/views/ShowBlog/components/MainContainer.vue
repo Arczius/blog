@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div class="container--tyler">
+        <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null"/>
 
             <MainContainerItem v-else v-for="blog in blogs" :blog="blog"/>
