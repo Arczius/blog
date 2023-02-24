@@ -21,14 +21,5 @@
 <script>
     export default {
         name: "BlogCreate",
-
-        data() {
-            return {
-            }
-        },
-
-        methods: {
-
-        },
     }
 </script>

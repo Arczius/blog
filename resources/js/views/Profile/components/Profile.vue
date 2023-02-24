@@ -1,6 +1,5 @@
 <template>
     <div class="profile">
-
         <div class="profile__banner">
             <img class="profile__banner profile__banner--image" :src="BannerPicture">
         </div>
@@ -17,7 +16,6 @@
             <button class="profile__user profile__user__button profile__user__button--followers">10.504 volgers</button>
             <button class="profile__user profile__user__button profile__user__button--following">127 volgend</button>
         </div>
-
     </div>
 </template>
 
@@ -29,15 +27,5 @@
 <script>
 export default {
     name: "Profile",
-
-    data(){
-        return {
-
-        }
-    },
-
-    methods: {
-        
-    },
 }
 </script>
