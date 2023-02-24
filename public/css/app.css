@@ -234,7 +234,6 @@ button {
 .blog__header__text--timestamp {
   color: #d66d35;
 }
-
 .blog__content {
   display: flex;
   flex-direction: column;
@@ -287,6 +286,7 @@ button {
   margin: 10px;
   outline: none;
   padding: 0.5rem 1rem;
+}
 
 .create {
   display: flex;
