@@ -32,7 +32,7 @@ class BlogController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($data);
+            return response()->json($response);
         }
 
         $blog = new Posts();
@@ -89,7 +89,15 @@ class BlogController extends Controller
     *
     * @return 
     */
-    public function destroy (Request $request) {
+    public function destroy (Request $request, String $id) : JsonResponse
+    {
+        $blog = Posts::where('id', $id)->first();
 
+        $file = $blog->file;
+        Storage::disk('public')->delete("blogPictures/" . $file);  
+
+        $blog->delete();
+
+        return response()->json($response);
     }
 }
