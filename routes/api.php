@@ -31,6 +31,6 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
     Route::post('/store', 'store');
-    Route::post('/destroy/{id}', 'destroy');
+    Route::delete('/destroy/{id}', 'destroy');
     Route::post('/file/{id}', 'getBlogImage');
 });
