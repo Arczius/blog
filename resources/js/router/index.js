@@ -12,6 +12,9 @@ const routes = [
         component: async () => await import('../views/Register/Index.vue')
     },
     {
+        path: '/blogs',
+        name: 'blogs',
+    }.
         path: '/categories',
         name: 'Categories',
         component: async () => await import('../views/Categories/Index.vue')
@@ -31,6 +34,17 @@ const routes = [
         name: 'Tyler',
         component: async () => await import('../views/Tyler/Index.vue')
     }
+    },
+    {
+        path: '/create',
+        name: 'create',
+        component: () => import('../views/BlogCreate/Index.vue')
+    },
+    {
+    },
+        component: () => import('../views/BlogDetails/Index.vue')
+        path: '/store',
+        name: 'store',
 ]
 
 const router = createRouter({

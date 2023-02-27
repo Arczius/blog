@@ -99,3 +99,12 @@
         }
     }
 }
+
+main{
+    width: fit-content;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: auto auto; 
+}

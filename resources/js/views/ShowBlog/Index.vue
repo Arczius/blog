@@ -1,15 +1,13 @@
 <template>
-    <div class="blog__holder">
-        <ShowBlog/>
-    </div>
+    <MainContainer/>
 </template>
 
 <script setup>
-import ShowBlog from "./components/ShowBlog.vue";
+import MainContainer from './components/MainContainer.vue' ;
 </script>
 
 <script>
 export default {
-    name: "Index",
+    name: "blogs",
 }
 </script>
