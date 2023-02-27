@@ -12,23 +12,13 @@ const routes = [
         component: async () => await import('../views/Register/Index.vue')
     },
     {
-        path: '/blogs',
-        name: 'blogs',
-        component: async () => await import('../views/ShowBlog/Index.vue')
-    },
-    {
-        path: '/create',
-        name: 'create',
-        component: () => import('../views/BlogCreate/Index.vue')
-    },
-    {
         path: '/store',
         name: 'store',
         component: () => import('../views/BlogDetails/Index.vue')
     },
     {
         path: '/profile',
-        name: 'Profile',
+        name: 'profile',
         component: async () => await import('../views/Profile/Index.vue')
     }
 ]

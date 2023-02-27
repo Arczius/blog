@@ -26,7 +26,7 @@
         props: {
             'createImage': {
                 default: DefaultPicture,
+            }
         }
-    }
     }
 </script>
