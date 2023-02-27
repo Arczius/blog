@@ -18,6 +18,11 @@
                 <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
             </div>
 
+            <label for="create__details--image">Omslag afbeelding</label>
+            <div class="create_details--image">
+                <input v-on:change="getFile()" type="file" ref="coverFile">
+            </div>
+
             <label for="create__details--image">Afbeelding</label>
             <div class="create_details--image">
                 <input v-on:change="getFile()" type="file" ref="files">
@@ -38,13 +43,15 @@
             return {
                 'title': null,
                 'description': null,
-                'picture': null,
+                'coverFile': null,
+                'file': null,
                 'blogid': null,
             };
         },
 
         methods: {
             getFile() {
+                this.coverFile = this.$refs.coverFile.files[0]
 			    this.file = this.$refs.files.files[0]
 		    },
 
@@ -62,9 +69,10 @@
                     this.blogid = response.data.id 
                 })
                 .then(() => {
-                    if(this.file) {
+                    if(this.coverFile) {
 					axios.post('/api/blog/file/' + this.blogid, {
-						'file': this.file
+						'coverFile': this.coverFile,
+                        'file': this.file
 					},
 					{
 						headers: {"Content-Type" : "multipart/form-data"}
