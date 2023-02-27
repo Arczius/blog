@@ -3,7 +3,7 @@
         <div class="create__details">
             <div class="create__header">
                 <p class="create__header create__header--title">Post aanmaken</p>
-                <router-link :to="{name: 'create'}">
+                <router-link :to="{name: 'profile'}">
                     <button class="create__header create__header__discard">X</button>
                 </router-link>
             </div>
@@ -85,8 +85,6 @@
                 .catch(function (error) {  
                     console.log(error);
                 });
-				
-				
 			}
         }
     };

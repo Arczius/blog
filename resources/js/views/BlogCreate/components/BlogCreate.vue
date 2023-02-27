@@ -2,10 +2,11 @@
     <div class="create__holder">
         <div class="create__form">
             <div>
-                <img class="create__image" :src="ProfilePicture">
+                <!-- <img class="create__image" :src="DefaultProfilePicture"> -->
+                <img class="create__image--profile" :src="DefaultPicture">
             </div>
 
-            <router-link :to="{ name: 'store'}">
+            <router-link :to="{name: 'store'}">
                 <div class="create__input">
                     Maak een blog
                 </div>
@@ -15,20 +16,17 @@
 </template>
 
 <script setup>
-    import ProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    // import DefaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import DefaultPicture from '../../../../assets/writing.png'
 </script>
 
 <script>
     export default {
         name: "BlogCreate",
-
-        data() {
-            return {
+        props: {
+            'createImage': {
+                default: DefaultPicture,
             }
-        },
-
-        methods: {
-
-        },
+        }
     }
 </script>
