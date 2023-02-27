@@ -57,28 +57,36 @@ class BlogController extends Controller
     */
     public function getBlogImage (Request $request, String $id) {
         $validator = Validator::make($request->all(), [
+            'coverFile' => ['mimes:png,jpg,jpeg'],
             'file' => ['mimes:png,jpg,jpeg']
         ]);
+
+        $data['status'] = 'failed';
 
         if ($validator->fails()) {
             return response()->json($response);
         }
 
+        $coverFile = $request->coverFile;
         $file = $request->file;
 
         $blogPost = Posts::where('id', $id)->first();
 
-        $data['status'] = 'failed';
-
         /* stores image in public/blogPictures folder */
-        if (isset($file)) {
+        if (isset($coverFile)) {
+            $coverFile->store('blogPictures', 'public');
             $file->store('blogPictures', 'public');
         }
 
-        if(isset($file)){
-            $fileName = $blogPost->id . "." . $file->extension();
+        if(isset($coverFile)){
+            $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
+            $fileName = $blogPost->id . "_content." . $file->extension();
+
+            $coverFile->storeAs('public/BlogPictures', $fileNameCover, 'local');
             $file->storeAs('public/BlogPictures', $fileName, 'local');
+
             Posts::where('id', $blogPost->id)->update([
+                'coverFile' => $fileNameCover,
                 'file' => $fileName,
             ]);
             $data['status'] = 'success';
@@ -87,29 +95,4 @@ class BlogController extends Controller
         return response()->json($data);
     }
 
-    /**
-    * delete the blog from the database
-    *
-    * @return 
-    */
-    public function destroy (Request $request, String $id) : JsonResponse
-    {
-        dd('test');
-        $validator = Validator::make($request->all(), [
-            'id' => ['required'],
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
-
-        $blog = Posts::where('id', $id)->first();
-
-        $file = $blog->file;
-        Storage::disk('public')->delete("blogPictures/" . $file);  
-
-        $blog->delete();
-
-        return response()->json($response);
-    }
-}

@@ -12,7 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->string('file')->nullable();
+            $table->string('coverFile')->nullable()->default(null);
+            $table->string('file')->nullable()->default(null);
             $table->timestamps();
         });
     }
