@@ -2,7 +2,9 @@
     <div class="create__detail__form">
         <div class="create__details">
             <div class="create__header">
-                <p class="create__header create__header--title">Post aanmaken</p>
+                <p v-if="this.$route.path == '/store'" class="create__header create__header--title">Post aanmaken</p>
+                <p v-else class="create__header create__header--title">Post bewerken</p>
+
                 <router-link :to="{name: 'profile'}">
                     <button class="create__header create__header__discard">X</button>
                 </router-link>
@@ -29,7 +31,8 @@
             </div>
 
             <div>
-                <button @click='sendRequest()' class="create__details--button">Maak post</button>
+                <button @click='sendRequest()' v-if="this.$route.path == '/store'" class="create__details--button">Maak post</button>
+                <button @click='sendEditRequest()' v-else class="create__details--button">Bewerk post</button>
             </div>
         </div>
     </div>
@@ -86,7 +89,40 @@
                 .catch(function (error) {  
                     console.log(error);
                 });
-			}
+			},
+
+            sendEditRequest() {
+			    axios.post('/api/blog/edit/' + this.blogid, {
+                    'id': this.blogid,
+                    'title': this.title,
+                    'description': this.description,
+				},
+				{
+					headers: { "Content-Type" : "application/json"}
+				}
+				)
+                .then((response) =>  {  
+                    console.log(response)
+                    this.blogid = response.data.id 
+                })
+                .then(() => {
+                    if(this.coverFile) {
+					axios.post('/api/blog/file/' + this.blogid, {
+						'coverFile': this.coverFile,
+                        'file': this.file
+					},
+					{
+						headers: {"Content-Type" : "multipart/form-data"}
+					})
+					.then((response) => {
+						console.log(response)
+					})
+				}
+                })  
+                .catch(function (error) {  
+                    console.log(error);
+                });
+            },
         }
         
     };
