@@ -20,6 +20,11 @@ class Post extends Model
         'file'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y', 
+        'updated_at' => 'datetime:d-m-Y',
+    ];
+
     // a post belongs to one user
     public function author(){
         return $this->belongsTo(User::class);

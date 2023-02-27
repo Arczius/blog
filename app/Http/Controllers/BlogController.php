@@ -101,7 +101,7 @@ class BlogController extends Controller
     *
     * @return 
     */
-    public function destroy (Request $request, String $id) : JsonResponse 
+    public function destroy (String $id) : JsonResponse 
     {
         $blog = Posts::find($id); 
         if($blog){ 

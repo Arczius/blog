@@ -14,7 +14,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('coverFile')->nullable()->default(null);
             $table->string('file')->nullable()->default(null);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
