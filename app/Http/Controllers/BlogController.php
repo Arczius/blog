@@ -95,4 +95,20 @@ class BlogController extends Controller
         return response()->json($data);
     }
 
-
+    
+    /**
+    * delete the blog from the database
+    *
+    * @return 
+    */
+    public function destroy (Request $request, String $id) : JsonResponse 
+    {
+        $blog = Posts::find($id); 
+        if($blog){ 
+            $blog->delete(); 
+            return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200); 
+        }else{ 
+            return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404); 
+        }
+    }
+}

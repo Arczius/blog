@@ -8,7 +8,7 @@
             <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
 
             <span><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></span>
-            <button><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+            <button  @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
         </div>
 
         <div class="blog__content">
@@ -33,10 +33,33 @@
 </script>
 
 <script>
+import axios from 'axios'
 export default {
     name: "MainContainerItem",
     props: [
         'blog',
     ],
+    data() {
+        return {
+        };
+    },
+    methods: {
+        deleteBlog() {
+           axios.delete('/api/blog/destroy/' + this.blog.id, {
+                'id': this.id,
+            },
+            {
+                headers: { "Content-Type" : "application/json"}
+            })
+            .then((response) =>  {  
+                console.log(response)
+                location.reload();
+                this.blog.id = response.data.id 
+            })
+            .catch(function (error) {  
+                console.log(error);
+            });
+        },
+    }
 }
 </script>
