@@ -84,7 +84,7 @@ class BlogController extends Controller
             $data['status'] = 'success';
         }
 
-        return response()->json($response);
+        return response()->json($data);
     }
 
     /**
@@ -92,14 +92,24 @@ class BlogController extends Controller
     *
     * @return 
     */
-    public function destroy (Request $request, String $id) : JsonResponse 
+    public function destroy (Request $request, String $id) : JsonResponse
     {
-        $blog = Posts::find($id); 
-        if($blog){ 
-            $blog->delete(); 
-            return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200); 
-        }else{ 
-            return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404); 
+        dd('test');
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($response);
         }
+
+        $blog = Posts::where('id', $id)->first();
+
+        $file = $blog->file;
+        Storage::disk('public')->delete("blogPictures/" . $file);  
+
+        $blog->delete();
+
+        return response()->json($response);
     }
 }
