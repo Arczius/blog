@@ -1,9 +1,5 @@
 <template>
     <div class="profile">
-        <div class="profile__banner">
-            <img class="profile__banner profile__banner--image" :src="BannerPicture">
-        </div>
-
         <div class="profile__picture">
             <img class="profile__picture profile__picture--image" :src="ProfilePicture">
         </div>
@@ -20,7 +16,6 @@
 </template>
 
 <script setup>
-    import BannerPicture from '../../../../assets/luca-bravo-O453M2Liufs-unsplash.jpg'
     import ProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
 </script>
 
