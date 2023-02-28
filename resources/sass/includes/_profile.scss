@@ -61,4 +61,51 @@
             width: 200px;
         }
     }
+
+    &__container{
+        display: flex;
+        flex-wrap: wrap;
+
+        &__info{
+            padding-left: 15rem;
+        }
+
+        .profile{
+            &__categories{
+                background-color: $white-colour;
+                display: flex;
+                padding: 4.8rem;
+                margin: 1rem;
+                position: relative;
+                top: -100px;
+
+                .categories{
+                    &__holder{
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 7px;
+                    }
+                    
+                    &__item{
+                        @include blue_outline_button;
+                        
+                        &--all-blogs{
+                            @include blue_button;
+                        }
+                        
+                        &--all-categories{
+                            @include orange_button;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sidebar{
+    display: grid;
+    align-self: flex-start;
+    flex: 1;
+    max-width: 25%;
 }

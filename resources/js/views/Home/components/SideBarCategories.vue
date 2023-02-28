@@ -1,18 +1,33 @@
 <template>
     <div>
-        <h3>Categorieën</h3>
-        <div class="categories__holder">
-            <div class="categories__item--all-blogs">
-                Alle blogs
+        <div v-if="this.$route.path == '/home'">
+            <h3>Categorieën</h3>
+            <div class="categories__holder">
+                <div class="categories__item--all-blogs">
+                    Alle blogs
+                </div>
+    
+                <SideBarCategoriesItemSkeleton v-if="!categories"/>
+                <SideBarCategoriesItem v-for="category in categories" :category="category" v-else/>
+    
+                <router-link to="/categories" class="categories__item--all-categories">
+                    Bekijk alle Categorieën
+                </router-link>
             </div>
-
-            <SideBarCategoriesItemSkeleton v-if="!categories"/>
-            <SideBarCategoriesItem v-for="category in categories" :category="category" v-else/>
-
-            <router-link to="/categories" class="categories__item--all-categories">
-                Bekijk alle Categorieën
-            </router-link>
         </div>
+
+        <div v-else class="categories__holder">
+            <h3>Tyler's Categorieën</h3>
+            <div class="categories__holder">
+                <router-link to="/blogs" class="categories__item--all-categories">
+                    Alle blogs
+                </router-link>
+    
+                <SideBarCategoriesItemSkeleton v-if="!categories"/>
+                <SideBarCategoriesItem v-for="category in categories" :category="category" v-else/>
+            </div>
+        </div>
+   
     </div>
 </template>
 

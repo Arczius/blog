@@ -11,6 +11,11 @@ use App\Models\Categories;
 
 class CategoriesController extends Controller
 {
+    /**
+    * get all the categories from the database
+    *
+    * @return
+    */
     public function getAllCategories() : JsonResponse
     {
         return response()->json([
@@ -18,6 +23,11 @@ class CategoriesController extends Controller
         ]);
     }
 
+    /**
+    * get the top categories
+    *
+    * @return
+    */
     public function getTopCategories() : JsonResponse
     {
         $categories = Categories::withCount('post')->orderBy('post_count', 'desc')->limit(6)->get();

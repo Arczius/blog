@@ -1,8 +1,11 @@
 <template>
     <div class="create__holder">
         <div class="create__form">
-            <div>
-                <!-- <img class="create__image" :src="DefaultProfilePicture"> -->
+            <div v-if="this.$route.path == '/home'">
+                <img class="create__image" :src="DefaultProfilePicture">
+            </div>
+
+            <div v-else>
                 <img class="create__image--profile" :src="DefaultPicture">
             </div>
 
@@ -16,7 +19,7 @@
 </template>
 
 <script setup>
-    // import DefaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import DefaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
     import DefaultPicture from '../../../../assets/writing.png'
 </script>
 
