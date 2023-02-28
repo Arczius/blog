@@ -1,0 +1,7 @@
+@mixin default_button {
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    padding: 8px 20px;
+    transition-duration: 0.3s;
+}

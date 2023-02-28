@@ -1,17 +1,17 @@
 <template>
     <div>
         <h3>Categorieen</h3>
-        <div class="">
-            <div>
-
+        <div class="categories__holder">
+            <div class="categories__item--all-blogs">
+                Alle blogs
             </div>
 
             <SideBarCategoriesItemSkeleton v-if="!categories"/>
             <SideBarCategoriesItem v-for="category in categories" :category="category" v-else/>
 
-            <div>
-
-            </div>
+            <router-link to="/categories" class="categories__item--all-categories">
+                Bekijk alle categorieen
+            </router-link>
         </div>
     </div>
 </template>

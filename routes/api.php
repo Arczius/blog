@@ -36,9 +36,15 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::delete('/destroy/{id}', 'destroy');
     Route::post('/file/{id}', 'getBlogImage');
 });
+
 Route::prefix('category')->controller(CategoriesController::class)->group(function () {
     Route::get('', 'getAllCategories');
     Route::get('/top', 'getTopCategories');
     Route::get('/amount/{amount}', 'getCategoriesByAmount');
 
+});
+
+Route::prefix('post')->controller(PostsController::class)->group(function () {
+    Route::get('/top', 'topPosts');
+    Route::get('/top/{amount}', 'topPosts');
 });

@@ -1,10 +1,9 @@
-@import './mixins/_orange_button.scss';
+@import './mixins/default_button';
+@import './mixins/blue_button';
+@import './mixins/blue_outline_button';
+@import './mixins/_orange_button';
 
 
 button {
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    padding: 8px 20px;
-    transition-duration: 0.3s;
+    @include default_button;
 }

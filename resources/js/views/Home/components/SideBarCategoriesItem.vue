@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="categories__item">
         {{ category.name }}
     </div>
 </template>
