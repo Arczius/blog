@@ -9,15 +9,14 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Posts extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'title',
         'description',
-        'picture',
-        'timestamp',
+        'file',
     ];
 
     // a post belongs to one user
@@ -27,7 +26,7 @@ class Post extends Model
 
     // a post can have multiple comments
     public function postComments(){
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(Comments::class, 'posts_comments', 'post_id', 'comment_id');
     }
 
     // a post can have one category

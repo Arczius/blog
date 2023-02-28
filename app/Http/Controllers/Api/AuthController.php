@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
 
@@ -55,7 +54,7 @@ class AuthController extends Controller
         }
     }
 
-    public function loginUser(Request $request)
+    public function loginUser(Request $request) : JsonResponse
     {
         try {
 
@@ -79,7 +78,7 @@ class AuthController extends Controller
 
             if(Auth::attempt($credentials)) {
                 $user = Auth::user();
-                
+
                 return response()->json([
                     'status' => 'success',
                     'handle' => $request->handle
@@ -100,15 +99,12 @@ class AuthController extends Controller
         }
     }
 
-    public function authorizeUser(Request $request) {
-        $user = $request->user;
-
-        $authUser = Auth::user();
-
+    public function authorizeUser() : JsonResponse
+    {
+        $user = Auth::user();
 
         $data = [
-            'user' => $user,
-            'auth_user' => $authUser
+            'auth_user' => $user,
         ];
 
         return response()->json($data);

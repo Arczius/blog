@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class PostSeeder extends Seeder
@@ -17,12 +15,12 @@ class PostSeeder extends Seeder
             [
                 'title' => "Amazing post",
                 'description' => 'This is an amazing description',
-                'picture' => '',
+                'file' => '',
             ],
             [
                 'title' => "Amazing post 2",
                 'description' => 'This is another amazing description',
-                'picture' => '',
+                'file' => '',
             ]
         ];
 
