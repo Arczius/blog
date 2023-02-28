@@ -10,8 +10,8 @@
             <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
 
             <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
-            <span><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></span>
-            <button  @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+            <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
+            <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
         </div>
 
         <div class="blog__content">
@@ -62,6 +62,10 @@ export default {
             .catch(function (error) {  
                 console.log(error);
             });
+        },
+
+        editBlog(){
+            this.$router.push('/edit/' + this.blog.id);
         },
     }
 }

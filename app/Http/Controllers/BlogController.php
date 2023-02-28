@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 
@@ -109,6 +107,38 @@ class BlogController extends Controller
             return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200); 
         }else{ 
             return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404); 
+        }
+    }
+
+    /**
+    * edit the blog 
+    *
+    * @return 
+    */
+    public function edit (Request $request, String $id) 
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        $blog = Posts::find($id); 
+
+        if($blog){ 
+            $data = $request->validate([
+                'title' => '',
+                'description' => '',
+                'coverFile' => '',
+                'file' => '',
+            ]);
+    
+            $input = $request->all();
+            $blog->update($input);
+
+            $response = [
+                'id' => $id
+            ];
+        
+            return response()->json($response);
         }
     }
 }

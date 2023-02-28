@@ -32,5 +32,6 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
     Route::post('/store', 'store');
     Route::delete('/destroy/{id}', 'destroy');
+    Route::post('/edit/{id}', 'edit');
     Route::post('/file/{id}', 'getBlogImage');
 });
