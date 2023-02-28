@@ -16,13 +16,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'description',
-        'coverFile',
-        'file'
-    ];
-
-    protected $casts = [
-        'created_at' => 'datetime:d-m-Y', 
-        'updated_at' => 'datetime:d-m-Y',
+        'picture',
+        'timestamp',
     ];
 
     // a post belongs to one user

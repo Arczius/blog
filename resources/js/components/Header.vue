@@ -11,7 +11,8 @@
                 <router-link to="/categories">Categorieën</router-link>
                 <router-link to="/posts/top">Top posts</router-link>
 
-                <router-link to="/profile"><img :src="user_image" alt=""></router-link>
+
+                <img :src="user_image" alt="">
             </div>
         </div>
     </header>
