@@ -74,6 +74,11 @@ export default {
                 })
                     .then((response) => {
                         console.log(response.data)
+
+                        axios.post("/api/auth")
+                            .then((response) => {
+                                console.log(response)
+                            })
                     })
                     .catch((error) => {
                         switch(error.response.status){

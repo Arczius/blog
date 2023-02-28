@@ -79,9 +79,15 @@ class AuthController extends Controller
             if(Auth::attempt($credentials)) {
                 $user = Auth::user();
 
+                Session::put(
+                    'user' , $user
+                );
+                Session::save();
+
                 return response()->json([
                     'status' => 'success',
-                    'handle' => $request->handle
+                    'handle' => $request->handle,
+                    'user' => $user,
                 ]);
             }
 
@@ -99,14 +105,8 @@ class AuthController extends Controller
         }
     }
 
-    public function authorizeUser() : JsonResponse
+    public function currentUser(Request $request)
     {
-        $user = Auth::user();
 
-        $data = [
-            'auth_user' => $user,
-        ];
-
-        return response()->json($data);
     }
 }

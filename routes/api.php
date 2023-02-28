@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/create', 'createUser');
     Route::post('/login', 'loginUser');
-    Route::post('', 'authorizeUser');
+    Route::post('', 'currentUser');
 });
 
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
