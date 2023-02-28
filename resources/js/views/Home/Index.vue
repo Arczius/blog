@@ -6,7 +6,7 @@
 
         <main class="home__main">
             <section class="home__main--top">
-                <BlogCreate/>
+                <BlogCreate />
             </section>
 
             <section class="home__main--bottom">

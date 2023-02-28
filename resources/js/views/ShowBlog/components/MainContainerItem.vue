@@ -6,12 +6,16 @@
 
             <span class="blog__header__text blog__header__text--username">@{{user.username}}</span>  -->
 
-            <img class="blog__header__image--profilePicture" :src="DefaultProfilePicture" alt="" loading="lazy"> 
-            <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
+            <div class="blog__header--inner-left">
+                <img class="blog__header__image--profilePicture" :src="DefaultProfilePicture" alt="" loading="lazy"> 
+                <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
+            </div>
 
-            <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
-            <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
-            <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+            <div class="blog__header--inner-right">
+                <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
+                <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
+                <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+            </div>
         </div>
 
         <div class="blog__content">

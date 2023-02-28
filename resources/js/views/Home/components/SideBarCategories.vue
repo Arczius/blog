@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Categorieen</h3>
+        <h3>Categorieën</h3>
         <div class="categories__holder">
             <div class="categories__item--all-blogs">
                 Alle blogs
@@ -10,7 +10,7 @@
             <SideBarCategoriesItem v-for="category in categories" :category="category" v-else/>
 
             <router-link to="/categories" class="categories__item--all-categories">
-                Bekijk alle categorieen
+                Bekijk alle Categorieën
             </router-link>
         </div>
     </div>

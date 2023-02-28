@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>top posts</h3>
+        <h3>Top posts</h3>
         <div>
             <SideBarTopPostsItemSkeleton v-if="!posts || !users"/>
             <SideBarTopPostsItem v-else v-for="(item, index) in posts" :user="users[index]" :post="item"/>

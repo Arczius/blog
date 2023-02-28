@@ -1,16 +1,22 @@
 .blog{
     &__holder{
         background-color: $white-colour;
-        width: 500px;
-        margin: 1rem;
     }
 
     &__header{
         align-items: center;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between ;
         padding: 0.5rem;
-        width: 500px;
+        width: 100%;
+
+        &--inner {
+            &-right,
+            &-left {
+                display: flex;
+                align-items: center;
+            }
+        }
 
         &__image{
             &--profilePicture{
@@ -100,11 +106,8 @@
     }
 }
 
-main{
-    width: fit-content;
-}
-
-.container{
+.container:has(.blog__holder){
     display: grid;
-    grid-template-columns: auto auto; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
