@@ -49,6 +49,7 @@
                 'coverFile': null,
                 'file': null,
                 'blogid': null,
+                'id': this.$route.params.id
             };
         },
 
@@ -64,7 +65,7 @@
                     'description': this.description,
 				},
 				{
-					headers: { "Content-Type" : "application/json"}
+					headers: {"Content-Type" : "application/json"}
 				}
 				)
                 .then((response) =>  {  
@@ -92,22 +93,21 @@
 			},
 
             sendEditRequest() {
-			    axios.post('/api/blog/edit/' + this.blogid, {
-                    'id': this.blogid,
+			    axios.post('/api/blog/edit/' + this.id, {
                     'title': this.title,
                     'description': this.description,
 				},
 				{
-					headers: { "Content-Type" : "application/json"}
+					headers: {"Content-Type" : "application/json"}
 				}
 				)
                 .then((response) =>  {  
                     console.log(response)
-                    this.blogid = response.data.id 
+                    this.id = response.data.id 
                 })
                 .then(() => {
                     if(this.coverFile) {
-					axios.post('/api/blog/file/' + this.blogid, {
+					axios.post('/api/blog/file/' + this.id, {
 						'coverFile': this.coverFile,
                         'file': this.file
 					},

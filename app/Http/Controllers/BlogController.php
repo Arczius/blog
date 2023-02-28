@@ -115,16 +115,14 @@ class BlogController extends Controller
     *
     * @return 
     */
-    public function edit (Request $request, String $id) : JsonResponse 
+    public function edit (Request $request, String $id) 
     {
         $validator = Validator::make($request->all(), [
             'id' => ['required', 'numeric'],
         ]);
 
-        $id = $request->id;
-        dd($id);
-
         $blog = Posts::find($id); 
+
         if($blog){ 
             $data = $request->validate([
                 'title' => '',
@@ -135,6 +133,12 @@ class BlogController extends Controller
     
             $input = $request->all();
             $blog->update($input);
+
+            $response = [
+                'id' => $id
+            ];
+        
+            return response()->json($response);
         }
     }
 }
