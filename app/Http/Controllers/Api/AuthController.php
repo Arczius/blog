@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 
@@ -78,16 +79,16 @@ class AuthController extends Controller
 
             if(Auth::attempt($credentials)) {
                 $user = Auth::user();
+                $randomToken = Str::random(64);
 
-                Session::put(
-                    'user' , $user
-                );
-                Session::save();
+                User::where('id', $user->id)->update([
+                    'token' => Hash::make($randomToken),
+                ]);
 
                 return response()->json([
                     'status' => 'success',
                     'handle' => $request->handle,
-                    'user' => $user,
+                    'token' => $randomToken,
                 ]);
             }
 
