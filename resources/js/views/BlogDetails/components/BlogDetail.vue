@@ -119,7 +119,7 @@
                         this.$router.push("/profile");
 					})
 				}
-                })  
+                })
                 .catch(function (error) {  
                     console.log(error);
                 });
