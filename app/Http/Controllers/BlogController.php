@@ -76,6 +76,7 @@ class BlogController extends Controller
             $file->store('blogPictures', 'public');
         }
 
+        /* give the uploaded file a new name */ 
         if(isset($coverFile)){
             $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
             $fileName = $blogPost->id . "_content." . $file->extension();
@@ -119,6 +120,8 @@ class BlogController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id' => ['required', 'numeric'],
+            'title' => ['required', new titlePattern(), 'max:255'],
+            'description' => [new descriptionPattern(), 'max:255'],
         ]);
 
         $blog = Posts::find($id); 
@@ -127,8 +130,6 @@ class BlogController extends Controller
             $data = $request->validate([
                 'title' => '',
                 'description' => '',
-                'coverFile' => '',
-                'file' => '',
             ]);
     
             $input = $request->all();

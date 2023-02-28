@@ -104,6 +104,7 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.id = response.data.id 
+                    this.$router.push({ path:'profile' });
                 })
                 .then(() => {
                     if(this.coverFile) {
