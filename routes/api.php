@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +26,12 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/create', 'createUser');
     Route::post('/login', 'loginUser');
     Route::post('', 'authorizeUser');
+});
+
+Route::prefix('blog')->controller(BlogController::class)->group(function () {
+    Route::get('', 'getAllBlogs');
+    Route::post('/store', 'store');
+    Route::delete('/destroy/{id}', 'destroy');
+    Route::post('/edit/{id}', 'edit');
+    Route::post('/file/{id}', 'getBlogImage');
 });

@@ -1,0 +1,64 @@
+.profile{
+
+    &__banner{
+        height: 350px;
+        width: 100%;
+
+        &--image{
+            object-fit: cover;
+        }
+    }
+
+    &__picture{
+        display: flex;
+        padding: 3rem;
+
+        &--image{
+            border-radius: 100%;
+            border: 10px solid $white-colour;
+            height: 300px;
+            object-fit: cover;
+            object-position: center center;
+            padding: 0rem;
+            position: relative;
+            top: -175px;
+            width: 300px;
+        }
+    }
+
+    &__user{
+        display: flex;
+        flex-direction: column;
+        font-size: 1.8rem;
+        padding-bottom: 1rem;
+        padding-left: 3rem;
+        position: relative;
+        top: -100px;
+        width: 400px;
+
+        &--name{
+            color: $orange-colour;
+            font-weight: 800;
+            padding-bottom: 0.2rem;
+        }
+
+        &--username{
+            color: $blue-colour;
+            font-weight: 800;
+        }
+
+        &--description{
+            color: lightgray;
+            font-size: 1rem;
+        }
+
+        &__button{
+            background-color: $blue-colour;
+            color: $white-colour;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            margin-left: 3rem;
+            width: 200px;
+        }
+    }
+}
