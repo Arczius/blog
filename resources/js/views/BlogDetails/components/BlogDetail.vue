@@ -71,7 +71,6 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.blogid = response.data.id 
-                    this.$router.push({ path:'profile' });
                 })
                 .then(() => {
                     if(this.coverFile) {
@@ -84,6 +83,7 @@
 					})
 					.then((response) => {
 						console.log(response)
+                        this.$router.push("/profile");
 					})
 				}
                 })  
@@ -104,7 +104,6 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.id = response.data.id 
-                    this.$router.push({ path:'profile' });
                 })
                 .then(() => {
                     if(this.coverFile) {
@@ -117,6 +116,7 @@
 					})
 					.then((response) => {
 						console.log(response)
+                        this.$router.push("/profile");
 					})
 				}
                 })  
