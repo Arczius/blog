@@ -3,6 +3,8 @@
 
     &__holder{
         background-color: $white-colour;
+        height: 15vh;
+        margin: 3rem;
         padding: 0.8rem;
     }
 
@@ -56,7 +58,7 @@
         margin: 1rem;
         padding: 1rem;
         width: 500px;
-
+    
         &--title{
             background-color: $main-background-colour;
             border-radius: 1rem;
@@ -66,7 +68,7 @@
             padding: 0.5rem 1rem;
             width: 350px;
         }
-
+    
         &--description{
             background-color: $main-background-colour;
             border-radius: 1rem;

@@ -1,8 +1,8 @@
 .blog{
     &__holder{
         background-color: $white-colour;
-        width: 100%;
-        //margin: 1rem;
+        width: 500px;
+        margin: 1rem;
     }
 
     &__header{
@@ -34,7 +34,7 @@
                 color: $blue-colour;
                 font-weight: 800;
             }
-
+    
             &--timestamp{
                 color: $orange-colour;
             }
@@ -44,7 +44,7 @@
     &__content{
         display: flex;
         flex-direction: column;
-
+        
         &--image{
             height: 200px;
             max-width: 100%;
@@ -100,8 +100,11 @@
     }
 }
 
-.container:has(.blog__holder){
+main{
+    width: fit-content;
+}
+
+.container{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 2rem;
+    grid-template-columns: auto auto; 
 }
