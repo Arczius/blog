@@ -5,14 +5,17 @@
             <img class="blog__header__image--profilePicture" v-else :src="DefaultProfilePicture" alt="" loading="lazy"> 
 
             <span class="blog__header__text blog__header__text--username">@{{user.username}}</span>  -->
-            <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
 
-            <span><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></span>
+            <img class="blog__header__image--profilePicture" :src="DefaultProfilePicture" alt="" loading="lazy"> 
+            <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
+
+            <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
+            <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
             <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
         </div>
 
         <div class="blog__content">
-            <img class="blog__content blog__content--image" :src="( blog.file !== '' ) ? blog.file : DefaultBlogPicture " alt="" loading="lazy">
+            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : DefaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
             <p class="blog__content blog__content--description">{{blog.description}}</p> 
             <button class="blog__content blog__content--button">Lees verder</button>
@@ -33,7 +36,7 @@
 </script>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 export default {
     name: "MainContainerItem",
     props: [
@@ -41,10 +44,8 @@ export default {
     ],
     data() {
         return {
-
         };
     },
-
     methods: {
         deleteBlog() {
            axios.delete('/api/blog/destroy/' + this.blog.id, {
@@ -61,6 +62,10 @@ export default {
             .catch(function (error) {  
                 console.log(error);
             });
+        },
+
+        editBlog(){
+            this.$router.push('/edit/' + this.blog.id);
         },
     }
 }

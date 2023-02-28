@@ -12,6 +12,14 @@
         object-fit: cover;
         object-position: center;
         width: 105px;
+
+        &--profile{
+            border-radius: 0%;
+            height: 100px;
+            object-fit: cover;
+            object-position: center;
+            width: 100px;
+        }
     }
 
     &__form {
@@ -100,6 +108,15 @@
             font-weight: 800;
             margin-left: 0.5rem;
         }
+    }
+}
+
+.onProfile{
+    display: flex;
+    flex-wrap: wrap;
+
+    .profileInfo{
+        padding-left: 15rem;
     }
 }
 

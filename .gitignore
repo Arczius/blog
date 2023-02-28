@@ -18,4 +18,5 @@ yarn-error.log
 # these files are auto generated and machine specific, so we'll be adding them to the gitignore
 public/js/*
 public/mix-manifest.json
-*css
+/resources/css
+public/css/app.css
