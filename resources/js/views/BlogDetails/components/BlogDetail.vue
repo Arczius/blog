@@ -2,7 +2,10 @@
     <div class="create__detail__form">
         <div class="create__details">
             <div class="create__header">
-                <p class="create__header create__header--title">Post aanmaken</p>
+                <!-- If the route is /store show 'post aanmaken', else show 'post bewerken' -->
+                <p v-if="this.$route.path == '/store'" class="create__header create__header--title">Post aanmaken</p>
+                <p v-else class="create__header create__header--title">Post bewerken</p>
+
                 <router-link :to="{name: 'profile'}">
                     <button class="create__header create__header__discard">X</button>
                 </router-link>
@@ -29,7 +32,8 @@
             </div>
 
             <div>
-                <button @click='sendRequest()' class="create__details--button">Maak post</button>
+                <button @click='sendRequest()' v-if="this.$route.path == '/store'" class="create__details--button">Maak post</button>
+                <button @click='sendEditRequest()' v-else class="create__details--button">Bewerk post</button>
             </div>
         </div>
     </div>
@@ -46,6 +50,7 @@
                 'coverFile': null,
                 'file': null,
                 'blogid': null,
+                'id': this.$route.params.id
             };
         },
 
@@ -55,19 +60,21 @@
 			    this.file = this.$refs.files.files[0]
 		    },
 
+            /* go to the store route */
             sendRequest() {
 			    axios.post('/api/blog/store', {
                     'title': this.title,
                     'description': this.description,
 				},
 				{
-					headers: { "Content-Type" : "application/json"}
+					headers: {"Content-Type" : "application/json"}
 				}
 				)
                 .then((response) =>  {  
                     console.log(response)
                     this.blogid = response.data.id 
                 })
+                /* send the files to the file route */
                 .then(() => {
                     if(this.coverFile) {
 					axios.post('/api/blog/file/' + this.blogid, {
@@ -77,15 +84,54 @@
 					{
 						headers: {"Content-Type" : "multipart/form-data"}
 					})
+                    /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
+                        this.$router.push("/profile");
 					})
 				}
                 })  
                 .catch(function (error) {  
                     console.log(error);
                 });
-			}
+			},
+
+            /* go to the edit route */
+            sendEditRequest() {
+			    axios.post('/api/blog/edit/' + this.id, {
+                    'title': this.title,
+                    'description': this.description,
+				},
+				{
+					headers: {"Content-Type" : "application/json"}
+				}
+				)
+                .then((response) =>  {  
+                    console.log(response)
+                    this.id = response.data.id 
+                })
+                 /* send the files to the file route */
+                .then(() => {
+                    if(this.coverFile) {
+					axios.post('/api/blog/file/' + this.id, {
+						'coverFile': this.coverFile,
+                        'file': this.file
+					},
+					{
+						headers: {"Content-Type" : "multipart/form-data"}
+					})
+                    /* redirect to the profile page */
+					.then((response) => {
+						console.log(response)
+                        this.$router.push("/profile");
+					})
+				}
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
+            },
         }
+        
     };
 </script>

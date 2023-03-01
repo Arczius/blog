@@ -1,6 +1,13 @@
 @mixin orange_button {
+    @include default_button;
+
     background: $orange-colour;
     color: $white-colour;
+
+    &:visited {
+        background: $orange-colour;
+        color: $white-colour;
+    }
 
     &:hover {
         background: darken($orange-colour, 15%);

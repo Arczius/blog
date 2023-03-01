@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
-use App\Models\Post as Posts;
+use App\Models\Posts;
 
 class BlogController extends Controller
 {
     public function getAllBlogs() : JsonResponse
-    {   
+    {
         return response()->json([
             'blogs' => Posts::all(),
         ]);
@@ -25,7 +23,7 @@ class BlogController extends Controller
     /**
     * store the created post in the database
     *
-    * @return 
+    * @return
     */
     public function store(Request $request) : JsonResponse
     {
@@ -46,14 +44,14 @@ class BlogController extends Controller
         $response = [
             'id' => $blog->id
         ];
-        
+
         return response()->json($response);
     }
 
     /**
     * store the included image in the database
     *
-    * @return 
+    * @return
     */
     public function getBlogImage (Request $request, String $id) {
         $validator = Validator::make($request->all(), [
@@ -78,6 +76,7 @@ class BlogController extends Controller
             $file->store('blogPictures', 'public');
         }
 
+        /* give the uploaded file a new name and store it */ 
         if(isset($coverFile)){
             $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
             $fileName = $blogPost->id . "_content." . $file->extension();
@@ -95,4 +94,52 @@ class BlogController extends Controller
         return response()->json($data);
     }
 
+    
+    /**
+    * delete the blog from the database
+    *
+    * @return
+    */
+    public function destroy (String $id) : JsonResponse 
+    {
+        $blog = Posts::find($id);
+        if($blog){
+            $blog->delete();
+            return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200);
+        }else{
+            return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);
+        }
+    }
 
+    /**
+    * edit the blog 
+    *
+    * @return 
+    */
+    public function edit (Request $request, String $id) 
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+            'title' => ['required', new titlePattern(), 'max:255'],
+            'description' => [new descriptionPattern(), 'max:255'],
+        ]);
+
+        $blog = Posts::find($id); 
+
+        if($blog){ 
+            $data = $request->validate([
+                'title' => '',
+                'description' => '',
+            ]);
+    
+            $input = $request->all();
+            $blog->update($input);
+
+            $response = [
+                'id' => $id
+            ];
+        
+            return response()->json($response);
+        }
+    }
+}

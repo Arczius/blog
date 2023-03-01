@@ -5,7 +5,7 @@
         </div>
 
         <div class="profile__user">
-            <p class="profile__user profile__user--name">John Doe</p>
+            <p class="profile__user profile__user--name">Tyler</p>
             <p class="profile__user profile__user--username">@Gebruikersnaam</p>
             <p class="profile__user profile__user--description">Dit is een korte omschrijving die op het profiel komt te staan. Lorem ipsum dolor sit amet, consecteur adipiscing elit, aenean.</p>
             
