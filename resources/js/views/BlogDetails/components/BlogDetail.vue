@@ -2,6 +2,7 @@
     <div class="create__detail__form">
         <div class="create__details">
             <div class="create__header">
+                <!-- If the route is /store show 'post aanmaken', else show 'post bewerken' -->
                 <p v-if="this.$route.path == '/store'" class="create__header create__header--title">Post aanmaken</p>
                 <p v-else class="create__header create__header--title">Post bewerken</p>
 
@@ -59,6 +60,7 @@
 			    this.file = this.$refs.files.files[0]
 		    },
 
+            /* go to the store route */
             sendRequest() {
 			    axios.post('/api/blog/store', {
                     'title': this.title,
@@ -72,6 +74,7 @@
                     console.log(response)
                     this.blogid = response.data.id 
                 })
+                /* send the files to the file route */
                 .then(() => {
                     if(this.coverFile) {
 					axios.post('/api/blog/file/' + this.blogid, {
@@ -81,6 +84,7 @@
 					{
 						headers: {"Content-Type" : "multipart/form-data"}
 					})
+                    /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
                         this.$router.push("/profile");
@@ -92,6 +96,7 @@
                 });
 			},
 
+            /* go to the edit route */
             sendEditRequest() {
 			    axios.post('/api/blog/edit/' + this.id, {
                     'title': this.title,
@@ -105,6 +110,7 @@
                     console.log(response)
                     this.id = response.data.id 
                 })
+                 /* send the files to the file route */
                 .then(() => {
                     if(this.coverFile) {
 					axios.post('/api/blog/file/' + this.id, {
@@ -114,6 +120,7 @@
 					{
 						headers: {"Content-Type" : "multipart/form-data"}
 					})
+                    /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
                         this.$router.push("/profile");

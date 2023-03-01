@@ -76,7 +76,7 @@ class BlogController extends Controller
             $file->store('blogPictures', 'public');
         }
 
-        /* give the uploaded file a new name */ 
+        /* give the uploaded file a new name and store it */ 
         if(isset($coverFile)){
             $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
             $fileName = $blogPost->id . "_content." . $file->extension();
