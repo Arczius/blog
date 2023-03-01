@@ -24,12 +24,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/* route for the auth */
 Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/create', 'createUser');
     Route::post('/login', 'loginUser');
     Route::post('', 'authorizeUser');
 });
 
+/* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
     Route::post('/store', 'store');
@@ -38,6 +40,7 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::post('/file/{id}', 'getBlogImage');
 });
 
+/* route for the categories */
 Route::prefix('category')->controller(CategoriesController::class)->group(function () {
     Route::get('', 'getAllCategories');
     Route::get('/top', 'getTopCategories');
@@ -45,6 +48,7 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 
 });
 
+/* route for the posts */
 Route::prefix('post')->controller(PostsController::class)->group(function () {
     Route::get('/top', 'topPosts');
     Route::get('/top/{amount}', 'topPosts');

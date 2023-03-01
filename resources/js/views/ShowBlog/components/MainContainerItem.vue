@@ -51,6 +51,7 @@ export default {
         };
     },
     methods: {
+        /* go to the destroy route with the id */
         deleteBlog() {
            axios.delete('/api/blog/destroy/' + this.blog.id, {
                 'id': this.id,
@@ -58,6 +59,7 @@ export default {
             {
                 headers: { "Content-Type" : "application/json"}
             })
+            /* reload the page */
             .then((response) =>  {  
                 console.log(response)
                 location.reload();
@@ -68,6 +70,7 @@ export default {
             });
         },
 
+        /* go to the edit route */
         editBlog(){
             this.$router.push('/edit/' + this.blog.id);
         },
