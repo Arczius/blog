@@ -15,6 +15,15 @@
                 <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
                 <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
                 <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+
+                <!-- 
+                    if({{ Auth::user()->id }} === blog.user_id){
+                        display:block;
+                    }else{
+                        display:none;
+                    }
+                -->
+
             </div>
         </div>
 
@@ -48,6 +57,7 @@ export default {
     ],
     data() {
         return {
+            // 'auth_id': Auth::user()->id,
         };
     },
     methods: {

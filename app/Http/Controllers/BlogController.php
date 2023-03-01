@@ -17,6 +17,7 @@ class BlogController extends Controller
     {
         return response()->json([
             'blogs' => Posts::all(),
+            // 'blogs' => Posts::all()->where('user_id', 1),
         ]);
     }
 
@@ -28,6 +29,7 @@ class BlogController extends Controller
     public function store(Request $request) : JsonResponse
     {
         $validator = Validator::make($request->all(), [
+            'user_id' => ['integer'],
             'title' => ['required', new titlePattern(), 'max:255'],
             'description' => [new descriptionPattern(), 'max:255'],
         ]);
@@ -36,7 +38,11 @@ class BlogController extends Controller
             return response()->json($response);
         }
 
+        $request->user_id = 1;
+        // $request->user_id = Auth::id();
+
         $blog = new Posts();
+        $blog->user_id = $request->user_id;
         $blog->title = $request->title;
         $blog->description = $request->description;
         $blog->save();
