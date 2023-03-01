@@ -22,7 +22,15 @@
             <!-- <img class="blog__content blog__content--image" :src="(blog.file !== '') ? 'storage/BlogPictures/' + blog.file : DefaultBlogPicture" alt="image" loading="lazy"> -->
 
             <span class="blog__detail__content blog__detail__content--title">Dit is de titel van een blog</span>
-            <span class="blog__detail__content blog__detail__content--description">Dit is de beschrijving van een blog</span>
+            <span class="blog__detail__content blog__detail__content--description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis fermentum dui. 
+                Morbi lacinia molestie consequat. Morbi vitae lectus sed purus volutpat ultrices eu vel lacus. 
+                Vestibulum non leo cursus, molestie nisl ac, molestie est. Maecenas a augue vel turpis cursus egestas. 
+                Cras dui ante, aliquet vitae gravida non, ornare ac nulla. Praesent porta cursus augue et accumsan. 
+                Integer dignissim ex vel quam volutpat, ut suscipit ante ultrices. Ut facilisis sollicitudin mauris in maximus. 
+                Nunc turpis sapien, accumsan non felis id, tempus finibus arcu. In non nisi nec ante dapibus blandit rhoncus sed ipsum. 
+                In fermentum lobortis felis, sed euismod est molestie non.
+            </span>
             <img class="blog__detail__content blog__detail__content--image" :src="defaultBlogPicture" alt="image" loading="lazy">
         </div>
 

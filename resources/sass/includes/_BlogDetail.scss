@@ -12,10 +12,6 @@
             padding: 0.5rem;
             width: 100%;
 
-            &__categories{
-                color: green;
-            }
-
             &--inner {
                 &-right,
                 &-left {
@@ -64,14 +60,14 @@
 
             &--title{
                 color: $blue-colour;
-                padding: 1.2rem;
-                font-size: 2rem;
+                font-size: 2.5rem;
                 font-weight: 800;
+                padding: 1.2rem;
             }
 
             &--description{
                 color: lightgray;
-                padding: 0.5rem;
+                font-size: 1.2rem;
                 padding: 1.2rem;
             }
 
@@ -118,6 +114,7 @@
             }
 
             &__commentsDiv{
+                align-items: center;
                 display: flex;
             }
         }
@@ -127,7 +124,15 @@
         display: grid;
         margin-left: 30%;
         position: relative;
-        top: -650px;
+        top: -1400px;
         width: 60%;
     }
+}
+
+.sidebar{
+    display: grid;
+    align-self: flex-start;
+    flex: 1;
+    max-width: 25%;
+    padding: 3rem;
 }
