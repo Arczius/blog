@@ -1,9 +1,9 @@
 <template>
-    <BlogDetail/>
+    <BlogStore/>
 </template>
 
 <script setup>
-    import BlogDetail from './components/BlogDetail.vue';
+    import BlogStore from './components/BlogStore.vue';
 </script>
 
 <script>
