@@ -21,7 +21,7 @@
             <!-- <p class="blog__content blog__content--description">{{blog.description}}</p>  -->
             <!-- <img class="blog__content blog__content--image" :src="(blog.file !== '') ? 'storage/BlogPictures/' + blog.file : DefaultBlogPicture" alt="image" loading="lazy"> -->
 
-            <span class="blog__detail__content blog__detail__content--title">Dit is de titel van een blog</span>
+            <h2 class="blog__detail__content blog__detail__content--title">Dit is de titel van een blog</h2>
             <span class="blog__detail__content blog__detail__content--description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis fermentum dui. 
                 Morbi lacinia molestie consequat. Morbi vitae lectus sed purus volutpat ultrices eu vel lacus. 
@@ -46,7 +46,6 @@
 </template>
 
 <script setup>
-    import defaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
     import defaultBlogPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
     import defaultCommentIcon from '../../../../assets/writing.png'
     import defaultEditIcon from '../../../../assets/draw.png'
@@ -60,10 +59,7 @@ export default {
     props: [
         'blog',
     ],
-    data() {
-        return {
-        };
-    },
+
     methods: {
          /* go to the destroy route with the id */
          deleteBlog() {

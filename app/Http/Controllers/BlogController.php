@@ -13,6 +13,11 @@ use App\Models\Posts;
 
 class BlogController extends Controller
 {
+    /**
+    * get all the existing blogs
+    *
+    * @return 
+    */
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
@@ -31,10 +36,6 @@ class BlogController extends Controller
             'title' => ['required', new titlePattern(), 'max:255'],
             'description' => [new descriptionPattern(), 'max:255'],
         ]);
-
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
 
         $blog = new Posts();
         $blog->title = $request->title;
@@ -62,7 +63,7 @@ class BlogController extends Controller
         $data['status'] = 'failed';
 
         if ($validator->fails()) {
-            return response()->json($response);
+            return response()->json($data);
         }
 
         $coverFile = $request->coverFile;
@@ -93,7 +94,6 @@ class BlogController extends Controller
 
         return response()->json($data);
     }
-
     
     /**
     * delete the blog from the database
@@ -105,9 +105,16 @@ class BlogController extends Controller
         $blog = Posts::find($id);
         if($blog){
             $blog->delete();
-            return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200);
-        }else{
-            return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);
+
+            /* delete the images from the public folder */
+            Storage::disk('public')->delete("BlogPictures/" . $coverFile); 
+            Storage::disk('public')->delete("BlogPictures/" . $file);
+
+            $response = [
+                'id' => $blog->id
+            ];
+    
+            return response()->json($response);
         }
     }
 
@@ -144,7 +151,7 @@ class BlogController extends Controller
     }
 
     /**
-    * get the details of one blog
+    * get one existing blog with it's details
     *
     * @return 
     */
