@@ -142,4 +142,17 @@ class BlogController extends Controller
             return response()->json($response);
         }
     }
+
+    /**
+    * get the details of one blog
+    *
+    * @return 
+    */
+    public function getBlogDetail(String $id) : JsonResponse
+    {
+        dd('test');
+        return response()->json([
+            'blogs' => Post::find($id),
+        ]);
+    }
 }

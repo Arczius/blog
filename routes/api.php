@@ -38,6 +38,7 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::delete('/destroy/{id}', 'destroy');
     Route::post('/edit/{id}', 'edit');
     Route::post('/file/{id}', 'getBlogImage');
+    Route::get('/detail/{id}', 'getBlogDetail');
 });
 
 /* route for the categories */
