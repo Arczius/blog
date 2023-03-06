@@ -13,9 +13,13 @@ class CommentSeeder extends Seeder
     {
         $data = [
             [
+                'user_id' => 1,
+                'post_id' => 1,
                 'comment' => "Amazing picture",
             ],
             [
+                'user_id' => 2,
+                'post_id' => 1,
                 'comment' => "Great post",
             ]
         ];

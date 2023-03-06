@@ -13,10 +13,12 @@ class CategorySeeder extends Seeder
     {
         $data = [
             [
+                'post_id' => 1,
                 'name' => "Food",
                 'picture' => '',
             ],
             [
+                'post_id' => 1,
                 'name' => "Tech",
                 'picture' => '',
             ]
