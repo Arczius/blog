@@ -95,7 +95,6 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'failed'
             ]);
-
         }
 
         catch (\Throwable $th) {
@@ -108,6 +107,12 @@ class AuthController extends Controller
 
     public function currentUser(Request $request)
     {
+//        $token = Hash::make($request->token);
+//        dd($token);
+        $user = User::all();
 
+//        $user = User::where('token', $token)->first();
+
+        dd($user);
     }
 }

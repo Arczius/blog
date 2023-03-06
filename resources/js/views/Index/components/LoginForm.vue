@@ -74,8 +74,11 @@ export default {
                 })
                     .then((response) => {
                         console.log(response.data)
+                        localStorage.setItem('token', response.data.token)
 
-                        axios.post("/api/auth")
+                        axios.post("/api/auth", {
+                            'token': localStorage.getItem('token')
+                        })
                             .then((response) => {
                                 console.log(response)
                             })
