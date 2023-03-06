@@ -18,12 +18,16 @@ class UserSeeder extends Seeder
                 'handle' => 'jarbottle',
                 'email' => 'appelsapmoedereter@gmail.com',
                 'password' => Hash::make('OmaEet33'),
+                'followers' => '10.470',
+                'following' => '127'
             ],
             [
                 'username' => "Stopcontact likker",
                 'handle' => 'itzdevs',
                 'email' => 'eetkinderenvoorontbijt@outlook.com',
                 'password' => Hash::make('BeterDanAirto'),
+                'followers' => '8.130',
+                'following' => '54'
             ]
         ];
 

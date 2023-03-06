@@ -17,7 +17,7 @@
         </div>
 
         <div v-else class="categories__holder">
-            <h3>Tyler's Categorieën</h3>
+            <h3>Tylers Categorieën</h3>
             <div class="categories__holder">
                 <router-link to="/blogs" class="categories__item--all-categories">
                     Alle blogs

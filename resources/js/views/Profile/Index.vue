@@ -1,30 +1,28 @@
 <template>
     <div class="profile profile__container">
-        <ProfileBanner/>
+        <mainContainer/>
         <div class="sidebar">
-            <Profile/>
             <div class="profile profile__categories">
-                <SideBarCategories/>
+                <sideBarCategories/>
             </div>
         </div>
 
         <div class="profile profile__info">
-            <BlogCreate/>
-            <Blog/>
+            <blogCreate/>
+            <blog/>
         </div>
     </div>
 </template>
 
 <script setup>
-import Profile from "./components/Profile.vue";
-import ProfileBanner from "./components/ProfileBanner.vue"
-import BlogCreate from '../BlogCreate/components/BlogCreate.vue';
-import Blog from '../ShowBlog/components/MainContainer.vue';
-import SideBarCategories from '../Home/components/SideBarCategories.vue';
+    import blogCreate from '../BlogCreate/components/BlogCreate.vue';
+    import blog from '../ShowBlog/components/MainContainer.vue';
+    import mainContainer from '../Profile/components/MainContainer.vue';
+    import sideBarCategories from '../Home/components/SideBarCategories.vue';
 </script>
 
 <script>
-export default {
-    name: "Index",
-}
+    export default {
+        name: "users",
+    }
 </script>

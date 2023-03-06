@@ -1,45 +1,64 @@
 <template>
     <main>
         <div class="container">
-            <MainContainerItemSkeleton v-if="blogs === null"/>
+            <mainContainerItemSkeleton v-if="blogs === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog"/>
+            <mainContainerItem  v-else v-for="blog in blogs" :blog="blog"/>
+            <!-- <mainContainerItem  v-else v-for="user in users" :user="user"/> -->
         </div>
-        
     </main>
 </template>
 
 <script setup>
-import MainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
-import MainContainerItem from './MainContainerItem.vue';
-import axios from 'axios'
+    import mainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
+    import mainContainerItem from './MainContainerItem.vue';
+    import axios from 'axios'
 </script>
-
 
 <script>
-export default {
-    name: "MainContainer",
-    data(){
-        return {
+    export default {
+        name: "MainContainer",
+        props: {
             'blogs': null,
-        }
-    },
-
-    methods: {
-        getAllBlogs(){
-            axios.get('/api/blog')
-                .then((response) => {
-                    this.blogs = response.data.blogs
-                    console.log(this.blogs)
-                })
-                .catch((error) => {
-                    console.warn(error)
-                })
+            'users': null,
         },
-    },
+        data(){
+            return {
+                'id': this.$route.params.id    
+            }
+        },
 
-    mounted(){
-        this.getAllBlogs()
+        methods: {
+            getAllBlogs(){
+                console.log(this.blogs);
+                axios.get('/api/blog')
+                    .then((response) => {
+                        this.blogs = response.data.blogs
+                        console.log(this.blogs)
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            },
+
+            getUserProfile(){
+                axios.get('/api/profile/user/' + this.id)
+                    .then((response) => {
+                        this.users = response.data.users
+                        console.log(this.users)
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            },
+        },
+
+        mounted(){
+            this.getAllBlogs(),
+            this.getUserProfile()
+        }
     }
-}
 </script>
+
+<!-- Attempting to mutate prop "users". Props are readonly.  -->
+<!-- 'set' on proxy: trap returned falsish for property 'users' -->

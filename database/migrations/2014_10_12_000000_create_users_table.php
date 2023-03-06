@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('handle')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('followers');
+            $table->string('following');
             $table->string('about_me')->default("hey there, im a blog user");
             $table->string('profile_picture')->nullable(true);
             $table->string('profile_header')->nullable(true);
