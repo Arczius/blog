@@ -9,7 +9,6 @@
 
 <script setup>
 import MainContainerItem from './BlogDetail.vue';
-// import Profile from '../../Profile/Index.vue';
 import axios from 'axios'
 </script>
 
