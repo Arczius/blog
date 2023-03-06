@@ -22,7 +22,7 @@ class Controller extends BaseController
      * @param String|Integer $userID the id of the currently logged-in user
      * @returns Boolean
      */
-    protected function AuthorizeUser(String $token, String | Integer $userID) : Boolean
+    protected function AuthorizeUser(String $token, String | Integer $userID) : bool
     {
         $userToken = User::select('token')->where('id', $userID)->first();
 
