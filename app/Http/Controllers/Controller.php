@@ -17,16 +17,16 @@ class Controller extends BaseController
 
     protected function AuthorizeUser(String $token, String | Integer $userID)
     {
-        $user = User::where('id', $userID)->pluck('token')->first();
+        $userToken = User::select('token')->where('id', $userID)->first();
 
-        return Hash::check($token, $user->token);
+        return Hash::check($token, $userToken->token);
     }
 
     protected function getUserData(String $token, String | Integer $userID) : array
     {
         return ($this->AuthorizeUser($token, $userID))
             ? [
-                'user' => User::where('id', $userID)->pluck('id', 'handle', 'username')->first()
+                'user' => User::select('id', 'handle', 'username')->where('id', $userID)->first()
             ]
             : [
                 'user' => false

@@ -109,7 +109,7 @@ class AuthController extends Controller
     {
         return response()->json(
             [
-                'authorized' => $this->AuthorizeUser($request->token, $request->userID)
+                'authorized' => $this->getUserData($request->token, $request->userID)
             ]
         );
     }
