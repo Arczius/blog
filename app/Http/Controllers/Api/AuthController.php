@@ -87,7 +87,7 @@ class AuthController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'handle' => $request->handle,
+                    'id' => $user->id,
                     'token' => $randomToken,
                 ]);
             }
@@ -107,12 +107,10 @@ class AuthController extends Controller
 
     public function currentUser(Request $request)
     {
-//        $token = Hash::make($request->token);
-//        dd($token);
-        $user = User::all();
-
-//        $user = User::where('token', $token)->first();
-
-        dd($user);
+        return response()->json(
+            [
+                'authorized' => $this->AuthorizeUser($request->token, $request->userID)
+            ]
+        );
     }
 }
