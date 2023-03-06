@@ -9,29 +9,16 @@
             </div>
 
             <div class="blog__detail__header--inner-right">
-                <!-- <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span>  -->
-                <span class="blog__detail__header__text blog__detail__header__text--timestamp">25-02-2023</span>
+                <span class="blog__header__text blog__header__text--timestamp">{{blogs.created_at}}</span> 
                 <button @click="editBlog()"><img class="blog__detail__header__image blog__detail__header__image--edit" :src="defaultEditIcon"></button>
                 <button @click="deleteBlog()"><img class="blog__detail__header__image blog__detail__header__image--delete" :src="defaultDeleteIcon"></button>
             </div>
         </div>
 
         <div class="blog__detail__content">
-            <!-- <p class="blog__content blog__content--title">{{blog.title}}</p> -->
-            <!-- <p class="blog__content blog__content--description">{{blog.description}}</p>  -->
-            <!-- <img class="blog__content blog__content--image" :src="(blog.file !== '') ? 'storage/BlogPictures/' + blog.file : DefaultBlogPicture" alt="image" loading="lazy"> -->
-
-            <h2 class="blog__detail__content blog__detail__content--title">Dit is de titel van een blog</h2>
-            <span class="blog__detail__content blog__detail__content--description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis fermentum dui. 
-                Morbi lacinia molestie consequat. Morbi vitae lectus sed purus volutpat ultrices eu vel lacus. 
-                Vestibulum non leo cursus, molestie nisl ac, molestie est. Maecenas a augue vel turpis cursus egestas. 
-                Cras dui ante, aliquet vitae gravida non, ornare ac nulla. Praesent porta cursus augue et accumsan. 
-                Integer dignissim ex vel quam volutpat, ut suscipit ante ultrices. Ut facilisis sollicitudin mauris in maximus. 
-                Nunc turpis sapien, accumsan non felis id, tempus finibus arcu. In non nisi nec ante dapibus blandit rhoncus sed ipsum. 
-                In fermentum lobortis felis, sed euismod est molestie non.
-            </span>
-            <img class="blog__detail__content blog__detail__content--image" :src="defaultBlogPicture" alt="image" loading="lazy">
+            <p class="blog__detail__content blog__detail__content--title">{{blogs.title}}</p>
+            <p class="blog__detail__content blog__detail__content--description">{{blogs.description}}</p> 
+            <img class="blog__detail__content blog__detail__content--image" :src="(blogs.coverFile !== '') ? 'storage/BlogPictures/' + blogs.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
         </div>
 
         <div class="blog__detail__comments">
@@ -57,12 +44,12 @@ import axios from 'axios'
 export default {
     name: "BlogDetail",
     props: [
-        'blog',
+        'blogs',
     ],
 
     methods: {
-         /* go to the destroy route with the id */
-         deleteBlog() {
+        /* go to the destroy route with the id */
+        deleteBlog() {
            axios.delete('/api/blog/destroy/' + this.blog.id, {
                 'id': this.id,
             },

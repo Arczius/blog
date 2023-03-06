@@ -151,15 +151,14 @@ class BlogController extends Controller
     }
 
     /**
-    * get one existing blog with it's details
+    * get one existing blog
     *
     * @return 
     */
     public function getBlogDetail(String $id) : JsonResponse
     {
-        dd('test');
         return response()->json([
-            'blogs' => Post::find($id),
+            'blogs' => Posts::where('id', $id)->first(),
         ]);
     }
 }

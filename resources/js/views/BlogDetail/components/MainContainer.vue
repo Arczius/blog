@@ -1,8 +1,7 @@
 <template>
     <main>
         <div class="container">
-            <!-- <MainContainerItem v-if="blogs !== null" v-for="blog in blogs" :blog="blog"/> -->
-            <MainContainerItem/>
+            <MainContainerItem v-if="blogs !== null" :blogs="blogs"/>
         </div>
     </main>
 </template>
@@ -11,7 +10,6 @@
 import MainContainerItem from './BlogDetail.vue';
 import axios from 'axios'
 </script>
-
 
 <script>
 export default {
@@ -25,7 +23,7 @@ export default {
 
     methods: {
         getBlogDetail(){
-            axios.get('/api/blog/detail' + this.id)
+            axios.get('/api/blog/detail/' + this.id)
                 .then((response) => {
                     this.blogs = response.data.blogs
                     console.log(this.blogs)
@@ -39,21 +37,5 @@ export default {
     mounted(){
         this.getBlogDetail()
     }
-
-    // getAllBlogs(){
-    //         axios.get('/api/blog')
-    //             .then((response) => {
-    //                 this.blogs = response.data.blogs
-    //                 console.log(this.blogs)
-    //             })
-    //             .catch((error) => {
-    //                 console.warn(error)
-    //             })
-    //     },
-    // },
-
-    // mounted(){
-    //     this.getAllBlogs()
-    // }
 }
 </script>
