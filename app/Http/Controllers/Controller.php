@@ -17,8 +17,19 @@ class Controller extends BaseController
 
     protected function AuthorizeUser(String $token, String | Integer $userID)
     {
-        $user = User::where('id', $userID)->first();
+        $user = User::where('id', $userID)->pluck('token')->first();
 
         return Hash::check($token, $user->token);
+    }
+
+    protected function getUserData(String $token, String | Integer $userID) : array
+    {
+        return ($this->AuthorizeUser($token, $userID))
+            ? [
+                'user' => User::where('id', $userID)->pluck('id', 'handle', 'username')->first()
+            ]
+            : [
+                'user' => false
+            ];
     }
 }
