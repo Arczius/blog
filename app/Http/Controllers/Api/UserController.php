@@ -14,17 +14,6 @@ class UserController extends Controller
 {
     public function getCurrentUserInfo(Request $request)
     {
-
-        return ($this->AuthorizeUser($request->token, $request->userID))
-            ? response()->json(
-                [
-                    'user' => User::select('id')->where('id', $request->userID)->first(),
-                ]
-            )
-            : response()->json(
-                [
-                    'Unauthorized' => true,
-                ],
-            401);
+        return $this->getUserData($request->token, $request->userID);
     }
 }

@@ -9,9 +9,11 @@
             <div class="blog__header--inner-right">
                 <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
 
-                <div v-if="user.id === blog.user_id">
-                    <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
-                    <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                <div v-if="user !== null">
+                    <div v-if="user.id === blog.user_id">
+                        <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
+                        <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,10 +76,6 @@
             editBlog(){
                 this.$router.push('/edit/' + this.blog.id);
             },
-        },
-
-        mounted(){
-            console.log(this.user.id);
         }
     }
 </script>
