@@ -1,11 +1,6 @@
 <template>
     <div class="blog__holder">
         <div class="blog__header">
-            <!-- <img class="blog__header__image--profilePicture" v-if="user.profile_picture !== ''" :src="user.profile_picture" alt="" loading="lazy"> 
-            <img class="blog__header__image--profilePicture" v-else :src="DefaultProfilePicture" alt="" loading="lazy"> 
-
-            <span class="blog__header__text blog__header__text--username">@{{user.username}}</span>  -->
-
             <div class="blog__header--inner-left">
                 <img class="blog__header__image--profilePicture" :src="DefaultProfilePicture" alt="" loading="lazy"> 
                 <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
@@ -13,8 +8,15 @@
 
             <div class="blog__header--inner-right">
                 <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
-                <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
-                <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+
+                <div v-if="user.id === blog.user_id">
+                    <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
+                    <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                </div>
+
+                <!-- <div v-else>
+                    
+                </div> -->
             </div>
         </div>
 
@@ -40,40 +42,42 @@
 </script>
 
 <script>
-import axios from 'axios'
-export default {
-    name: "MainContainerItem",
-    props: [
-        'blog',
-    ],
-    data() {
-        return {
-        };
-    },
-    methods: {
-        /* go to the destroy route with the id */
-        deleteBlog() {
-           axios.delete('/api/blog/destroy/' + this.blog.id, {
-                'id': this.id,
-            },
-            {
-                headers: { "Content-Type" : "application/json"}
-            })
-            /* reload the page */
-            .then((response) =>  {  
-                console.log(response)
-                location.reload();
-                this.blog.id = response.data.id 
-            })
-            .catch(function (error) {  
-                console.log(error);
-            });
-        },
+    import axios from 'axios'
+    export default {
+        name: "MainContainerItem",
+        props: [
+            'blog',
+            'user'
+        ],
+        data() {
+            return {
 
-        /* go to the edit route */
-        editBlog(){
-            this.$router.push('/edit/' + this.blog.id);
+            };
+        },
+        methods: {
+            /* go to the destroy route with the id */
+            deleteBlog() {
+            axios.delete('/api/blog/destroy/' + this.blog.id, {
+                    'id': this.id,
+                },
+                {
+                    headers: { "Content-Type" : "application/json"}
+                })
+                /* reload the page */
+                .then((response) =>  {  
+                    console.log(response)
+                    location.reload();
+                    this.blog.id = response.data.id 
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
+            },
+
+            /* go to the edit route */
+            editBlog(){
+                this.$router.push('/edit/' + this.blog.id);
+            },
         },
     }
-}
 </script>
