@@ -1,5 +1,7 @@
 <template>
     <BlogStore v-if="blog !== null" :blog="blog"/>
+    <BlogStore v-if="user !== null" :user="user"/>
+
 </template>
 
 <script setup>
@@ -18,6 +20,7 @@ export default {
         return {
             'id': this.$route.params.id,
             'blog': null,
+              'user': null,
         }
     },
     
@@ -33,10 +36,26 @@ export default {
             .catch(function (error) {  
                 console.log(error);
             });
-        }
+        },
+        
+          getCurrentUserData(){
+                axios.post('/api/user/currentUser', {
+                    'userID': localStorage.getItem('userID'),
+                    'token': localStorage.getItem('token'),
+                })
+                    .then((response) => {
+                        this.user = response.data.user
+                        console.log(this.user)
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    
+                    })
+            }
     },
     mounted(){
         this.getCurrentBlogInfo()
+        this.getCurrentUserData()
     }
 }
 </script>
