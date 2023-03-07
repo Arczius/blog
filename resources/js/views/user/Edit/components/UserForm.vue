@@ -52,6 +52,9 @@ export default {
             'profile_picture': null,
             'profile_header': null,
 
+            'token': localStorage.getItem('token'),
+            'userID': localStorage.getItem('userID'),
+
             'userData': {
                 'username': null,
                 'email': null,
@@ -67,14 +70,62 @@ export default {
                 'username': this.userData.username,
                 'email': this.userData.email,
                 'about_me': this.userData.about_me,
-                'token': localStorage.getItem('token'),
-                'userID': localStorage.getItem('userID'),
+                'token': this.token,
+                'userID': this.userID,
             })
                 .then((response) => {
                     console.log(response)
+
+                    if(this.profile_picture === null && this.profile_header === null){
+                        this.$router.push("/home")
+                    }
+
+                    if(this.profile_picture !== null) {
+                        this.sendLocalProfilePicture()
+                    }
+
+                    if(this.profile_header !== null) {
+                        this.sendLocalProfileHeader()
+                    }
+
+                })
+                .then(() => {
                 })
         },
+        sendLocalProfilePicture(){
+            axios.post("/api/user/update/profile_picture",
+                {
+                    'image': this.profile_picture,
+                    'token': this.token,
+                    'userID': this.userID,
+                },
+                {
+                    headers: {
+                        "Content-Type": 'multipart/form-data'
+                    }
+                }
+            )
+                .then((response) => {
 
+                })
+        },
+        sendLocalProfileHeader(){
+            axios.post("/api/user/update/profile_header",
+                {
+                    'image': this.profile_header,
+                    'token': this.token,
+                    'userID': this.userID,
+                },
+                {
+                    headers: {
+                        "Content-Type": 'multipart/form-data'
+                    }
+                }
+            )
+                .then((response) => {
+
+                })
+        },
         updateLocalProfilePicture(){
             this.profile_picture = this.$refs.ProfilePicture.files[0]
         },
