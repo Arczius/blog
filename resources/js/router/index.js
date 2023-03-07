@@ -19,12 +19,12 @@ const routes = [
     {
         path: '/store',
         name: 'store',
-        component: async () => await import('../views/BlogDetails/Index.vue')
+        component: async () => await import('../views/BlogStore/Index.vue')
     },
     {
         path: '/blogs',
         name: 'blogs',
-        component: async () => import('../views/BlogDetails/Index.vue')
+        component: async () => import('../views/BlogStore/Index.vue')
     },
     {
         path: '/home',
@@ -41,7 +41,7 @@ const routes = [
     {
         path: '/edit/:id',
         name: 'edit',
-        component: async () => await import('../views/BlogDetails/Index.vue')
+        component: async () => await import('../views/BlogStore/Index.vue')
     },
     {
         path: '/register',
