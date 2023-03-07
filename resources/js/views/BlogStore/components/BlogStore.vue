@@ -13,12 +13,12 @@
 
             <label for="create__details--title">Titel</label>
             <div>
-                <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
+                <input class="create__details--title" v-model="blog.title" type="text" placeholder="Post titel...">
             </div>
 
             <label for="create__details--description">Beschrijving</label>
             <div>
-                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
+                <textarea class="create__details--description" type="text" placeholder="Post beschrijving..."></textarea>
             </div>
 
             <label for="create__details--image">Omslag afbeelding</label>
@@ -43,6 +43,10 @@
     import axios from 'axios';
     export default {
         name: "store",
+        props: [
+            'blog',
+        ],
+
         data() {
             return {
                 'title': null,
@@ -131,6 +135,10 @@
                     console.log(error);
                 });
             },
+        },
+
+        mounted(){
+            console.log(this.blog);
         }
         
     };

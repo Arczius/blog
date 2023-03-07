@@ -142,4 +142,18 @@ class BlogController extends Controller
             return response()->json($response);
         }
     }
+
+    /**
+    * get the current the blog data
+    *
+    * @return 
+    */
+    public function getCurrentBlogInfo(String $id)
+    {
+        return response()->json(
+            [
+                'blog' => Posts::select('id', 'title', 'description')->where('id', $id)->first(),
+            ]
+        );
+    }
 }
