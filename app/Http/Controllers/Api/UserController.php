@@ -106,7 +106,6 @@ class UserController extends Controller
             // deleting the old picture
             if($user->profile_picture !== null) {
                 Storage::disk('public')->delete($user->profile_picture);
-
             }
 
             // generating the new picture
@@ -125,6 +124,10 @@ class UserController extends Controller
                     'profile_picture' => 'profile_pictures/' . $filename
                 ]
             );
+
+            return response()->json([
+                'status' => 'success'
+            ]);
         }
 
         catch (\Throwable $th) {
@@ -133,12 +136,66 @@ class UserController extends Controller
                 'errors' => $th->getMessage()
             ], 500);
         }
-
-//        dd($validated);
     }
 
     public function updateUserProfileHeader(Request $request)
     {
 
+        try{
+            $validated = Validator::make($request->all(),
+                [
+                    'image' => 'required|mimes:jpg,png,webp,svg,gif|max:4096'
+                ]
+            );
+
+            if($validated->fails()) {
+                return response()->json([
+                    'status' => 'validation failed',
+                    'errors' => $validated->errors()
+                ], 400);
+            }
+
+            if(!$this->AuthorizeUser($request->token, $request->userID)){
+                return response()->json([
+                    'status' => 'unauthorized to do this action'
+                ], 401);
+            }
+
+            $user = User::where('id', $request->userID)->first();
+
+
+            // deleting the old picture
+            if($user->profile_header !== null) {
+                Storage::disk('public')->delete($user->profile_header);
+            }
+
+            // generating the new picture
+            $image = $request->file('image');
+
+            $filename = $request->userID . "_profile-header." . $image->extension();
+
+            $image->storeAs(
+                'public/profile_headers',
+                $filename
+            );
+
+            // putting the new picture in the database
+            User::where('id', $request->userID)->update(
+                [
+                    'profile_header' => 'profile_headers/' . $filename
+                ]
+            );
+
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
+
+        catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'server error',
+                'errors' => $th->getMessage()
+            ], 500);
+        }
     }
 }
