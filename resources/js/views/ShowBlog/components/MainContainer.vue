@@ -3,7 +3,7 @@
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user"/>
         </div>
         
     </main>
@@ -22,6 +22,7 @@ export default {
     data(){
         return {
             'blogs': null,
+            'user': null,
         }
     },
 
@@ -36,10 +37,29 @@ export default {
                     console.warn(error)
                 })
         },
+
+        getCurrentUserData(){
+            axios.post('/api/user/currentUser', {
+                'userID': localStorage.getItem('userID'),
+                'token': localStorage.getItem('token'),
+            })
+                .then((response) => {
+                    this.user = response.data.user
+                    console.log(this.user)
+                })
+                .catch((error) => {
+                    console.warn(error)
+                  
+                })
+        }
     },
 
     mounted(){
         this.getAllBlogs()
+
+        if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
+            this.getCurrentUserData()
+        }
     }
 }
 </script>

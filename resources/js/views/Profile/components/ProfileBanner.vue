@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import BannerPicture from '../../../../assets/luca-bravo-O453M2Liufs-unsplash.jpg'
+import BannerPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
 </script>
 
 <script>

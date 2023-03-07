@@ -1,0 +1,11 @@
+@mixin blue_button {
+    @include default_button;
+
+    background: $blue-colour;
+    color: $white-colour;
+
+    &:hover {
+        background: lighten($blue-colour, 15%);
+        color: darken($white-colour, 15%);
+    }
+}
