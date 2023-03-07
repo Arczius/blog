@@ -11,12 +11,13 @@
 export default {
     name: "Edit blog",
     props: {
-        'blog': null,
+        
     },
 
     data(){
         return {
-            'id': this.$route.params.id
+            'id': this.$route.params.id,
+            'blog': null,
         }
     },
     
@@ -27,7 +28,7 @@ export default {
             },
             )
             .then((response) =>  {  
-                this.id = response.data.id 
+                this.blog = response.data 
             })
             .catch(function (error) {  
                 console.log(error);
