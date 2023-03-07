@@ -13,10 +13,6 @@
                     <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
                     <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
                 </div>
-
-                <!-- <div v-else>
-                    
-                </div> -->
             </div>
         </div>
 
@@ -79,5 +75,9 @@
                 this.$router.push('/edit/' + this.blog.id);
             },
         },
+
+        mounted(){
+            console.log(this.user.id);
+        }
     }
 </script>

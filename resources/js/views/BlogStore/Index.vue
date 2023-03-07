@@ -1,5 +1,7 @@
 <template>
+    <BlogStore v-if="blog !== null" :blog="blog"/>
     <BlogStore v-if="user !== null" :user="user"/>
+
 </template>
 
 <script setup>
@@ -7,17 +9,36 @@
 </script>
 
 <script>
-    import axios from 'axios';
-    export default {
-        name: "Index",
-        data() {
-            return {
-                'user': null,
-            };
-        },
+    import axios from 'axios'
+export default {
+    name: "Edit blog",
+    props: {
+        
+    },
 
-        methods: {
-            getCurrentUserData(){
+    data(){
+        return {
+            'id': this.$route.params.id,
+            'blog': null,
+              'user': null,
+        }
+    },
+    
+    methods: {
+        getCurrentBlogInfo(){
+            console.log(this.id);
+            axios.post('/api/blog/info/' + this.id, {
+            },
+            )
+            .then((response) =>  {  
+                this.blog = response.data 
+            })
+            .catch(function (error) {  
+                console.log(error);
+            });
+        },
+        
+          getCurrentUserData(){
                 axios.post('/api/user/currentUser', {
                     'userID': localStorage.getItem('userID'),
                     'token': localStorage.getItem('token'),
@@ -31,10 +52,10 @@
                     
                     })
             }
-        },
-
-        mounted(){
-            this.getCurrentUserData()
-        }
+    },
+    mounted(){
+        this.getCurrentBlogInfo()
+        this.getCurrentUserData()
     }
+}
 </script>
