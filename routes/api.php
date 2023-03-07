@@ -49,9 +49,14 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 });
 
 /* route for the posts */
-Route::prefix('post')->controller(PostsController::class)->group(function () {
-    Route::get('/top', 'topPosts');
-    Route::get('/top/{amount}', 'topPosts');
+// Route::prefix('post')->controller(PostsController::class)->group(function () {
+//     Route::get('/top', 'topPosts');
+//     Route::get('/top/{amount}', 'topPosts');
+// });
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::post('/currentUser', 'getCurrentUserInfo');
 });
 
 /* route for the users */
