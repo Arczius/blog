@@ -45,12 +45,10 @@
         name: "store",
         props: [
             'blog',
-            'user'
         ],
 
         data() {
             return {
-                'user_id': this.user.id,
                 'title': null,
                 'description': null,
                 'coverFile': null,
@@ -71,7 +69,6 @@
 			    axios.post('/api/blog/store', {
                     'title': this.title,
                     'description': this.description,
-                    'user_id': this.user.id,
 				},
 				{
 					headers: {"Content-Type" : "application/json"}
@@ -138,7 +135,11 @@
                     console.log(error);
                 });
             },
-        }, 
+        },
 
+        mounted(){
+            console.log(this.blog);
+        }
+        
     };
 </script>

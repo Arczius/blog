@@ -30,22 +30,20 @@ class BlogController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required', new titlePattern(), 'max:255'],
             'description' => [new descriptionPattern(), 'max:255'],
-            'user_id' => ['required']
         ]);
+
+        if ($validator->fails()) {
+            return response()->json($response);
+        }
 
         $blog = new Posts();
         $blog->title = $request->title;
         $blog->description = $request->description;
-        $blog->user_id = $request->user_id;
         $blog->save();
 
         $response = [
             'id' => $blog->id
         ];
-
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
 
         return response()->json($response);
     }

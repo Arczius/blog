@@ -61,8 +61,3 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::post('/currentUser', 'getCurrentUserInfo');
 });
-
-/* route for the users */
-Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::post('/currentUser', 'getCurrentUserInfo');
-});
