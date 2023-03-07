@@ -1,7 +1,8 @@
 <template>
-    <BlogStore v-if="blog !== null" :blog="blog"/>
-    <BlogStore v-if="user !== null" :user="user"/>
-
+    <div v-if="this.$route.path == '/store'">
+        <BlogStore v-if="user !== null" :user="user"/>
+    </div>
+    <BlogStore v-if="blog !== null" :blog="blog" :user="user"/>
 </template>
 
 <script setup>
@@ -54,8 +55,10 @@ export default {
             }
     },
     mounted(){
-        this.getCurrentBlogInfo()
         this.getCurrentUserData()
+        if (this.$route.path !== '/store') {
+            this.getCurrentBlogInfo()
+        }
     }
 }
 </script>
