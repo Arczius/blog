@@ -20,6 +20,13 @@ class BlogController extends Controller
         ]);
     }
 
+    // public function getUserBlogs() : JsonResponse
+    // {
+    //     return response()->json([
+    //         'blogs' => Posts::where('user_id', 1),
+    //     ]);
+    // }
+
     /**
     * store the created post in the database
     *

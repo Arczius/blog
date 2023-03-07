@@ -2,8 +2,11 @@
     <div class="blog__holder">
         <div class="blog__header">
             <div class="blog__header--inner-left">
-                <img class="blog__header__image--profilePicture" :src="(user.profile_picture !== '') ? '../../storage/ProfilePictures/' + user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-                <span class="blog__header__text blog__header__text--username">@{{user.username}}</span> 
+                <img class="blog__header__image--profilePicture" :src="DefaultProfilePicture" alt="" loading="lazy"> 
+                <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
+
+                <!-- <img class="blog__header__image--profilePicture" :src="(user.profile_picture !== '') ? '../../storage/ProfilePictures/' + user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy"> -->
+                <!-- <span class="blog__header__text blog__header__text--username">@{{user.handle}}</span>  -->
             </div>
 
             <div class="blog__header--inner-right">
@@ -14,22 +17,22 @@
         </div>
 
         <div class="blog__content">
-            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
+            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : DefaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
             <p class="blog__content blog__content--description">{{blog.description}}</p> 
             <button class="blog__content blog__content--button">Lees verder</button>
         </div>
 
         <div class="blog__comments">
-            <img class="blog__comments blog__comments--profilePicture" :src="defaultProfilePicture">
+            <img class="blog__comments blog__comments--profilePicture" :src="DefaultProfilePicture">
             <input class="blog__comments blog__comments--text" type="text" placeholder="Schrijf een opmerking...">
         </div>
     </div>
 </template>
 
 <script setup>
-    import defaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
-    import defaultBlogPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import DefaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import DefaultBlogPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
     import defaultEditIcon from '../../../../assets/draw.png'
     import defaultDeleteIcon from '../../../../assets/bin.png'
 </script>
@@ -39,14 +42,17 @@ import axios from 'axios'
 export default {
     name: "MainContainerItem",
     props: [
-        'blogs',
-        'users',
+        'blog',
+        'user'
     ],
-
+    data() {
+        return {
+        };
+    },
     methods: {
         /* go to the destroy route with the id */
         deleteBlog() {
-           axios.delete('/api/blog/destroy/' + this.id, {
+           axios.delete('/api/blog/destroy/' + this.blog.id, {
                 'id': this.id,
             },
             {
@@ -56,7 +62,7 @@ export default {
             .then((response) =>  {  
                 console.log(response)
                 location.reload();
-                this.id = response.data.id 
+                this.blog.id = response.data.id 
             })
             .catch(function (error) {  
                 console.log(error);
@@ -65,7 +71,7 @@ export default {
 
         /* go to the edit route */
         editBlog(){
-            this.$router.push('/edit/' + this.id);
+            this.$router.push('/edit/' + this.blog.id);
         },
     }
 }

@@ -34,6 +34,7 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
+    // Route::get('/user', 'getUserBlogs');
     Route::post('/store', 'store');
     Route::delete('/destroy/{id}', 'destroy');
     Route::post('/edit/{id}', 'edit');
