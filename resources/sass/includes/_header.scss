@@ -3,6 +3,9 @@
     background-color: #111b4e;
     display: flex;
     padding: 0.7rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
     &__inner {
         display: flex;

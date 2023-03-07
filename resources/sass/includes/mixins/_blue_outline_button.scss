@@ -1,0 +1,14 @@
+@mixin blue_outline_button {
+    @include default_button;
+
+    background: $white-colour;
+    border: solid 1px #{$blue-colour};
+    color: $blue-colour;
+    padding: 7px 19px;
+
+    &:hover {
+        background: darken($white-colour, 8%);
+        border: solid 1px darken($blue-colour, 8%);
+        color: darken($blue-colour, 8%);
+    }
+}
