@@ -26,7 +26,7 @@
         </div>
 
         <div class="blog__comments">  
-            <div class="blog__comments__existingComment" v-for="comment in comments">
+            <div class="blog__comments__existingComment" v-for="comment in comments"> <!-- $postComment->post_id = $id; -->
                 <img class="blog__comments blog__comments--profilePicture" alt="profilePicture" :src="comment.user_id">
                 <span class="blog__comments blog__comments__existingComment--text">{{comment.comment_id}}</span>
             </div>

@@ -162,7 +162,7 @@ class BlogController extends Controller
     }
 
     /**
-    * add a comment to the selected blog
+    * add a comment to the blog
     * 
     */
     public function addComment(Request $request, String $id)
@@ -177,6 +177,7 @@ class BlogController extends Controller
 
         // $postComment = new PostsComments();
         // $postComment->post_id = $id;
+        // $postComment->comment_id = $comment->id;
         // $postComment->save();
 
         $response = [

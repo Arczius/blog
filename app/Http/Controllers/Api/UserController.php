@@ -20,7 +20,7 @@ class UserController extends Controller
         return ($this->AuthorizeUser($request->token, $request->userID))
             ? response()->json(
                 [
-                    'user' => User::select('id', 'username', 'about_me', 'email', 'profile_header', 'profile_picture')->where('id', $request->userID)->first(),
+                    'user' => User::select('id', 'handle', 'username', 'about_me', 'email', 'profile_header', 'profile_picture')->where('id', $request->userID)->first(),
                 ]
             )
                 : response()->json(
