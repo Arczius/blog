@@ -28,6 +28,7 @@
         },
 
         methods: {
+            /* get the current logged in user */
             getCurrentUserData(){
                 axios.post('/api/user/currentUser', {
                     'userID': localStorage.getItem('userID'),
@@ -43,6 +44,7 @@
                     })
             },
 
+            /* get all the blogs to display at the homepage */
             getAllBlogs(){
                 axios.get('/api/blog')
                     .then((response) => {
@@ -54,6 +56,7 @@
                     })
             },
 
+            /* get all the user blogs to display at the userprofile */
             getUserBlogs(){
                 axios.get('/api/blog/user/' + this.id)
                     .then((response) => {
@@ -65,6 +68,7 @@
                     })
             },
 
+            /* get the user data to display at the userprofile*/
             getUserProfile(){
                 axios.get('/api/profile/user/' + this.id)
                     .then((response) => {
@@ -75,6 +79,18 @@
                         console.warn(error)
                     })
             },
+
+            // /* get all the users who belong to a blog */
+            // getAllUsers(){
+            //     axios.get('/api/blog/users' + )
+            //         .then((response) => {
+            //             this.users = response.data.users
+            //             console.log(this.users)
+            //         })
+            //         .catch((error) => {
+            //             console.warn(error)
+            //         })
+            // },
         },
 
         mounted(){
@@ -84,6 +100,7 @@
 
             if (this.$route.path == '/home') {
                 this.getAllBlogs()
+                // this.getAllUsers()
             }else{
                 this.getUserBlogs()
             }
