@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 
@@ -78,17 +79,22 @@ class AuthController extends Controller
 
             if(Auth::attempt($credentials)) {
                 $user = Auth::user();
+                $randomToken = Str::random(64);
+
+                User::where('id', $user->id)->update([
+                    'token' => Hash::make($randomToken),
+                ]);
 
                 return response()->json([
                     'status' => 'success',
-                    'handle' => $request->handle
+                    'id' => $user->id,
+                    'token' => $randomToken,
                 ]);
             }
 
             return response()->json([
                 'status' => 'failed'
             ]);
-
         }
 
         catch (\Throwable $th) {
@@ -99,14 +105,12 @@ class AuthController extends Controller
         }
     }
 
-    public function authorizeUser() : JsonResponse
+    public function currentUser(Request $request)
     {
-        $user = Auth::user();
-
-        $data = [
-            'auth_user' => $user,
-        ];
-
-        return response()->json($data);
+        return response()->json(
+            [
+                'authorized' => $this->AuthorizeUser($request->token, $request->userID)
+            ]
+        );
     }
 }

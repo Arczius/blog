@@ -17,7 +17,8 @@
         </div>
 
         <div v-else class="categories__holder">
-            <h3>Tylers Categorieën</h3>
+            <!-- <h3>{{ users.username }}'s Categorieën</h3> -->
+             <h3>Tyler's Categorieën</h3>
             <div class="categories__holder">
                 <router-link to="/blogs" class="categories__item--all-categories">
                     Alle blogs
@@ -40,6 +41,10 @@ import SideBarCategoriesItem from './SideBarCategoriesItem.vue';
 <script>
 export default {
     name: "SideBarCategories",
+    props: [
+        'user'
+    ],
+
     data(){
         return {
             'categories': null,

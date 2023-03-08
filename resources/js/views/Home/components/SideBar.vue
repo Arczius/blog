@@ -1,6 +1,6 @@
 <template>
     <section class="home__sidebar--categories">
-        <SideBarCategories/>
+        <SideBarCategories :users="users"/>
     </section>
 
     <section class="home__sidebar--top-posts">
@@ -16,6 +16,30 @@ import SideBarTopPosts from './SideBarTopPosts.vue';
 
 <script>
 export default {
-    name: "SideBar"
+    name: "SideBar",
+
+    data(){
+        return {
+            'users': null,
+        }
+    },
+
+    methods: {
+        
+        getUserProfile(){
+                axios.get('/api/profile/user/' + this.id)
+                    .then((response) => {
+                        this.users = response.data.users
+                        console.log(this.users)
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            },
+    },
+
+    mounted(){
+        this.getUserProfile()
+    }
 }
 </script>

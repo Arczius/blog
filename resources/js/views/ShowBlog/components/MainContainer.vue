@@ -3,10 +3,8 @@
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog"/>
-            <!-- <MainContainerItem v-else v-for="user in users" :user="user"/> -->
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :users="users"/>
         </div>
-        
     </main>
 </template>
 
@@ -20,10 +18,6 @@
 <script>
     export default {
         name: "MainContainer",
-        props: {
-            // 'blogs': null,
-            // 'users': null,
-        },
         
         data(){
             return {
@@ -34,8 +28,34 @@
         },
 
         methods: {
+            getCurrentUserData(){
+                axios.post('/api/user/currentUser', {
+                    'userID': localStorage.getItem('userID'),
+                    'token': localStorage.getItem('token'),
+                    })
+                    .then((response) => {
+                        this.user = response.data.user
+                        console.log(this.user)
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    
+                    })
+            },
+
             getAllBlogs(){
                 axios.get('/api/blog')
+                    .then((response) => {
+                        this.blogs = response.data.blogs
+                        console.log(this.blogs)
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            },
+
+            getUserBlogs(){
+                axios.get('/api/blog/user/' + this.id)
                     .then((response) => {
                         this.blogs = response.data.blogs
                         console.log(this.blogs)
@@ -58,7 +78,16 @@
         },
 
         mounted(){
-            this.getAllBlogs()
+            if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
+                this.getCurrentUserData()
+            }
+
+            if (this.$route.path == '/home') {
+                this.getAllBlogs()
+            }else{
+                this.getUserBlogs()
+            }
+            
             this.getUserProfile()
         }
     }
