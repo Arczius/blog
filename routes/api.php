@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\PostsController;
+use App\Http\Controllers\Api\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,10 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 Route::prefix('post')->controller(PostsController::class)->group(function () {
     Route::get('/top', 'topPosts');
     Route::get('/top/{amount}', 'topPosts');
+});
+
+/* route for the followers */
+Route::prefix('follow')->controller(FollowController::class)->group(function () {
+    Route::get('/followers/single/{userid}' , 'getFollowersSinglePerson');
+    Route::get('/following/single/{userid}', 'getFollowingSinglePerson');
 });
