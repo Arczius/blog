@@ -1,9 +1,11 @@
 <template>
-    <main>
-        <mainContainerBanner v-if="users !== null" :users="users"/>
+    <mainContainerBanner v-if="users !== null" :users="users"/>
 
-        <div class="sidebar">
-            <mainContainerItem v-if="users !== null" :users="users"/>
+    <main>
+        <mainContainerItem v-if="users !== null" :users="users"/>
+
+        <div class="profile profile__categories">
+            <sideBarCategories :users="users"/>
         </div>
     </main>
 </template>
@@ -11,6 +13,7 @@
 <script setup>
 import mainContainerItem from './Profile.vue';
 import mainContainerBanner from './ProfileBanner.vue';
+  import sideBarCategories from '../../Home/components/SideBarCategories.vue';
 import axios from 'axios'
 </script>
 
@@ -29,7 +32,6 @@ export default {
             axios.get('/api/profile/user/' + this.id)
                 .then((response) => {
                     this.users = response.data.users
-                    // console.log(this.users)
                 })
                 .catch((error) => {
                     console.warn(error)
