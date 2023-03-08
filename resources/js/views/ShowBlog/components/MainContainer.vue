@@ -38,7 +38,7 @@ export default {
                 })
         },
 
-        getCurrentUserData(){
+        getCurrentUserInfo(){
             axios.post('/api/user/currentUser', {
                 'userID': localStorage.getItem('userID'),
                 'token': localStorage.getItem('token'),
@@ -58,7 +58,7 @@ export default {
         this.getAllBlogs()
 
         if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
-            this.getCurrentUserData()
+            this.getCurrentUserInfo()
         }
     }
 }
