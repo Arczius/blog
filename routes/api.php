@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\PostsController;
@@ -35,8 +35,12 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
-    Route::post('/store', 'store');
+    Route::get('/user/{id}', 'getUserBlogs');
+    // Route::get('/users', 'getAllUsers');
+  
     Route::delete('/destroy/{id}', 'destroy');
+
+    Route::post('/store', 'store');
     Route::post('/edit/{id}', 'edit');
     Route::post('/file/{id}', 'getBlogImage');
 });
@@ -53,6 +57,16 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 Route::prefix('post')->controller(PostsController::class)->group(function () {
     Route::get('/top', 'topPosts');
     Route::get('/top/{amount}', 'topPosts');
+});
+
+/* route for the profile */
+Route::prefix('profile')->controller(UserController::class)->group(function () {
+    Route::get('/user/{id}', 'getUserProfile');
+});
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::post('/currentUser', 'getCurrentUserInfo');
 });
 
 /* route for the followers */

@@ -9,13 +9,13 @@
 </template>
 
 <script setup>
-import SideBarCategories from './SideBarCategories.vue';
-import SideBarTopPosts from './SideBarTopPosts.vue';
+    import SideBarCategories from './SideBarCategories.vue';
+    import SideBarTopPosts from './SideBarTopPosts.vue';
 </script>
 
 
 <script>
-export default {
-    name: "SideBar"
-}
+    export default {
+        name: "SideBar",
+    }
 </script>

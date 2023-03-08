@@ -49,7 +49,7 @@ const routes = [
         component: async () => await import('../views/Register/Index.vue')
     },
     {
-        path: '/profile',
+        path: '/profile/user/:id',
         name: 'profile',
         component: async () => await import('../views/Profile/Index.vue')
     }
