@@ -13,23 +13,23 @@
 
             <label for="create__details--title">Titel</label>
             <div>
-                <div v-if="blog !== undefined">
+                <!-- <div v-if="blog !== undefined">
                     <input class="create__details--title" v-model="blog.blog.title" type="text" placeholder="Post titel...">
                 </div>
 
-                <div v-else>
+                <div v-else> -->
                     <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
-                </div>
+                <!-- </div> -->
             </div>
 
             <label for="create__details--description">Beschrijving</label>
-            <div v-if="blog !== undefined">
+            <!-- <div v-if="blog !== undefined">
                 <textarea class="create__details--description" v-model="blog.blog.description" type="text" placeholder="Post beschrijving..."></textarea>
             </div>
 
-            <div v-else>
+            <div v-else> -->
                 <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
-            </div>
+            <!-- </div> -->
 
             <label for="create__details--image">Omslag afbeelding</label>
             <div class="create_details--image">
@@ -59,14 +59,22 @@
         ],
 
         data() {
+            var title = null;
+            var description = null;
+
+            if (this.blog !== undefined) {
+                title = this.blog.blog.title;
+                description = this.blog.blog.description;
+            }
+
             return {
-                'user_id': this.user.id,
-                'title': null,
-                'description': null,
+                'title': title,
+                'description': description,
                 'coverFile': null,
                 'file': null,
                 'blogid': null,
-                'id': this.$route.params.id
+                'id': this.$route.params.id,
+                'user_id': this.user.id,
             };
         },
 
@@ -149,6 +157,5 @@
                 });
             },
         }, 
-
     };
 </script>

@@ -25,7 +25,7 @@ class BlogController extends Controller
     *
     * @return
     */
-    public function store(Request $request) : JsonResponse
+    public function store (Request $request) : JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'title' => ['required', new titlePattern(), 'max:255'],
