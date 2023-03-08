@@ -52,6 +52,11 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: async () => await import('../views/Profile/Index.vue')
+    },
+    {
+        path: '/user/edit',
+        name: 'Edit User',
+        component: async () => await import('../views/user/Edit/Index.vue')
     }
 ]
 
