@@ -66,3 +66,14 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::post('/currentUser', 'getCurrentUserInfo');
 });
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+
+    Route::post('/currentUser', 'getCurrentUserInfo');
+
+    /* updating the user */
+    Route::post('/update', 'updateUserInformation');
+    Route::post('/update/profile_picture', 'updateUserProfilePicture');
+    Route::post('/update/profile_header', 'updateUserProfileHeader');
+});
