@@ -13,13 +13,23 @@
 
             <label for="create__details--title">Titel</label>
             <div>
-                <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
+                <!-- <div v-if="blog !== undefined">
+                    <input class="create__details--title" v-model="blog.blog.title" type="text" placeholder="Post titel...">
+                </div>
+
+                <div v-else> -->
+                    <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
+                <!-- </div> -->
             </div>
 
             <label for="create__details--description">Beschrijving</label>
-            <div>
-                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
+            <!-- <div v-if="blog !== undefined">
+                <textarea class="create__details--description" v-model="blog.blog.description" type="text" placeholder="Post beschrijving..."></textarea>
             </div>
+
+            <div v-else> -->
+                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
+            <!-- </div> -->
 
             <label for="create__details--image">Omslag afbeelding</label>
             <div class="create_details--image">
@@ -43,14 +53,28 @@
     import axios from 'axios';
     export default {
         name: "store",
+        props: [
+            'blog',
+            'user'
+        ],
+
         data() {
+            var title = null;
+            var description = null;
+
+            if (this.blog !== undefined) {
+                title = this.blog.blog.title;
+                description = this.blog.blog.description;
+            }
+
             return {
-                'title': null,
-                'description': null,
+                'title': title,
+                'description': description,
                 'coverFile': null,
                 'file': null,
                 'blogid': null,
-                'id': this.$route.params.id
+                'id': this.$route.params.id,
+                'user_id': this.user.id,
             };
         },
 
@@ -65,6 +89,7 @@
 			    axios.post('/api/blog/store', {
                     'title': this.title,
                     'description': this.description,
+                    'user_id': this.user.id,
 				},
 				{
 					headers: {"Content-Type" : "application/json"}
@@ -131,7 +156,6 @@
                     console.log(error);
                 });
             },
-        }
-        
+        }, 
     };
 </script>

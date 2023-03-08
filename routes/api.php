@@ -34,10 +34,13 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
+
     Route::post('/store', 'store');
-    Route::delete('/destroy/{id}', 'destroy');
     Route::post('/edit/{id}', 'edit');
+    Route::post('/info/{id}', 'getCurrentBlogInfo');
     Route::post('/file/{id}', 'getBlogImage');
+
+    Route::delete('/destroy/{id}', 'destroy');
 });
 
 /* route for the categories */
@@ -49,9 +52,19 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
 });
 
 /* route for the posts */
-Route::prefix('post')->controller(PostsController::class)->group(function () {
-    Route::get('/top', 'topPosts');
-    Route::get('/top/{amount}', 'topPosts');
+// Route::prefix('post')->controller(PostsController::class)->group(function () {
+//     Route::get('/top', 'topPosts');
+//     Route::get('/top/{amount}', 'topPosts');
+// });
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::post('/currentUser', 'getCurrentUserInfo');
+});
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::post('/currentUser', 'getCurrentUserInfo');
 });
 
 /* route for the users */
