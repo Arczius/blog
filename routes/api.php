@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\PostsController;
+use App\Http\Controllers\Api\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/create', 'createUser');
     Route::post('/login', 'loginUser');
-    Route::post('', 'authorizeUser');
+    Route::post('', 'currentUser');
 });
 
 /* route for the blogs */
@@ -66,4 +67,10 @@ Route::prefix('profile')->controller(UserController::class)->group(function () {
 /* route for the users */
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::post('/currentUser', 'getCurrentUserInfo');
+});
+
+/* route for the followers */
+Route::prefix('follow')->controller(FollowController::class)->group(function () {
+    Route::get('/followers/single/{userid}' , 'getFollowersSinglePerson');
+    Route::get('/following/single/{userid}', 'getFollowingSinglePerson');
 });
