@@ -34,11 +34,13 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
+    Route::get('/comments', 'getAllComments');
 
     Route::post('/store', 'store');
     Route::post('/edit/{id}', 'edit');
     Route::post('/info/{id}', 'getCurrentBlogInfo');
     Route::post('/file/{id}', 'getBlogImage');
+    Route::post('/comment/{id}', 'addComment');
 
     Route::delete('/destroy/{id}', 'destroy');
 });
@@ -48,7 +50,6 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
     Route::get('', 'getAllCategories');
     Route::get('/top', 'getTopCategories');
     Route::get('/amount/{amount}', 'getCategoriesByAmount');
-
 });
 
 /* route for the posts */

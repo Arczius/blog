@@ -3,7 +3,7 @@
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments"/>
         </div>
         
     </main>
@@ -23,6 +23,7 @@ export default {
         return {
             'blogs': null,
             'user': null,
+            'comments': null
         }
     },
 
@@ -32,6 +33,17 @@ export default {
                 .then((response) => {
                     this.blogs = response.data.blogs
                     console.log(this.blogs)
+                })
+                .catch((error) => {
+                    console.warn(error)
+                })
+        },
+
+        getAllComments(){
+            axios.get('/api/blog/comments')
+                .then((response) => {
+                    this.comments = response.data.comments
+                    console.log(this.comments)
                 })
                 .catch((error) => {
                     console.warn(error)
@@ -56,6 +68,7 @@ export default {
 
     mounted(){
         this.getAllBlogs()
+        this.getAllComments()
 
         if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
             this.getCurrentUserInfo()

@@ -10,6 +10,8 @@ use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
+use App\Models\Comments;
+use App\Models\PostsComments;
 
 class BlogController extends Controller
 {
@@ -156,6 +158,51 @@ class BlogController extends Controller
             [
                 'blog' => Posts::select('id', 'title', 'description')->where('id', $id)->first(),
             ]
+        );
+    }
+
+    /**
+    * add a comment to the selected blog
+    * 
+    */
+    public function addComment(Request $request, String $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'comment' => ['required'],
+        ]);
+
+        $comment = new Comments();
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        // $postComment = new PostsComments();
+        // $postComment->post_id = $id;
+        // $postComment->save();
+
+        $response = [
+            'id' => $comment->id
+        ];
+
+        if ($validator->fails()) {
+            return response()->json($response);
+        }
+
+        return response()->json($response);
+    }
+
+    /**
+    * get all the blogs which belongs to a blog
+    * 
+    */
+    public function getAllComments(){
+        return response()->json(
+            [
+                'comments' => PostsComments::all(),
+            ]
+
+            // postComments -> comment_id / user_id
+            // comments -> comment
+            // users -> profile_picture
         );
     }
 }
