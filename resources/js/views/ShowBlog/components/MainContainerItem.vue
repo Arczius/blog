@@ -26,10 +26,14 @@
         </div>
 
         <div class="blog__comments">  
-            <div class="blog__comments__existingComment" v-for="comment in comments"> <!-- $postComment->post_id = $id; -->
-                <img class="blog__comments blog__comments--profilePicture" alt="profilePicture" :src="comment.user_id">
-                <span class="blog__comments blog__comments__existingComment--text">{{comment.comment_id}}</span>
-            </div>
+                <div class="blog__comments__existingComment">   
+                    <div v-if="blog.comment !== null">
+                        <div v-for="comments in blog.comments">
+                            <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? 'storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
+                            <span class="blog__comments blog__comments__existingComment--text">{{comments.comment}}</span>
+                        </div>
+                    </div>
+                </div>
 
             <div class="blog__comments__add">
                 <img class="blog__comments blog__comments--profilePicture" :src="defaultProfilePicture">
@@ -58,16 +62,20 @@
         ],
         data() {
             return {
-                'comment': null
+                'comment': null,
+                'user_id': this.user.id,
+                // 'user_id': 1,
+                'posts_id': this.blog.id
             };
         },
 
         methods: {
             /* add a comment to a blog */
             addComment() {
-			    axios.post('/api/blog/comment/' + this.id, {
-                    'id': this.id,
-                    'comment': this.comment
+			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
+                    'comment': this.comment,
+                    'user_id': this.user_id,
+                    'posts_id': this.posts_id
 				})
                  /* reload the page */
                  .then((response) =>  {  

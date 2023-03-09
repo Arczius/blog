@@ -3,22 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
+use DB;
+
+use Illuminate\Support\Facades\Validator;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
 use App\Models\Comments;
-use App\Models\PostsComments;
 
 class BlogController extends Controller
 {
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
-            'blogs' => Posts::all(),
+            'blogs' => 
+            Posts::with(['comments' => function ($query) {
+                $query->with('user');
+            }])
+            ->get()
         ]);
     }
 
@@ -165,45 +170,20 @@ class BlogController extends Controller
     * add a comment to the blog
     * 
     */
-    public function addComment(Request $request, String $id)
+    public function addComment(Request $request, Posts $post)
     {
-        $validator = Validator::make($request->all(), [
+        $validated = $request->validate([
             'comment' => ['required'],
+            'user_id' => ['required'],
+            'posts_id' => ['required']
         ]);
 
-        $comment = new Comments();
-        $comment->comment = $request->comment;
+        $comment = new Comments;
+        $comment->comment = $validated['comment'];
+        $comment->user_id = $validated['user_id'];
+        $comment->posts_id = $validated['posts_id'];
         $comment->save();
 
-        // $postComment = new PostsComments();
-        // $postComment->post_id = $id;
-        // $postComment->comment_id = $comment->id;
-        // $postComment->save();
-
-        $response = [
-            'id' => $comment->id
-        ];
-
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
-
-        return response()->json($response);
-    }
-
-    /**
-    * get all the blogs which belongs to a blog
-    * 
-    */
-    public function getAllComments(){
-        return response()->json(
-            [
-                'comments' => PostsComments::all(),
-            ]
-
-            // postComments -> comment_id / user_id
-            // comments -> comment
-            // users -> profile_picture
-        );
+        return response()->json(['id' => $comment->id], 201);
     }
 }

@@ -26,17 +26,12 @@ class Posts extends Model
     ];
 
     // a post belongs to one user
-    public function author(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
     // a post can have multiple comments
-    public function postComments(){
-        return $this->belongsToMany(Comments::class, 'posts_comments', 'post_id', 'comment_id');
-    }
-
-    // a post can have one category
-    public function postCategory(){
-        return $this->hasOne(Category::class);
+    public function comments(){
+        return $this->hasMany(Comments::class);
     }
 }

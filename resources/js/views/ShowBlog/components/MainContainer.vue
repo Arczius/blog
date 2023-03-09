@@ -39,17 +39,6 @@ export default {
                 })
         },
 
-        getAllComments(){
-            axios.get('/api/blog/comments')
-                .then((response) => {
-                    this.comments = response.data.comments
-                    console.log(this.comments)
-                })
-                .catch((error) => {
-                    console.warn(error)
-                })
-        },
-
         getCurrentUserInfo(){
             axios.post('/api/user/currentUser', {
                 'userID': localStorage.getItem('userID'),
@@ -63,12 +52,11 @@ export default {
                     console.warn(error)
                   
                 })
-        }
+        },
     },
 
     mounted(){
         this.getAllBlogs()
-        this.getAllComments()
 
         if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
             this.getCurrentUserInfo()
