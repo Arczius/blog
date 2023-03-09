@@ -18,7 +18,7 @@
         <div class="blog__detail__content">
             <p class="blog__detail__content blog__detail__content--title">{{blogs.title}}</p>
             <p class="blog__detail__content blog__detail__content--description">{{blogs.description}}</p> 
-            <img class="blog__detail__content blog__detail__content--image" :src="(blogs.coverFile !== '') ? 'storage/BlogPictures/' + blogs.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
+            <img class="blog__detail__content blog__detail__content--image" :src="(blogs.coverFile !== '') ? '../../storage/BlogPictures/' + blogs.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
         </div>
 
         <div class="blog__detail__comments">
