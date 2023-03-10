@@ -178,6 +178,8 @@ class BlogController extends Controller
             'posts_id' => ['required']
         ]);
 
+        // dd($validated);
+
         $comment = new Comments;
         $comment->comment = $validated['comment'];
         $comment->user_id = $validated['user_id'];

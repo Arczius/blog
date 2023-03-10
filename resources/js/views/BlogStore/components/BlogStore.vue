@@ -13,23 +13,11 @@
 
             <label for="create__details--title">Titel</label>
             <div>
-                <!-- <div v-if="blog !== undefined">
-                    <input class="create__details--title" v-model="blog.blog.title" type="text" placeholder="Post titel...">
-                </div>
-
-                <div v-else> -->
-                    <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
-                <!-- </div> -->
+                <input class="create__details--title" v-model="title" type="text" placeholder="Post titel...">
             </div>
 
             <label for="create__details--description">Beschrijving</label>
-            <!-- <div v-if="blog !== undefined">
-                <textarea class="create__details--description" v-model="blog.blog.description" type="text" placeholder="Post beschrijving..."></textarea>
-            </div>
-
-            <div v-else> -->
-                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
-            <!-- </div> -->
+            <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
 
             <label for="create__details--image">Omslag afbeelding</label>
             <div class="create_details--image">
@@ -112,7 +100,7 @@
                     /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
-                        this.$router.push("/home");
+                        this.$router.push("/profile");
 					})
 				}
                 })  
@@ -134,7 +122,7 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.id = response.data.id 
-                    this.$router.push("/home");
+                    this.$router.push("/profile");
                 })
                  /* send the files to the file route */
                 .then(() => {
