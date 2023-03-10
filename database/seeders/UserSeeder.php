@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
                 'email' => 'mamaikbenbangkommeophalen@help.com',
                 'password' => Hash::make('TestWachtwoordVoorTyler')
             ]
+
         ];
 
         foreach($data as $item) {
