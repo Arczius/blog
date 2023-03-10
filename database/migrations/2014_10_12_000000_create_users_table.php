@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('about_me')->default("hey there, im a blog user");
             $table->string('profile_picture')->nullable(true);
             $table->string('profile_header')->nullable(true);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

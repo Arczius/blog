@@ -8,7 +8,6 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\PostsController;
-use App\Http\Controllers\Api\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +34,7 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
-    Route::get('/user/{id}', 'getUserBlogs');
-    // Route::get('/users', 'getAllUsers');
-  
-    Route::delete('/destroy/{id}', 'destroy');
-  
+    
     Route::post('/store', 'store');
     Route::post('/edit/{id}', 'edit');
     Route::post('/info/{id}', 'getCurrentBlogInfo');
@@ -75,20 +70,4 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::post('/update', 'updateUserInformation');
     Route::post('/update/profile_picture', 'updateUserProfilePicture');
     Route::post('/update/profile_header', 'updateUserProfileHeader');
-});
-
-/* route for the profile */
-Route::prefix('profile')->controller(UserController::class)->group(function () {
-    Route::get('/user/{id}', 'getUserProfile');
-});
-
-/* route for the users */
-Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::post('/currentUser', 'getCurrentUserInfo');
-});
-
-/* route for the followers */
-Route::prefix('follow')->controller(FollowController::class)->group(function () {
-    Route::get('/followers/single/{userid}' , 'getFollowersSinglePerson');
-    Route::get('/following/single/{userid}', 'getFollowingSinglePerson');
 });

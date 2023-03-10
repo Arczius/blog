@@ -4,11 +4,16 @@
     width: 100%;
 
     &__sidebar {
-
-        @include sidebar {
-            margin-right: 0;
-            background: $white-colour;
-        }
+        align-self: flex-start;
+        background-color: $white-colour;
+        display: grid;
+        flex: 1;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+        margin-left: 2rem;
+        margin-top: 2.5rem;
+        min-width: calc(calc(100% / 4) - 2rem);
+        padding: 1.8rem;
 
         &--categories {
             position:  relative;

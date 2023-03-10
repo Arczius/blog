@@ -2,12 +2,8 @@
     <div class="blog__holder">
         <div class="blog__header">
             <div class="blog__header--inner-left">
-            
-                <template v-if="users">
-                    <img class="blog__header__image--profilePicture" :src="(users.profile_picture !== '') ? '../../storage/ProfilePictures/' + users.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-                    <span class="blog__header__text blog__header__text--username">@{{users.handle}}</span> 
-                </template>
-
+                <img class="blog__header__image--profilePicture" :src="defaultProfilePicture" alt="" loading="lazy"> 
+                <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
             </div>
 
             <div class="blog__header--inner-right">
@@ -56,7 +52,6 @@
 </script>
 
 <script>
-
     import axios from 'axios'
     export default {
         name: "MainContainerItem",
@@ -65,7 +60,7 @@
             'user',
             'comments'
         ],
-        
+
         data() {
             return {
                 'comment': null,

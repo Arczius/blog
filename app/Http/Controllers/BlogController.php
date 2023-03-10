@@ -12,7 +12,6 @@ use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
-// use App\Models\Users;
 use App\Models\Comments;
 
 class BlogController extends Controller
@@ -27,20 +26,6 @@ class BlogController extends Controller
             ->get()
         ]);
     }
-
-    public function getUserBlogs(String $id) : JsonResponse
-    {
-        return response()->json([
-            'blogs' => Posts::where('user_id', $id)->get(),
-        ]);
-    }
-
-    // public function getAllUsers(String $id) : JsnoResponse
-    // {
-    //     return response()->json([
-    //         'users' => Users::where('blog_id', $id)->get(),
-    //     ]);
-    // }
 
     /**
     * store the created post in the database
@@ -129,13 +114,6 @@ class BlogController extends Controller
         $blog = Posts::find($id);
         if($blog){
             $blog->delete();
-
-            /* delete the file from the public folder */
-            Storage::disk('public')->delete(
-                $blog->coverFile, 
-                $blog->file
-            );
-
             return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200);
         }else{
             return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);

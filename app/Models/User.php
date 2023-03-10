@@ -29,15 +29,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // a user can follow multiple people
-    public function following(){
-        return $this->belongsToMany(User::class, 'following', 'user_id', 'follow_id');
-    }
-
-    // a user can have multiple followers
-    public function followers(){
-        return $this->belongsToMany(User::class, 'following', 'follow_id', 'user_id');
-    }
     // a user can have multiple posts
     public function posts(){
         return $this->hasMany(Posts::class);

@@ -61,8 +61,7 @@ export default {
             'handle': null,
             'password': null,
             'checkbox': false,
-            'errors': null,
-            'parent': this.$parent.$parent
+            'errors': null
         }
     },
 
@@ -84,8 +83,6 @@ export default {
                         })
                             .then((response) => {
                                 console.log(response)
-
-                                this.$router.push('/home')
                             })
                     })
                     .catch((error) => {
