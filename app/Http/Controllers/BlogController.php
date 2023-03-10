@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use DB;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
@@ -27,8 +28,7 @@ class BlogController extends Controller
             'blogs' => 
             Posts::with(['comments' => function ($query) {
                 $query->with('user');
-            }])
-            ->get()
+            }])->get()
         ]);
     }
 
@@ -84,14 +84,8 @@ class BlogController extends Controller
 
         $blogPost = Posts::where('id', $id)->first();
 
-        /* stores image in public/blogPictures folder */
-        if (isset($coverFile)) {
-            $coverFile->store('blogPictures', 'public');
-            $file->store('blogPictures', 'public');
-        }
-
         /* give the uploaded file a new name and store it */ 
-        if(isset($coverFile)){
+        if(isset($coverFile) && isset($file)){
             $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
             $fileName = $blogPost->id . "_content." . $file->extension();
 
@@ -120,8 +114,8 @@ class BlogController extends Controller
             $blog->delete();
 
             /* delete the images from the public folder */
-            Storage::disk('public')->delete("BlogPictures/" . $coverFile); 
-            Storage::disk('public')->delete("BlogPictures/" . $file);
+            Storage::disk('public')->delete("BlogPictures/" . $blog['coverFile']); 
+            Storage::disk('public')->delete("BlogPictures/" . $blog['file']);
 
             $response = [
                 'id' => $blog->id
@@ -163,7 +157,7 @@ class BlogController extends Controller
         }
     }
 
-
+    /**
     * get one existing blog
     *
     * @return 
@@ -174,8 +168,8 @@ class BlogController extends Controller
             'blogs' => Posts::where('id', $id)->first(),
         ]);
     }
-}
 
+    /**
     * get the current the blog data
     *
     * @return 

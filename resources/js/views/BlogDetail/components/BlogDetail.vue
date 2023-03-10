@@ -41,37 +41,37 @@
 </script>
 
 <script>
-import axios from 'axios'
-export default {
-    name: "BlogDetail",
-    props: [
-        'blogs',
-    ],
+    import axios from 'axios'
+    export default {
+        name: "BlogDetail",
+        props: [
+            'blogs',
+        ],
 
-    methods: {
-        /* go to the destroy route with the id */
-        deleteBlog() {
-           axios.delete('/api/blog/destroy/' + this.blog.id, {
-                'id': this.id,
+        methods: {
+            /* go to the destroy route with the id */
+            deleteBlog() {
+            axios.delete('/api/blog/destroy/' + this.blog.id, {
+                    'id': this.id,
+                },
+                {
+                    headers: { "Content-Type" : "application/json"}
+                })
+                /* reload the page */
+                .then((response) =>  {  
+                    console.log(response)
+                    location.reload();
+                    this.blog.id = response.data.id 
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
             },
-            {
-                headers: { "Content-Type" : "application/json"}
-            })
-            /* reload the page */
-            .then((response) =>  {  
-                console.log(response)
-                location.reload();
-                this.blog.id = response.data.id 
-            })
-            .catch(function (error) {  
-                console.log(error);
-            });
-        },
 
-        /* go to the edit route */
-        editBlog(){
-            this.$router.push('/edit/' + this.blog.id);
-        },
-    }
-}
+            /* go to the edit route */
+            editBlog(){
+                this.$router.push('/edit/' + this.blog.id);
+            },
+        }
+    };
 </script>

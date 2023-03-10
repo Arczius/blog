@@ -43,15 +43,6 @@
     import axios from 'axios';
     export default {
         name: "store",
-        data() {
-            return {
-                'title': null,
-                'description': null,
-                'coverFile': null,
-                'file': null,
-                'blogid': null,
-                'id': this.$route.params.id
-
         props: [
             'blog',
             'user'
@@ -159,3 +150,4 @@
 
         }, 
     };
+</script>
