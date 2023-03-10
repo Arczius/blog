@@ -65,10 +65,18 @@
         ],
 
         data() {
+            if(this.blog.comments.length > 0){
+                var comment_id;
+                this.blog.comments.forEach(comment => {
+                    comment_id = comment.id
+                });
+            }
+
             return {
                 'comment': null,
                 'user_id': this.user.id,
-                'posts_id': this.blog.id
+                'posts_id': this.blog.id,
+                'blogComment_id': comment_id
             };
         },
         
@@ -77,7 +85,7 @@
             showBlogDetail(){
                 this.$router.push('/detail/' + this.blog.id);
             },
-        
+
             /* add a comment to a blog */
             addComment() {
 			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
@@ -97,13 +105,17 @@
 			},
 
             /* go to the destroy route with the id */
-            deleteBlog() {
-            axios.delete('/api/blog/destroy/' + this.blog.id, {
-                    'id': this.id,
-                },
-                {
-                    headers: { "Content-Type" : "application/json"}
-                })
+            deleteComment() {
+                  if(this.blog.comments.length > 0){
+                    var comment_id;
+                        this.blog.comments.forEach(comment => {
+                            comment_id = comment.id
+                        });
+                    }
+            
+                axios.delete('/api/blog/destroy/comment/' + comment_id, {
+                    'id': this.blogComment_id,
+                },)
                 /* reload the page */
                 .then((response) =>  {  
                     console.log(response)
@@ -115,20 +127,23 @@
                 });
             },
 
-            /* go to the destroy route with the id */
-            deleteComment() {
-                axios.delete('/api/blog/destroy/comment/' + this.blog.id, {
-                    'id': this.id,
-                },)
-                /* reload the page */
-                .then((response) =>  {  
-                    console.log(response)
-                    this.$emit("refresh");
-                    this.blog.id = response.data.id 
-                })
-                .catch(function (error) {  
-                    console.log(error);
-                });
+             /* go to the destroy route with the id */
+             deleteBlog() {
+                axios.delete('/api/blog/destroy/' + this.blog.id, {
+                        'id': this.blog.id,
+                    },
+                    {
+                        headers: { "Content-Type" : "application/json"}
+                    })
+                    /* reload the page */
+                    .then((response) =>  {  
+                        console.log(response)
+                        this.$emit("refresh");
+                        this.blog.id = response.data.id 
+                    })
+                    .catch(function (error) {  
+                        console.log(error);
+                    });
             },
 
             /* go to the edit route */

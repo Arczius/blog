@@ -133,6 +133,7 @@ class BlogController extends Controller
     public function destroyComment (String $id) : JsonResponse 
     {
         $comment = Comments::find($id);
+
         if($comment){
             $comment->delete();
 
