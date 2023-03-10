@@ -3,7 +3,7 @@
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" @refresh="getAllBlogs"/>
         </div>
         
     </main>
@@ -19,6 +19,7 @@ import axios from 'axios'
 <script>
 export default {
     name: "MainContainer",
+    
     data(){
         return {
             'blogs': null,

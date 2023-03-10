@@ -60,11 +60,15 @@
             'user',
             'comments'
         ],
+
         data() {
+              if(this.user){
+                var user_id =  this.user.id; 
+            }
+
             return {
                 'comment': null,
-                'user_id': this.user.id,
-                // 'user_id': 1,
+                'user_id': user_id,
                 'posts_id': this.blog.id
             };
         },
@@ -80,7 +84,7 @@
                  /* reload the page */
                  .then((response) =>  {  
                     console.log(response)
-                    location.reload();
+                    this.$emit("refresh");
                     this.blog.id = response.data.id 
                 })
                 .catch(function (error) {  
@@ -99,7 +103,7 @@
                 /* reload the page */
                 .then((response) =>  {  
                     console.log(response)
-                    location.reload();
+                    this.$emit("refresh");
                     this.blog.id = response.data.id 
                 })
                 .catch(function (error) {  
