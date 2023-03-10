@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
+use DB;
+
+use Illuminate\Support\Facades\Validator;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
+use App\Models\Comments;
 
 class BlogController extends Controller
 {
@@ -21,7 +24,11 @@ class BlogController extends Controller
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
-            'blogs' => Posts::all(),
+            'blogs' => 
+            Posts::with(['comments' => function ($query) {
+                $query->with('user');
+            }])
+            ->get()
         ]);
     }
 
@@ -30,21 +37,27 @@ class BlogController extends Controller
     *
     * @return
     */
-    public function store(Request $request) : JsonResponse
+    public function store (Request $request) : JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'title' => ['required', new titlePattern(), 'max:255'],
             'description' => [new descriptionPattern(), 'max:255'],
+            'user_id' => ['required']
         ]);
 
         $blog = new Posts();
         $blog->title = $request->title;
         $blog->description = $request->description;
+        $blog->user_id = $request->user_id;
         $blog->save();
 
         $response = [
             'id' => $blog->id
         ];
+
+        if ($validator->fails()) {
+            return response()->json($response);
+        }
 
         return response()->json($response);
     }
@@ -150,7 +163,7 @@ class BlogController extends Controller
         }
     }
 
-    /**
+
     * get one existing blog
     *
     * @return 
@@ -160,5 +173,40 @@ class BlogController extends Controller
         return response()->json([
             'blogs' => Posts::where('id', $id)->first(),
         ]);
+    }
+}
+
+    * get the current the blog data
+    *
+    * @return 
+    */
+    public function getCurrentBlogInfo(String $id)
+    {
+        return response()->json(
+            [
+                'blog' => Posts::select('id', 'title', 'description')->where('id', $id)->first(),
+            ]
+        );
+    }
+
+    /**
+    * add a comment to the blog
+    * 
+    */
+    public function addComment(Request $request, Posts $post)
+    {
+        $validated = $request->validate([
+            'comment' => ['required'],
+            'user_id' => ['required'],
+            'posts_id' => ['required']
+        ]);
+
+        $comment = new Comments;
+        $comment->comment = $validated['comment'];
+        $comment->user_id = $validated['user_id'];
+        $comment->posts_id = $validated['posts_id'];
+        $comment->save();
+
+        return response()->json(['id' => $comment->id], 201);
     }
 }

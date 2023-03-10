@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\PostsController;
@@ -28,17 +28,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('/create', 'createUser');
     Route::post('/login', 'loginUser');
-    Route::post('', 'authorizeUser');
+    Route::post('', 'currentUser');
 });
 
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
+      Route::get('/detail/{id}', 'getBlogDetail');
+    
     Route::post('/store', 'store');
-    Route::delete('/destroy/{id}', 'destroy');
     Route::post('/edit/{id}', 'edit');
+    Route::post('/info/{id}', 'getCurrentBlogInfo');
     Route::post('/file/{id}', 'getBlogImage');
-    Route::get('/detail/{id}', 'getBlogDetail');
+    Route::post('/posts/{id}/comment', 'addComment');
+    
+    Route::delete('/destroy/{id}', 'destroy');
 });
 
 /* route for the categories */
@@ -46,11 +50,25 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
     Route::get('', 'getAllCategories');
     Route::get('/top', 'getTopCategories');
     Route::get('/amount/{amount}', 'getCategoriesByAmount');
-
 });
 
-/* route for the posts */
-Route::prefix('post')->controller(PostsController::class)->group(function () {
-    Route::get('/top', 'topPosts');
-    Route::get('/top/{amount}', 'topPosts');
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::post('/currentUser', 'getCurrentUserInfo');
+});
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::post('/currentUser', 'getCurrentUserInfo');
+});
+
+/* route for the users */
+Route::prefix('user')->controller(UserController::class)->group(function () {
+
+    Route::post('/currentUser', 'getCurrentUserInfo');
+
+    /* updating the user */
+    Route::post('/update', 'updateUserInformation');
+    Route::post('/update/profile_picture', 'updateUserProfilePicture');
+    Route::post('/update/profile_header', 'updateUserProfileHeader');
 });

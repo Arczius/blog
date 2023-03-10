@@ -51,6 +51,29 @@
                 'file': null,
                 'blogid': null,
                 'id': this.$route.params.id
+
+        props: [
+            'blog',
+            'user'
+        ],
+
+        data() {
+            var title = null;
+            var description = null;
+
+            if (this.blog !== undefined) {
+                title = this.blog.blog.title;
+                description = this.blog.blog.description;
+            }
+
+            return {
+                'title': title,
+                'description': description,
+                'coverFile': null,
+                'file': null,
+                'blogid': null,
+                'id': this.$route.params.id,
+                'user_id': this.user.id,
             };
         },
 
@@ -65,6 +88,7 @@
 			    axios.post('/api/blog/store', {
                     'title': this.title,
                     'description': this.description,
+                    'user_id': this.user.id,
 				},
 				{
 					headers: {"Content-Type" : "application/json"}
@@ -109,6 +133,7 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.id = response.data.id 
+                    this.$router.push("/profile");
                 })
                  /* send the files to the file route */
                 .then(() => {
@@ -131,7 +156,6 @@
                     console.log(error);
                 });
             },
-        }
-        
+
+        }, 
     };
-</script>

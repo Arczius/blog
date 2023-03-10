@@ -10,6 +10,10 @@ body {
     overflow-x: hidden;
 }
 
+img {
+    user-select: none;
+}
+
 button {
     font-family: $default-font;
 }
