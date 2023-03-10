@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
 
 use App\Models\User;
@@ -31,12 +30,21 @@ class UserController extends Controller
     /**
     * get the profile for an existing user
     *
-    * @return 
+    * @return
     */
     public function getUserProfile(String $id) : JsonResponse
     {
         return response()->json([
-            'users' => User::where('id', $id)->first(),
+            'users' => User::where('id', $id)
+                ->select([
+                    'id',
+                    'username',
+                    'handle',
+                    'email',
+                    'about_me',
+                    'profile_picture',
+                    'profile_header'
+                ])->first(),
         ]);
     }
 }

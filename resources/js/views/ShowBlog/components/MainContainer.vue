@@ -18,7 +18,7 @@
 <script>
     export default {
         name: "MainContainer",
-        
+
         data(){
             return {
                 'blogs': null,
@@ -40,7 +40,7 @@
                     })
                     .catch((error) => {
                         console.warn(error)
-                    
+
                     })
             },
 
@@ -80,17 +80,6 @@
                     })
             },
 
-            // /* get all the users who belong to a blog */
-            // getAllUsers(){
-            //     axios.get('/api/blog/users' + )
-            //         .then((response) => {
-            //             this.users = response.data.users
-            //             console.log(this.users)
-            //         })
-            //         .catch((error) => {
-            //             console.warn(error)
-            //         })
-            // },
         },
 
         mounted(){
@@ -104,7 +93,7 @@
             }else{
                 this.getUserBlogs()
             }
-            
+
             this.getUserProfile()
         }
     }

@@ -24,9 +24,7 @@ class Controller extends BaseController
      */
     protected function AuthorizeUser(String $token, String | Integer $userID) : bool
     {
-        $userToken = User::select('token')->where('id', $userID)->first();
-
-        return Hash::check($token, $userToken->token);
+        return Hash::check($token, User::select('token')->where('id', $userID)->first()->token);
     }
 
     /**

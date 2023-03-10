@@ -1,42 +1,98 @@
-.profile{
-
-    &__container{
+.profile {
+    &__container {
         display: flex;
         flex-wrap: wrap;
+        padding-bottom: 2.5rem;
+    }
 
-        &__info{
-            padding-left: 15rem;
+    &__banner {
+        height: 350px;
+        width: 100%;
+
+        &--image {
+            object-fit: cover;
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    &__main {
+        @include sidebar{
+            gap: 1.5rem;
+            position: relative;
+            top: -160px;
+            max-width: 400px;
+            flex-grow: 1;
         }
 
-        .profile{
-            height: 35%;
+        .profile {
 
-            &__main{
-                width: 30%;
+            &__picture {
+                background: $white-colour;
+                border-radius: 50%;
+                display: flex;
+                height: 300px;
+                width: 300px;
+
+
+                &--image {
+                    border-radius: 50%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    padding: 0.8rem;
+                    width: 100%;
+                }
             }
 
-            &__categories{
-                background-color: $white-colour;
-                display: flex;
-                margin: 1rem;
-                padding: 4.8rem;
-                position: relative;
+            &__user {
+                display: grid;
+                gap: 0.8rem;
 
-                .categories{
-                    &__holder{
+                &--name {
+                    color: $orange-colour;
+                    font-size: 1.9rem;
+                }
+
+                &--username {
+                    color: $blue-colour;
+                    font-size: 1.6rem;
+                }
+
+                &--description {
+                    color: $gray-colour;
+                }
+
+                &--button {
+                    @include blue_button;
+
+                    width: 60%;
+                }
+            }
+
+            &__categories {
+                @include sidebar__block{
+
+                }
+
+                .categories {
+                    &__holder {
                         display: flex;
                         flex-wrap: wrap;
-                        gap: 7px;
+                        gap: 0.5rem;
+                        h3{
+                            width: 100%;
+                        }
                     }
-                    
-                    &__item{
+
+                    &__item {
                         @include blue_outline_button;
-                        
-                        &--all-blogs{
+
+                        &--all-blogs {
                             @include blue_button;
                         }
-                        
-                        &--all-categories{
+
+                        &--all-categories {
                             @include orange_button;
                         }
                     }
@@ -45,66 +101,7 @@
         }
     }
 
-    &__banner{
-        height: 350px;
-        width: 100vw;
-
-        &--image{
-            object-fit: cover;
-        }
-    }
-
-    &__picture{
-        display: flex;
-        padding: 3rem;
-        width: fit-content;
-
-        &--image{
-            border-radius: 100%;
-            border: 10px solid $white-colour;
-            height: 300px;
-            object-fit: cover;
-            object-position: center center;
-            padding: 0rem;
-            position: relative;
-            top: -175px;
-            width: 300px;
-        }
-    }
-
-    &__user{
-        display: flex;
-        flex-direction: column;
-        font-size: 1.8rem;
-        padding-bottom: 1rem;
-        padding-left: 3rem;
-        position: relative;
-        top: -100px;
-        width: 400px;
-
-        &--name{
-            color: $orange-colour;
-            font-weight: 800;
-            padding-bottom: 0.2rem;
-        }
-
-        &--username{
-            color: $blue-colour;
-            font-weight: 800;
-        }
-
-        &--description{
-            color: lightgray;
-            font-size: 1rem;
-        }
-
-        &__button{
-            background-color: $blue-colour;
-            color: $white-colour;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            margin-left: 3rem;
-            width: 200px;
-        }
+    &__info {
+        flex-grow: 1;
     }
 }
