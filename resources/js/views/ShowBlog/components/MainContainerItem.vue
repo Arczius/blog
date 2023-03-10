@@ -62,13 +62,9 @@
         ],
 
         data() {
-              if(this.user){
-                var user_id =  this.user.id; 
-            }
-
             return {
                 'comment': null,
-                'user_id': user_id,
+                'user_id': this.user.id,
                 'posts_id': this.blog.id
             };
         },
