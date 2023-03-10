@@ -126,6 +126,25 @@ class BlogController extends Controller
     }
 
     /**
+    * delete the blog from the database
+    *
+    * @return
+    */
+    public function destroyComment (String $id) : JsonResponse 
+    {
+        $comment = Comments::find($id);
+        if($comment){
+            $comment->delete();
+
+            $response = [
+                'id' => $comment->id
+            ];
+    
+            return response()->json($response);
+        }
+    }
+
+    /**
     * edit the blog 
     *
     * @return 
