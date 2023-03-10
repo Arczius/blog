@@ -1,4 +1,16 @@
 <template>
+    <BlogDetail/>
+</template>
+
+<script setup>
+    import BlogDetail from './components/BlogStore.vue';
+</script>
+
+<script>
+    export default {
+        name: "Index",
+    }
+
     <div v-if="this.$route.path == '/store'">
         <BlogStore v-if="user !== null" :user="user"/>
     </div>

@@ -16,6 +16,11 @@ use App\Models\Comments;
 
 class BlogController extends Controller
 {
+    /**
+    * get all the existing blogs
+    *
+    * @return 
+    */
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
@@ -71,7 +76,7 @@ class BlogController extends Controller
         $data['status'] = 'failed';
 
         if ($validator->fails()) {
-            return response()->json($response);
+            return response()->json($data);
         }
 
         $coverFile = $request->coverFile;
@@ -102,7 +107,6 @@ class BlogController extends Controller
 
         return response()->json($data);
     }
-
     
     /**
     * delete the blog from the database
@@ -114,9 +118,16 @@ class BlogController extends Controller
         $blog = Posts::find($id);
         if($blog){
             $blog->delete();
-            return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200);
-        }else{
-            return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);
+
+            /* delete the images from the public folder */
+            Storage::disk('public')->delete("BlogPictures/" . $coverFile); 
+            Storage::disk('public')->delete("BlogPictures/" . $file);
+
+            $response = [
+                'id' => $blog->id
+            ];
+    
+            return response()->json($response);
         }
     }
 
@@ -152,7 +163,19 @@ class BlogController extends Controller
         }
     }
 
-    /**
+
+    * get one existing blog
+    *
+    * @return 
+    */
+    public function getBlogDetail(String $id) : JsonResponse
+    {
+        return response()->json([
+            'blogs' => Posts::where('id', $id)->first(),
+        ]);
+    }
+}
+
     * get the current the blog data
     *
     * @return 
@@ -177,8 +200,6 @@ class BlogController extends Controller
             'user_id' => ['required'],
             'posts_id' => ['required']
         ]);
-
-        // dd($validated);
 
         $comment = new Comments;
         $comment->comment = $validated['comment'];

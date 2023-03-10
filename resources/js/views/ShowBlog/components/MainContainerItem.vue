@@ -22,7 +22,7 @@
             <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
             <p class="blog__content blog__content--description">{{blog.description}}</p> 
-            <button class="blog__content blog__content--button">Lees verder</button>
+            <button @click="showBlogDetail()" class="blog__content blog__content--button">Lees verder</button>
         </div>
 
         <div class="blog__comments">  
@@ -68,8 +68,13 @@
                 'posts_id': this.blog.id
             };
         },
-
+        
         methods: {
+             /* go to the detail route */
+          showBlogDetail(){
+            this.$router.push('/detail/' + this.blog.id);
+          },
+        
             /* add a comment to a blog */
             addComment() {
 			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {

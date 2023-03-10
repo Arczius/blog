@@ -34,13 +34,14 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('', 'getAllBlogs');
+      Route::get('/detail/{id}', 'getBlogDetail');
     
     Route::post('/store', 'store');
     Route::post('/edit/{id}', 'edit');
     Route::post('/info/{id}', 'getCurrentBlogInfo');
     Route::post('/file/{id}', 'getBlogImage');
     Route::post('/posts/{id}/comment', 'addComment');
-
+    
     Route::delete('/destroy/{id}', 'destroy');
 });
 

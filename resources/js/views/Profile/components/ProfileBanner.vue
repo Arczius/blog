@@ -1,6 +1,6 @@
 <template>
     <div class="profile__banner">
-        <img class="profile__banner profile__banner--image" :src="bannerImage">
+        <img class="profile__banner profile__banner--image" :src="BannerPicture">
     </div>
 </template>
 
