@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Http\JsonResponse;
 
 use App\Models\User;
@@ -20,14 +19,35 @@ class UserController extends Controller
         return ($this->AuthorizeUser($request->token, $request->userID))
             ? response()->json(
                 [
-                    'user' => User::select('id', 'handle', 'username', 'about_me', 'email', 'profile_header', 'profile_picture')->where('id', $request->userID)->first(),
+                    'user' => User::select('id')->where('id', $request->userID)->first(),
                 ]
             )
-                : response()->json(
-                    [
-                        'Unauthorized' => true,
-                    ],
-                401);
+            : response()->json(
+                [
+                    'Unauthorized' => true,
+                ],
+            401);
+    }
+
+    /**
+    * get the profile for an existing user
+    *
+    * @return
+    */
+    public function getUserProfile(String $id) : JsonResponse
+    {
+        return response()->json([
+            'users' => User::where('id', $id)
+                ->select([
+                    'id',
+                    'username',
+                    'handle',
+                    'email',
+                    'about_me',
+                    'profile_picture',
+                    'profile_header'
+                ])->first(),
+        ]);                   
     }
 
     public function updateUserInformation(Request $request) : JsonResponse
