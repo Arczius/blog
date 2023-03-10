@@ -2,6 +2,7 @@
     <div class="blog__holder">
         <div class="blog__header">
             <div class="blog__header--inner-left">
+            
                 <template v-if="users">
                     <img class="blog__header__image--profilePicture" :src="(users.profile_picture !== '') ? '../../storage/ProfilePictures/' + users.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
                     <span class="blog__header__text blog__header__text--username">@{{users.handle}}</span> 
@@ -11,8 +12,13 @@
 
             <div class="blog__header--inner-right">
                 <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
-                <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
-                <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+
+                <div v-if="user !== null">
+                    <div v-if="user.id === blog.user_id">
+                        <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
+                        <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -23,11 +29,21 @@
             <button class="blog__content blog__content--button">Lees verder</button>
         </div>
 
-        <div class="blog__comments">
-            <template v-if="users">
-                <img class="blog__comments blog__comments--profilePicture" :src="(users.profile_picture !== '') ? '../../storage/ProfilePictures/' + users.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-            </template>
-            <input class="blog__comments blog__comments--text" type="text" placeholder="Schrijf een opmerking...">
+        <div class="blog__comments">  
+                <div class="blog__comments__existingComment">   
+                    <div v-if="blog.comment !== null">
+                        <div v-for="comments in blog.comments">
+                            <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? 'storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
+                            <span class="blog__comments blog__comments__existingComment--text">{{comments.comment}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="blog__comments__add">
+                <img class="blog__comments blog__comments--profilePicture" :src="defaultProfilePicture">
+                <input class="blog__comments blog__comments--text" type="text" v-model="comment" placeholder="Schrijf een opmerking...">
+                <button @click="addComment()">Plaats comment</button>
+            </div>
         </div>
     </div>
 </template>
@@ -40,44 +56,66 @@
 </script>
 
 <script>
-import axios from 'axios'
-export default {
-    name: "MainContainerItem",
-    props: [
-        'blog',
-        'users'
-    ],
 
-    data() {
-        return {
-            
-        };
-    },
+    import axios from 'axios'
+    export default {
+        name: "MainContainerItem",
+        props: [
+            'blog',
+            'user',
+            'comments'
+        ],
+        
+        data() {
+            return {
+                'comment': null,
+                'user_id': this.user.id,
+                'posts_id': this.blog.id
+            };
+        },
 
-    methods: {
-        /* go to the destroy route with the id */
-        deleteBlog() {
-           axios.delete('/api/blog/destroy/' + this.blog.id, {
-                'id': this.id,
+        methods: {
+            /* add a comment to a blog */
+            addComment() {
+			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
+                    'comment': this.comment,
+                    'user_id': this.user_id,
+                    'posts_id': this.posts_id
+				})
+                 /* reload the page */
+                 .then((response) =>  {  
+                    console.log(response)
+                    this.$emit("refresh");
+                    this.blog.id = response.data.id 
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
+			},
+
+            /* go to the destroy route with the id */
+            deleteBlog() {
+            axios.delete('/api/blog/destroy/' + this.blog.id, {
+                    'id': this.id,
+                },
+                {
+                    headers: { "Content-Type" : "application/json"}
+                })
+                /* reload the page */
+                .then((response) =>  {  
+                    console.log(response)
+                    this.$emit("refresh");
+                    this.blog.id = response.data.id 
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
             },
-            {
-                headers: { "Content-Type" : "application/json"}
-            })
-            /* reload the page */
-            .then((response) =>  {  
-                console.log(response)
-                location.reload();
-                this.blog.id = response.data.id 
-            })
-            .catch(function (error) {  
-                console.log(error);
-            });
-        },
 
-        /* go to the edit route */
-        editBlog(){
-            this.$router.push('/edit/' + this.blog.id);
-        },
+            /* go to the edit route */
+            editBlog(){
+                this.$router.push('/edit/' + this.blog.id);
+            },
+        }
     }
-}
 </script>

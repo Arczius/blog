@@ -1,9 +1,10 @@
 <template>
     <main>
         <div class="container">
-            <MainContainerItemSkeleton v-if="blogs === null"/>
-
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :users="users"/>
+            <MainContainerItemSkeleton v-if="blogs === null || user === null"/>
+            
+            
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" @refresh="getAllBlogs"/>
         </div>
     </main>
 </template>
@@ -23,7 +24,8 @@
             return {
                 'blogs': null,
                 'users': null,
-                'id': this.$route.params.id
+                'id': this.$route.params.id,
+                'comments': null
             }
         },
 

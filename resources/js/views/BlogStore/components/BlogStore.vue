@@ -17,9 +17,7 @@
             </div>
 
             <label for="create__details--description">Beschrijving</label>
-            <div>
-                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
-            </div>
+            <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
 
             <label for="create__details--image">Omslag afbeelding</label>
             <div class="create_details--image">
@@ -43,14 +41,28 @@
     import axios from 'axios';
     export default {
         name: "store",
+        props: [
+            'blog',
+            'user'
+        ],
+
         data() {
+            var title = null;
+            var description = null;
+
+            if (this.blog !== undefined) {
+                title = this.blog.blog.title;
+                description = this.blog.blog.description;
+            }
+
             return {
-                'title': null,
-                'description': null,
+                'title': title,
+                'description': description,
                 'coverFile': null,
                 'file': null,
                 'blogid': null,
-                'id': this.$route.params.id
+                'id': this.$route.params.id,
+                'user_id': this.user.id,
             };
         },
 
@@ -65,6 +77,7 @@
 			    axios.post('/api/blog/store', {
                     'title': this.title,
                     'description': this.description,
+                    'user_id': this.user.id,
 				},
 				{
 					headers: {"Content-Type" : "application/json"}
@@ -109,6 +122,7 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.id = response.data.id 
+                    this.$router.push("/profile");
                 })
                  /* send the files to the file route */
                 .then(() => {
@@ -123,7 +137,7 @@
                     /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
-                        this.$router.push("/profile");
+                        this.$router.push("/home");
 					})
 				}
                 })
@@ -131,7 +145,6 @@
                     console.log(error);
                 });
             },
-        }
-        
+        }, 
     };
 </script>
