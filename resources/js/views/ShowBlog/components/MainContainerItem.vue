@@ -26,7 +26,7 @@
             <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
             <p class="blog__content blog__content--description">{{blog.description}}</p> 
-            <button class="blog__content blog__content--button">Lees verder</button>
+            <button @click="showBlogDetail()" class="blog__content blog__content--button">Lees verder</button>
         </div>
 
         <div class="blog__comments">  
@@ -35,6 +35,9 @@
                         <div v-for="comments in blog.comments">
                             <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? 'storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
                             <span class="blog__comments blog__comments__existingComment--text">{{comments.comment}}</span>
+                            <span v-if="user !== null && user.id === comments.user_id">
+                                <button @click="deleteComment()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -67,14 +70,27 @@
         ],
         
         data() {
+            if(this.blog.comments.length > 0){
+                var comment_id;
+                this.blog.comments.forEach(comment => {
+                    comment_id = comment.id
+                });
+            }
+
             return {
                 'comment': null,
                 'user_id': this.user.id,
-                'posts_id': this.blog.id
+                'posts_id': this.blog.id,
+                'blogComment_id': comment_id
             };
         },
-
+        
         methods: {
+            /* go to the detail route */
+            showBlogDetail(){
+                this.$router.push('/detail/' + this.blog.id);
+            },
+
             /* add a comment to a blog */
             addComment() {
 			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
@@ -94,13 +110,17 @@
 			},
 
             /* go to the destroy route with the id */
-            deleteBlog() {
-            axios.delete('/api/blog/destroy/' + this.blog.id, {
-                    'id': this.id,
-                },
-                {
-                    headers: { "Content-Type" : "application/json"}
-                })
+            deleteComment() {
+                  if(this.blog.comments.length > 0){
+                    var comment_id;
+                        this.blog.comments.forEach(comment => {
+                            comment_id = comment.id
+                        });
+                    }
+            
+                axios.delete('/api/blog/destroy/comment/' + comment_id, {
+                    'id': this.blogComment_id,
+                },)
                 /* reload the page */
                 .then((response) =>  {  
                     console.log(response)
@@ -110,6 +130,25 @@
                 .catch(function (error) {  
                     console.log(error);
                 });
+            },
+
+             /* go to the destroy route with the id */
+             deleteBlog() {
+                axios.delete('/api/blog/destroy/' + this.blog.id, {
+                        'id': this.blog.id,
+                    },
+                    {
+                        headers: { "Content-Type" : "application/json"}
+                    })
+                    /* reload the page */
+                    .then((response) =>  {  
+                        console.log(response)
+                        this.$emit("refresh");
+                        this.blog.id = response.data.id 
+                    })
+                    .catch(function (error) {  
+                        console.log(error);
+                    });
             },
 
             /* go to the edit route */

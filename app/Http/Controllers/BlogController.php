@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use DB;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
@@ -17,14 +18,18 @@ use App\Models\Comments;
 
 class BlogController extends Controller
 {
+    /**
+    * get all the existing blogs
+    *
+    * @return 
+    */
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
             'blogs' => 
             Posts::with(['comments' => function ($query) {
                 $query->with('user');
-            }])
-            ->get()
+            }])->get()
         ]);
     }
 
@@ -86,7 +91,7 @@ class BlogController extends Controller
         $data['status'] = 'failed';
 
         if ($validator->fails()) {
-            return response()->json($response);
+            return response()->json($data);
         }
 
         $coverFile = $request->coverFile;
@@ -94,14 +99,8 @@ class BlogController extends Controller
 
         $blogPost = Posts::where('id', $id)->first();
 
-        /* stores image in public/blogPictures folder */
-        if (isset($coverFile)) {
-            $coverFile->store('blogPictures', 'public');
-            $file->store('blogPictures', 'public');
-        }
-
         /* give the uploaded file a new name and store it */ 
-        if(isset($coverFile)){
+        if(isset($coverFile) && isset($file)){
             $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
             $fileName = $blogPost->id . "_content." . $file->extension();
 
@@ -117,7 +116,6 @@ class BlogController extends Controller
 
         return response()->json($data);
     }
-
     
     /**
     * delete the blog from the database
@@ -139,6 +137,35 @@ class BlogController extends Controller
             return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200);
         }else{
             return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);
+            /* delete the images from the public folder */
+            Storage::disk('public')->delete("BlogPictures/" . $blog['coverFile']); 
+            Storage::disk('public')->delete("BlogPictures/" . $blog['file']);
+
+            $response = [
+                'id' => $blog->id
+            ];
+    
+            return response()->json($response);
+        }
+    }
+
+    /**
+    * delete the blog from the database
+    *
+    * @return
+    */
+    public function destroyComment (String $id) : JsonResponse 
+    {
+        $comment = Comments::find($id);
+
+        if($comment){
+            $comment->delete();
+
+            $response = [
+                'id' => $comment->id
+            ];
+    
+            return response()->json($response);
         }
     }
 
@@ -175,6 +202,18 @@ class BlogController extends Controller
     }
 
     /**
+    * get one existing blog
+    *
+    * @return 
+    */
+    public function getBlogDetail(String $id) : JsonResponse
+    {
+        return response()->json([
+            'blogs' => Posts::where('id', $id)->first(),
+        ]);
+    }
+
+    /**
     * get the current the blog data
     *
     * @return 
@@ -199,8 +238,6 @@ class BlogController extends Controller
             'user_id' => ['required'],
             'posts_id' => ['required']
         ]);
-
-        // dd($validated);
 
         $comment = new Comments;
         $comment->comment = $validated['comment'];

@@ -17,7 +17,9 @@
             </div>
 
             <label for="create__details--description">Beschrijving</label>
-            <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
+            <div>
+                <textarea class="create__details--description" v-model="description" type="text" placeholder="Post beschrijving..."></textarea>
+            </div>
 
             <label for="create__details--image">Omslag afbeelding</label>
             <div class="create_details--image">
@@ -137,7 +139,7 @@
                     /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
-                        this.$router.push("/home");
+                        this.$router.push("/profile");
 					})
 				}
                 })
@@ -145,6 +147,7 @@
                     console.log(error);
                 });
             },
+
         }, 
     };
 </script>
