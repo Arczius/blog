@@ -13,11 +13,13 @@ class Comments extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Comment',
+        'comment',
+        'user_id',
+        'posts_id'
     ];
 
     // a comment belongs to one user
-    public function author(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 

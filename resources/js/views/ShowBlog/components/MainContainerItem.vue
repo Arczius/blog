@@ -2,7 +2,7 @@
     <div class="blog__holder">
         <div class="blog__header">
             <div class="blog__header--inner-left">
-                <img class="blog__header__image--profilePicture" :src="DefaultProfilePicture" alt="" loading="lazy"> 
+                <img class="blog__header__image--profilePicture" :src="defaultProfilePicture" alt="" loading="lazy"> 
                 <span class="blog__header__text blog__header__text--username">@Gebruikersnaam</span> 
             </div>
 
@@ -19,22 +19,34 @@
         </div>
 
         <div class="blog__content">
-            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : DefaultBlogPicture" alt="coverImage" loading="lazy">
+            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
             <p class="blog__content blog__content--description">{{blog.description}}</p> 
             <button class="blog__content blog__content--button">Lees verder</button>
         </div>
 
-        <div class="blog__comments">
-            <img class="blog__comments blog__comments--profilePicture" :src="DefaultProfilePicture">
-            <input class="blog__comments blog__comments--text" type="text" placeholder="Schrijf een opmerking...">
+        <div class="blog__comments">  
+                <div class="blog__comments__existingComment">   
+                    <div v-if="blog.comment !== null">
+                        <div v-for="comments in blog.comments">
+                            <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? 'storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
+                            <span class="blog__comments blog__comments__existingComment--text">{{comments.comment}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="blog__comments__add">
+                <img class="blog__comments blog__comments--profilePicture" :src="defaultProfilePicture">
+                <input class="blog__comments blog__comments--text" type="text" v-model="comment" placeholder="Schrijf een opmerking...">
+                <button @click="addComment()">Plaats comment</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-    import DefaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
-    import DefaultBlogPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import defaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import defaultBlogPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
     import defaultEditIcon from '../../../../assets/draw.png'
     import defaultDeleteIcon from '../../../../assets/bin.png'
 </script>
@@ -45,14 +57,41 @@
         name: "MainContainerItem",
         props: [
             'blog',
-            'user'
+            'user',
+            'comments'
         ],
-        data() {
-            return {
 
+        data() {
+              if(this.user){
+                var user_id =  this.user.id; 
+            }
+
+            return {
+                'comment': null,
+                'user_id': user_id,
+                'posts_id': this.blog.id
             };
         },
+
         methods: {
+            /* add a comment to a blog */
+            addComment() {
+			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
+                    'comment': this.comment,
+                    'user_id': this.user_id,
+                    'posts_id': this.posts_id
+				})
+                 /* reload the page */
+                 .then((response) =>  {  
+                    console.log(response)
+                    this.$emit("refresh");
+                    this.blog.id = response.data.id 
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
+			},
+
             /* go to the destroy route with the id */
             deleteBlog() {
             axios.delete('/api/blog/destroy/' + this.blog.id, {
@@ -64,7 +103,7 @@
                 /* reload the page */
                 .then((response) =>  {  
                     console.log(response)
-                    location.reload();
+                    this.$emit("refresh");
                     this.blog.id = response.data.id 
                 })
                 .catch(function (error) {  
