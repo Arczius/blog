@@ -21,7 +21,7 @@ export default {
         return {
             'id': this.$route.params.id,
             'blog': null,
-              'user': null,
+            'user': null,
         }
     },
     

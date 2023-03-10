@@ -3,20 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
+use DB;
+
+use Illuminate\Support\Facades\Validator;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
+use App\Models\Comments;
 
 class BlogController extends Controller
 {
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
-            'blogs' => Posts::all(),
+            'blogs' => 
+            Posts::with(['comments' => function ($query) {
+                $query->with('user');
+            }])
+            ->get()
         ]);
     }
 
@@ -157,5 +164,26 @@ class BlogController extends Controller
                 'blog' => Posts::select('id', 'title', 'description')->where('id', $id)->first(),
             ]
         );
+    }
+
+    /**
+    * add a comment to the blog
+    * 
+    */
+    public function addComment(Request $request, Posts $post)
+    {
+        $validated = $request->validate([
+            'comment' => ['required'],
+            'user_id' => ['required'],
+            'posts_id' => ['required']
+        ]);
+
+        $comment = new Comments;
+        $comment->comment = $validated['comment'];
+        $comment->user_id = $validated['user_id'];
+        $comment->posts_id = $validated['posts_id'];
+        $comment->save();
+
+        return response()->json(['id' => $comment->id], 201);
     }
 }
