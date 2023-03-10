@@ -53,6 +53,8 @@ export default {
                     .then((response) => {
 
                         if(!response.data.authorized) {
+                            localStorage.clear()
+
                             this.notifyUnauthorized()
                         }
                     })
