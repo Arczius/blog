@@ -31,6 +31,9 @@
                         <div v-for="comments in blog.comments">
                             <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? 'storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
                             <span class="blog__comments blog__comments__existingComment--text">{{comments.comment}}</span>
+                            <span v-if="user !== null && user.id === comments.user_id">
+                                <button @click="deleteComment()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -70,10 +73,10 @@
         },
         
         methods: {
-             /* go to the detail route */
-          showBlogDetail(){
-            this.$router.push('/detail/' + this.blog.id);
-          },
+            /* go to the detail route */
+            showBlogDetail(){
+                this.$router.push('/detail/' + this.blog.id);
+            },
         
             /* add a comment to a blog */
             addComment() {
@@ -101,6 +104,22 @@
                 {
                     headers: { "Content-Type" : "application/json"}
                 })
+                /* reload the page */
+                .then((response) =>  {  
+                    console.log(response)
+                    this.$emit("refresh");
+                    this.blog.id = response.data.id 
+                })
+                .catch(function (error) {  
+                    console.log(error);
+                });
+            },
+
+            /* go to the destroy route with the id */
+            deleteComment() {
+                axios.delete('/api/blog/destroy/comment/' + this.blog.id, {
+                    'id': this.id,
+                },)
                 /* reload the page */
                 .then((response) =>  {  
                     console.log(response)
