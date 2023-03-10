@@ -1,0 +1,17 @@
+@mixin sidebar {
+    align-self: start;
+    display: grid;
+    gap: 1rem;
+    margin: 2.5rem;
+    min-width: calc(calc(100% / 4) - 2rem);
+    padding: 1.8rem;
+
+    @content;
+}
+
+@mixin sidebar__block {
+    background: $white-colour;
+    padding: 1rem;
+
+    @content;
+}
