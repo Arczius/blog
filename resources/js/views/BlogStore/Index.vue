@@ -27,7 +27,6 @@ export default {
     
     methods: {
         getCurrentBlogInfo(){
-            console.log(this.id);
             axios.post('/api/blog/info/' + this.id, {
             },
             )

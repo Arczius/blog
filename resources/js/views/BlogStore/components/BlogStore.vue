@@ -6,7 +6,7 @@
                 <p v-if="this.$route.path == '/store'" class="create__header create__header--title">Post aanmaken</p>
                 <p v-else class="create__header create__header--title">Post bewerken</p>
 
-                <router-link :to="{name: 'profile'}">
+                <router-link :to="{name: 'profile', params: {id: user_id}}">
                     <button class="create__header create__header__discard">X</button>
                 </router-link>
             </div>
@@ -41,6 +41,7 @@
 
 <script>
     import axios from 'axios';
+    
     export default {
         name: "store",
         props: [
@@ -56,6 +57,7 @@
                 title = this.blog.blog.title;
                 description = this.blog.blog.description;
             }
+            console.log(true);
 
             return {
                 'title': title,

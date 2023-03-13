@@ -2,7 +2,8 @@
 
 const public_routes = [
     "/",
-    "/register"
+    "/register",
+    "/tyler"
 ]
 
 export default public_routes

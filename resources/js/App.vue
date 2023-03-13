@@ -1,7 +1,6 @@
 <template>
     <Header
-        :user-icon="profile_picture"
-    />
+        :user-icon="profile_picture"/>
     <router-view></router-view>
     <Footer/>
 </template>
@@ -83,7 +82,6 @@ export default {
                 if(response.data.authorized) {
                         axios.get("/api/profile/user/" + userID)
                             .then((response) => {
-                                // console.table(response.data.users)
                                 if(response.data.users.profile_picture !== null) {
                                     this.profile_picture = response.data.users.profile_picture
                                 }
@@ -100,6 +98,7 @@ export default {
 
     watch: {
         $route () {
+            console.log(this.$route)
             this.authorize()
             this.getUserProfilePicture()
         }
