@@ -47,15 +47,7 @@ class UserController extends Controller
                     'profile_picture',
                     'profile_header'
                 ])->first(),
-        ]);
-                    'user' => User::select('id', 'handle', 'username', 'about_me', 'email', 'profile_header', 'profile_picture')->where('id', $request->userID)->first(),
-                ]
-            )
-                : response()->json(
-                    [
-                        'Unauthorized' => true,
-                    ],
-                401);
+            ]);
     }
 
     public function updateUserInformation(Request $request) : JsonResponse
