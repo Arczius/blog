@@ -23,7 +23,7 @@
                 'blogs': null,
                 'users': null,
                 'user': null,
-                 'comments': null
+                'comments': null,
                 'id': this.$route.params.id
             }
         },

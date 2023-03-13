@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use DB;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
@@ -23,7 +21,7 @@ class BlogController extends Controller
     /**
     * get all the existing blogs
     *
-    * @return 
+    * @return
     */
     public function getAllBlogs() : JsonResponse
     {
@@ -38,7 +36,7 @@ class BlogController extends Controller
     public function getUserBlogs(String $id) : JsonResponse
     {
         return response()->json([
-            'blogs' => 
+            'blogs' =>
             Posts::with(['comments' => function ($query) {
                 $query->with('user');
             }])->get()
@@ -97,7 +95,7 @@ class BlogController extends Controller
 
         $blogPost = Posts::where('id', $id)->first();
 
-        /* give the uploaded file a new name and store it */ 
+        /* give the uploaded file a new name and store it */
         if(isset($coverFile) && isset($file)){
             $fileNameCover = $blogPost->id . "_cover." . $coverFile->extension();
             $fileName = $blogPost->id . "_content." . $file->extension();
@@ -118,20 +116,20 @@ class BlogController extends Controller
 
         return response()->json($data);
     }
-    
+
     /**
     * delete the blog from the database
     *
     * @return
     */
-    public function destroy (String $id) : JsonResponse 
+    public function destroy (String $id) : JsonResponse
     {
         $blog = Posts::find($id);
         if($blog){
             $blog->delete();
             /* delete the file from the public folder */
             Storage::disk('public')->delete(
-                $blog->coverFile, 
+                $blog->coverFile,
                 $blog->file
             );
 
@@ -140,13 +138,13 @@ class BlogController extends Controller
             return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);
 
             /* delete the images from the public folder */
-            Storage::disk('public')->delete("BlogPictures/" . $blog['coverFile']); 
+            Storage::disk('public')->delete("BlogPictures/" . $blog['coverFile']);
             Storage::disk('public')->delete("BlogPictures/" . $blog['file']);
 
             $response = [
                 'id' => $blog->id
             ];
-    
+
             return response()->json($response);
         }
     }
@@ -156,7 +154,7 @@ class BlogController extends Controller
     *
     * @return
     */
-    public function destroyComment (String $id) : JsonResponse 
+    public function destroyComment (String $id) : JsonResponse
     {
         $comment = Comments::find($id);
 
@@ -166,17 +164,17 @@ class BlogController extends Controller
             $response = [
                 'id' => $comment->id
             ];
-    
+
             return response()->json($response);
         }
     }
 
     /**
-    * edit the blog 
+    * edit the blog
     *
-    * @return 
+    * @return
     */
-    public function edit (Request $request, String $id) 
+    public function edit (Request $request, String $id)
     {
         $validator = Validator::make($request->all(), [
             'id' => ['required', 'numeric'],
@@ -184,21 +182,21 @@ class BlogController extends Controller
             'description' => [new descriptionPattern(), 'max:255'],
         ]);
 
-        $blog = Posts::find($id); 
+        $blog = Posts::find($id);
 
-        if($blog){ 
+        if($blog){
             $data = $request->validate([
                 'title' => '',
                 'description' => '',
             ]);
-    
+
             $input = $request->all();
             $blog->update($input);
 
             $response = [
                 'id' => $id
             ];
-        
+
             return response()->json($response);
         }
     }
@@ -206,7 +204,7 @@ class BlogController extends Controller
     /**
     * get one existing blog
     *
-    * @return 
+    * @return
     */
     public function getBlogDetail(String $id) : JsonResponse
     {
@@ -218,7 +216,7 @@ class BlogController extends Controller
     /**
     * get the current the blog data
     *
-    * @return 
+    * @return
     */
     public function getCurrentBlogInfo(String $id)
     {
@@ -231,7 +229,7 @@ class BlogController extends Controller
 
     /**
     * add a comment to the blog
-    * 
+    *
     */
     public function addComment(Request $request, Posts $post)
     {
