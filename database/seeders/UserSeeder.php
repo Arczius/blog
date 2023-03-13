@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'email' => 'appelsapmoedereter@gmail.com',
                 'password' => Hash::make('OmaEet33'),
                 'profile_picture' => '1_profile.jpg',
-                'profile_header' => '1_banner.jpg'
+                'profile_header' => '1_banner.jpg',
             ],
             [
                 'username' => "Stopcontact likker",
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'username' => 'kebabcontact likker',
                 'handle' => 'broodjekebablover',
                 'email' => 'mamaikbenbangkommeophalen@help.com',
-                'password' => Hash::make('TestWachtwoordVoorTyler')
+                'password' => Hash::make('TestWachtwoordVoorTyler'),
             ]
 
         ];

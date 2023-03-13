@@ -1,9 +1,9 @@
 <template>
     <main>
         <div class="container">
-            <MainContainerItemSkeleton v-if="blogs === null"/>
+            <MainContainerItemSkeleton v-if="blogs === null || user === null"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" @refresh="getAllBlogs"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :users="users"/>
         </div>
     </main>
 </template>
@@ -18,11 +18,12 @@
 <script>
     export default {
         name: "MainContainer",
-
         data(){
             return {
                 'blogs': null,
                 'users': null,
+                'user': null,
+                 'comments': null
                 'id': this.$route.params.id
             }
         },

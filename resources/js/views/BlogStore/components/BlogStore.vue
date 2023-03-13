@@ -57,7 +57,6 @@
                 title = this.blog.blog.title;
                 description = this.blog.blog.description;
             }
-            console.log(true);
 
             return {
                 'title': title,

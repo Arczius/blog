@@ -7,11 +7,6 @@ const routes = [
         component: () => import('../views/Index/Index.vue')
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: async () => await import('../views/Register/Index.vue')
-    },
-    {
         path: '/create',
         name: 'create',
         component: async () => await import('../views/BlogCreate/Index.vue')
@@ -25,6 +20,11 @@ const routes = [
         path: '/blogs',
         name: 'blogs',
         component: async () => import('../views/BlogStore/Index.vue')
+    },
+    {
+        path: '/detail/:id',
+        name: 'detail',
+        component: async () => await import('../views/BlogDetail/Index.vue')
     },
     {
         path: '/home',
@@ -52,6 +52,11 @@ const routes = [
         path: '/profile/user/:id',
         name: 'profile',
         component: async () => await import('../views/Profile/Index.vue')
+    },
+    {
+        path: '/user/edit',
+        name: 'Edit User',
+        component: async () => await import('../views/user/Edit/Index.vue')
     }
 ]
 
