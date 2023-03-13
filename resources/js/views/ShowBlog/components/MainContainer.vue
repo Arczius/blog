@@ -2,9 +2,10 @@
     <main>
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null || user === null"/>
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" @refresh="getAllBlogs"/>
 
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" @refresh="getAllBlogs"/>
         </div>
+        
     </main>
 </template>
 
@@ -18,83 +19,46 @@
 <script>
     export default {
         name: "MainContainer",
+        
         data(){
             return {
                 'blogs': null,
-                'users': null,
                 'user': null,
-                'comments': null,
-                'id': this.$route.params.id
+                'comments': null
             }
         },
 
         methods: {
-            /* get the current logged in user */
-            getCurrentUserData(){
-                axios.post('/api/user/currentUser', {
-                    'userID': localStorage.getItem('userID'),
-                    'token': localStorage.getItem('token'),
-                    })
-                    .then((response) => {
-                        this.user = response.data.user
-                        console.log(this.user)
-                    })
-                    .catch((error) => {
-                        console.warn(error)
-
-                    })
-            },
-
-            /* get all the blogs to display at the homepage */
             getAllBlogs(){
                 axios.get('/api/blog')
                     .then((response) => {
                         this.blogs = response.data.blogs
-                        console.log(this.blogs)
                     })
                     .catch((error) => {
                         console.warn(error)
                     })
             },
 
-            /* get all the user blogs to display at the userprofile */
-            getUserBlogs(){
-                axios.get('/api/blog/user/' + this.id)
+            getCurrentUserInfo(){
+                axios.post('/api/user/currentUser', {
+                    'userID': localStorage.getItem('userID'),
+                    'token': localStorage.getItem('token'),
+                })
                     .then((response) => {
-                        this.blogs = response.data.blogs
-                        console.log(this.blogs)
+                        this.user = response.data.user
                     })
                     .catch((error) => {
                         console.warn(error)
                     })
             },
-
-            /* get the user data to display at the userprofile*/
-            getUserProfile(){
-                axios.get('/api/profile/user/' + this.id)
-                    .then((response) => {
-                        this.users = response.data.users
-                        console.log(this.users)
-                    })
-                    .catch((error) => {
-                        console.warn(error)
-                    })
-            },
-
         },
 
         mounted(){
+            this.getAllBlogs()
+
             if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
-                this.getCurrentUserData()
+                this.getCurrentUserInfo()
             }
-
-            if (this.$route.path == '/home') {
-                this.getAllBlogs()
-            }else{
-                this.getUserBlogs()
-            }
-
-            this.getUserProfile()
         }
     }
 </script>
