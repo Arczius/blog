@@ -12,13 +12,13 @@ use App\Rules\descriptionPattern;
 use App\Models\Posts;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
-            // 'blogs' => Posts::all(),
             'blogs' => DB::table('posts')
             ->join('users', 'users.id', '=', 'posts.user_id')
             ->select('users.*', 'posts.*')
@@ -45,10 +45,6 @@ class BlogController extends Controller
             'description' => [new descriptionPattern(), 'max:255'],
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
-
         $blog = new Posts();
         $blog->title = $request->title;
         $blog->description = $request->description;
@@ -57,6 +53,10 @@ class BlogController extends Controller
         $response = [
             'id' => $blog->id
         ];
+
+        if ($validator->fails()) {
+            return response()->json($response);
+        }
 
         return response()->json($response);
     }
@@ -73,10 +73,6 @@ class BlogController extends Controller
         ]);
 
         $data['status'] = 'failed';
-
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
 
         $coverFile = $request->coverFile;
         $file = $request->file;
@@ -102,6 +98,10 @@ class BlogController extends Controller
                 'file' => $fileName,
             ]);
             $data['status'] = 'success';
+        }
+
+        if ($validator->fails()) {
+            return response()->json($data);
         }
 
         return response()->json($data);
