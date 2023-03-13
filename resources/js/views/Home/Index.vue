@@ -16,9 +16,6 @@
     </div>
 </template>
 
-<style scoped>
-</style>
-
 <script setup>
 import SideBar from './components/SideBar.vue'
 import MainSectionBottom from './components/MainSectionBottom.vue'
@@ -27,6 +24,6 @@ import BlogCreate from "../BlogCreate/components/BlogCreate.vue";
 
 <script>
 export default {
-    name: "Home"
+    name: "Home",
 }
 </script>

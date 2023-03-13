@@ -15,6 +15,9 @@ use App\Rules\descriptionPattern;
 use App\Models\Posts;
 use App\Models\Comments;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 class BlogController extends Controller
 {
     /**
@@ -23,6 +26,16 @@ class BlogController extends Controller
     * @return 
     */
     public function getAllBlogs() : JsonResponse
+    {
+        return response()->json([
+            'blogs' => DB::table('posts')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->select('users.*', 'posts.*')
+            ->get()
+        ]);
+    }
+
+    public function getUserBlogs(String $id) : JsonResponse
     {
         return response()->json([
             'blogs' => 
@@ -99,6 +112,10 @@ class BlogController extends Controller
             $data['status'] = 'success';
         }
 
+        if ($validator->fails()) {
+            return response()->json($data);
+        }
+
         return response()->json($data);
     }
     
@@ -112,6 +129,15 @@ class BlogController extends Controller
         $blog = Posts::find($id);
         if($blog){
             $blog->delete();
+            /* delete the file from the public folder */
+            Storage::disk('public')->delete(
+                $blog->coverFile, 
+                $blog->file
+            );
+
+            return response()->json([ 'status' => 200, 'message' => 'Blog deleted successfully', ], 200);
+        }else{
+            return response()->json([ 'status' => 404, 'message' => 'No blog found' ], 404);
 
             /* delete the images from the public folder */
             Storage::disk('public')->delete("BlogPictures/" . $blog['coverFile']); 

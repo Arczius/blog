@@ -1,13 +1,14 @@
 <template>
-    <MainContainer/>
+    <mainContainer/>
 </template>
 
 <script setup>
-import MainContainer from './components/MainContainer.vue' ;
+    import mainContainer from './components/MainContainer.vue' ;
 </script>
 
 <script>
-export default {
-    name: "blogs",
-}
+    export default {
+        name: "blogs",
+        name: "users",
+    }
 </script>

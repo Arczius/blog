@@ -11,7 +11,9 @@
                 <router-link to="/categories">Categorieën</router-link>
                 <router-link to="/posts/top">Top posts</router-link>
 
-                <router-link to="/profile"><img :src="user_image" alt=""></router-link>
+                <router-link to="/profile">
+                    <img :src="userIcon" alt="">
+                </router-link>
             </div>
         </div>
     </header>
@@ -22,29 +24,15 @@
 
 <script setup>
 import logo from "../../assets/writing-wit.png"
-import defaultUserIcon from "../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg"
 </script>
 
 <script>
 export default {
-    data(){
-        return {
-            'user_image': null
+    name: "Header",
+    props: {
+        userIcon: {
+            default: null,
         }
     },
-    methods: {
-        setUserIcon(){
-            const route = this.$route.path
-            if(route === "/" || "/register"){
-                this.user_image = defaultUserIcon
-            }
-            else{
-                this.user_image = () => import('../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg')
-            }
-        },
-    },
-    mounted(){
-        this.setUserIcon()
-    }
 }
 </script>
