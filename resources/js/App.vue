@@ -83,7 +83,7 @@ export default {
                 if(response.data.authorized) {
                         axios.get("/api/profile/user/" + userID)
                             .then((response) => {
-                                console.table(response.data.users)
+                                // console.table(response.data.users)
                                 if(response.data.users.profile_picture !== null) {
                                     this.profile_picture = response.data.users.profile_picture
                                 }

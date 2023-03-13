@@ -10,14 +10,19 @@ use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
-// use App\Models\Users;
+
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
-            'blogs' => Posts::all(),
+            // 'blogs' => Posts::all(),
+            'blogs' => DB::table('posts')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->select('users.*', 'posts.*')
+            ->get()
         ]);
     }
 
@@ -27,13 +32,6 @@ class BlogController extends Controller
             'blogs' => Posts::where('user_id', $id)->get(),
         ]);
     }
-
-    // public function getAllUsers(String $id) : JsnoResponse
-    // {
-    //     return response()->json([
-    //         'users' => Users::where('blog_id', $id)->get(),
-    //     ]);
-    // }
 
     /**
     * store the created post in the database

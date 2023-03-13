@@ -38,7 +38,7 @@
             getFollowers(){
                 axios.get("/api/follow/followers/single/" + this.users.id)
                     .then((response) => {
-                        console.table(response.data)
+                        // console.table(response.data)
                         this.followerAmount = response.data.follower_amount
                     })
             },
@@ -46,17 +46,16 @@
             getFollowing(){
                 axios.get("/api/follow/following/single/" + this.users.id)
                     .then((response) => {
-                        console.table(response.data)
+                        // console.table(response.data)
                         this.followingAmount = response.data.following_amount
                     })
             }
         },
 
         mounted(){
-            console.table(this.users)
+            // console.table(this.users)
             this.getFollowers()
             this.getFollowing()
         },
-
     }
 </script>

@@ -89,7 +89,6 @@
 
             if (this.$route.path == '/home') {
                 this.getAllBlogs()
-                // this.getAllUsers()
             }else{
                 this.getUserBlogs()
             }
