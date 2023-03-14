@@ -103,7 +103,7 @@
                     /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
-                        this.$router.push("/profile");
+                        this.$router.push("/profile/user/" + this.user.id);
 					})
 				}
                 })  
@@ -125,7 +125,7 @@
                 .then((response) =>  {  
                     console.log(response)
                     this.id = response.data.id 
-                    this.$router.push("/profile");
+                    this.$router.push("/profile/user/" + this.user.id);
                 })
                  /* send the files to the file route */
                 .then(() => {
@@ -140,7 +140,7 @@
                     /* redirect to the profile page */
 					.then((response) => {
 						console.log(response)
-                        this.$router.push("/profile");
+                        this.$router.push("/profile/user/" + this.user.id);
 					})
 				}
                 })

@@ -82,6 +82,7 @@
             if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
                 this.getCurrentUserData()
             }
+            
             if (this.$route.path == '/home') {
                 this.getAllBlogs()
             }else{

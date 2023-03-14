@@ -2,21 +2,25 @@
     <div class="blog__holder">
         <div class="blog__header">
             <div class="blog__header--inner-left">
-                <template v-if="users">
+                <!-- <template v-if="this.$route.path !== '/home' && users">
                     <img class="blog__header__image--profilePicture" :src="(users.profile_picture !== '') ? '../../storage/ProfilePictures/' + users.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
                     <span class="blog__header__text blog__header__text--username">@{{users.handle}}</span> 
-                </template>
+                </template> -->
 
-                <div v-if="this.$route.path == '/home'" class="blog__header--inner-left">
-                    <img class="blog__header__image--profilePicture" :src="(blog.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-                    <span class="blog__header__text blog__header__text--username">@{{blog.handle}}</span> 
+                <div class="blog__header--inner-left">
+                    <img class="blog__header__image--profilePicture" :src="(blog.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
+                    <span class="blog__header__text blog__header__text--username">@{{blog.user.handle}}</span> 
                 </div>
             </div>
 
             <div class="blog__header--inner-right">
                 <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
-                <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
-                <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                <div v-if="user !== null">
+                    <div v-if="user.id === blog.user_id">
+                        <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
+                        <button @click="deleteBlog()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -66,6 +70,7 @@
             'comments',
             'users'
         ],
+
         data() {
             if(this.blog.comments.length > 0){
                 var comment_id;

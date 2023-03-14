@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
 class BlogController extends Controller
 {
     /**
-    * get all the existing blogs
+    * get all the existing blogs for the home page
     *
     * @return
     */
@@ -26,20 +26,29 @@ class BlogController extends Controller
     {
         return response()->json([
             'blogs' =>
-            Posts::join('users', 'users.id', '=', 'posts.user_id')->with(['comments' => function ($query) {
-                $query->with('user');
-            }])
-            ->get()
+            // Posts::with(['comments' => function ($query) {
+            //     $query->with('user');
+            // }])
+            // ->get()
+
+            Posts::with(['user', 'comments.user'])->get()
         ]);
     }
 
+    /**
+    * get all the existing blogs a specific user has made for the personal profile
+    *
+    * @return
+    */
     public function getUserBlogs(String $id) : JsonResponse
     {
         return response()->json([
             'blogs' =>
-                Posts::where('user_id', $id)->with(['comments' => function ($query) {
-                    $query->with('user');
-                }])->get()
+                // Posts::where('user_id', $id)->with(['comments' => function ($query) {
+                //     $query->with('user');
+                // }])->get()
+
+            Posts::where('user_id', $id)->with(['user', 'comments.user'])->get()
         ]);
     }
 
@@ -74,7 +83,7 @@ class BlogController extends Controller
     }
 
     /**
-    * store the included image in the database
+    * store the included images in the database
     *
     * @return
     */
@@ -124,6 +133,7 @@ class BlogController extends Controller
     */
     public function destroy (String $id) : JsonResponse
     {
+        dd($id);
         $blog = Posts::find($id);
         if($blog){
             foreach ($blog->comments as $comments) {
@@ -154,7 +164,7 @@ class BlogController extends Controller
     }
 
     /**
-    * delete the blog from the database
+    * delete the blog comment from the database
     *
     * @return
     */
@@ -206,7 +216,7 @@ class BlogController extends Controller
     }
 
     /**
-    * get one existing blog
+    * get one existing blog for the detail page
     *
     * @return
     */
@@ -218,7 +228,7 @@ class BlogController extends Controller
     }
 
     /**
-    * get the current the blog data
+    * get the current blog data
     *
     * @return
     */
