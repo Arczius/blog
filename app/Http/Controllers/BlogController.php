@@ -41,7 +41,6 @@ class BlogController extends Controller
             Posts::with(['comments' => function ($query) {
                 $query->with('user');
             }])->get()
-
             // Posts::where('user_id', $id)->get(),
         ]);
     }
@@ -127,8 +126,12 @@ class BlogController extends Controller
     */
     public function destroy (String $id) : JsonResponse
     {
-        $blog = Posts::find($id)->with('comments');
+        $blog = Posts::find($id);
         if($blog){
+            foreach ($blog->comments as $comments) {
+                $comments->delete();
+            }
+
             $blog->delete();
             /* delete the file from the public folder */
             Storage::disk('public')->delete(
