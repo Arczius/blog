@@ -13,7 +13,6 @@ use App\Rules\descriptionPattern;
 use App\Models\Posts;
 use App\Models\Comments;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
@@ -26,9 +25,11 @@ class BlogController extends Controller
     public function getAllBlogs() : JsonResponse
     {
         return response()->json([
-            'blogs' => DB::table('posts')
-            ->join('users', 'users.id', '=', 'posts.user_id')
-            ->select('users.*', 'posts.*')
+            'blogs' =>
+            Posts::with(['comments' => function ($query) {
+                $query->with('user');
+            }])
+            // ->join('users', 'users.id', '=', 'posts.user_id')
             ->get()
         ]);
     }
@@ -40,6 +41,8 @@ class BlogController extends Controller
             Posts::with(['comments' => function ($query) {
                 $query->with('user');
             }])->get()
+
+            // Posts::where('user_id', $id)->get(),
         ]);
     }
 
@@ -124,7 +127,7 @@ class BlogController extends Controller
     */
     public function destroy (String $id) : JsonResponse
     {
-        $blog = Posts::find($id);
+        $blog = Posts::find($id)->with('comments');
         if($blog){
             $blog->delete();
             /* delete the file from the public folder */
@@ -231,7 +234,7 @@ class BlogController extends Controller
     * add a comment to the blog
     *
     */
-    public function addComment(Request $request, Posts $post)
+    public function addComment(Request $request)
     {
         $validated = $request->validate([
             'comment' => ['required'],
