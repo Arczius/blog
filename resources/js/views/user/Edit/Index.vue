@@ -1,6 +1,6 @@
 <template>
-    <main>
-        <UserForm v-if="user !== null" :user="user"/>
+    <main class="edit-user">
+        <UserForm v-if="user" :user="user"/>
     </main>
 
 </template>
@@ -30,12 +30,6 @@ export default {
                 })
                 .catch((error) => {
                     console.warn(error)
-                    switch(error.response.status){
-                        case 401:
-                            alert('you are not authorized to view this page')
-                            this.$router.push('/home')
-                        break;
-                    }
                 })
         }
     },

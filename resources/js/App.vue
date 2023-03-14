@@ -83,7 +83,7 @@ export default {
                         axios.get("/api/profile/user/" + userID)
                             .then((response) => {
                                 if(response.data.users.profile_picture !== null) {
-                                    this.profile_picture = response.data.users.profile_picture
+                                    this.profile_picture = '/storage/ProfilePictures/'+ response.data.users.profile_picture
                                 }
                             })
                         }

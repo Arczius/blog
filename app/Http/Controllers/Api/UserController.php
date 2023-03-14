@@ -19,7 +19,15 @@ class UserController extends Controller
         return ($this->AuthorizeUser($request->token, $request->userID))
             ? response()->json(
                 [
-                    'user' => User::select('id')->where('id', $request->userID)->first(),
+                    'user' => User::select(
+                        'id',
+                        'email',
+                        'handle',
+                        'username',
+                        'profile_picture',
+                        'profile_header',
+                        'about_me'
+                        )->where('id', $request->userID)->first(),
                 ]
             )
             : response()->json(
@@ -142,7 +150,7 @@ class UserController extends Controller
             // putting the new picture in the database
             User::where('id', $request->userID)->update(
                 [
-                    'profile_picture' => 'ProfilePictures/' . $filename
+                    'profile_picture' => $filename
                 ]
             );
 
@@ -202,7 +210,7 @@ class UserController extends Controller
             // put the new picture in the database
             User::where('id', $request->userID)->update(
                 [
-                    'profile_header' => 'ProfileBanners/' . $filename
+                    'profile_header' => $filename
                 ]
             );
 
