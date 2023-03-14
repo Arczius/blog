@@ -132,17 +132,17 @@ class UserController extends Controller
             // generating the new picture
             $image = $request->file('image');
 
-            $filename = $request->userID . "_profile-picture." . $image->extension();
+            $filename = $request->userID . "_profile." . $image->extension();
 
             $image->storeAs(
-                'public/profile_pictures',
+                'public/ProfilePictures',
                 $filename
             );
 
             // putting the new picture in the database
             User::where('id', $request->userID)->update(
                 [
-                    'profile_picture' => 'profile_pictures/' . $filename
+                    'profile_picture' => 'ProfilePictures/' . $filename
                 ]
             );
 
@@ -184,7 +184,6 @@ class UserController extends Controller
 
             $user = User::where('id', $request->userID)->first();
 
-
             // deleting the old picture
             if($user->profile_header !== null) {
                 Storage::disk('public')->delete($user->profile_header);
@@ -193,17 +192,17 @@ class UserController extends Controller
             // generating the new picture
             $image = $request->file('image');
 
-            $filename = $request->userID . "_profile-header." . $image->extension();
+            $filename = $request->userID . "_banner." . $image->extension();
 
             $image->storeAs(
-                'public/profile_headers',
+                'public/ProfileBanners',
                 $filename
             );
 
             // put the new picture in the database
             User::where('id', $request->userID)->update(
                 [
-                    'profile_header' => 'profile_headers/' . $filename
+                    'profile_header' => 'ProfileBanners/' . $filename
                 ]
             );
 

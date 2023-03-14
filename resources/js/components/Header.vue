@@ -10,6 +10,7 @@
                 <router-link to="/following">Volgend</router-link>
                 <router-link to="/categories">Categorieën</router-link>
                 <router-link to="/posts/top">Top posts</router-link>
+                <router-link to="/user/edit">Wijzig profiel</router-link>
 
                 <router-link to="/profile/user/1">
                     <img :src="userIcon" alt="">
