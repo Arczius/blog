@@ -222,8 +222,11 @@ class BlogController extends Controller
     */
     public function getBlogDetail(String $id) : JsonResponse
     {
+        $blog = Posts::where('id', $id)->first();
+
         return response()->json([
-            'blogs' => Posts::where('id', $id)->first(),
+            'blog' => $blog,
+            'user' => $blog->user,
         ]);
     }
 
