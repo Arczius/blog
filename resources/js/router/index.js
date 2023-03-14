@@ -57,6 +57,12 @@ const routes = [
         path: '/user/edit',
         name: 'Edit User',
         component: async () => await import('../views/user/Edit/Index.vue')
+    },
+
+    // keep this at the bottom of the array, otherwise all pages will throw an 404
+    {
+        path: '/:pathMatch(.*)*',
+        component: async () => await import('../views/404/Index.vue')
     }
 ]
 
