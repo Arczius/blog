@@ -41,7 +41,7 @@
 
 <script>
     import axios from 'axios';
-    
+
     export default {
         name: "store",
         props: [
@@ -86,9 +86,8 @@
 					headers: {"Content-Type" : "application/json"}
 				}
 				)
-                .then((response) =>  {  
-                    console.log(response)
-                    this.blogid = response.data.id 
+                .then((response) =>  {
+                    this.blogid = response.data.id
                 })
                 /* send the files to the file route */
                 .then(() => {
@@ -102,13 +101,12 @@
 					})
                     /* redirect to the profile page */
 					.then((response) => {
-						console.log(response)
                         this.$router.push("/profile/user/" + this.user.id);
 					})
 				}
-                })  
-                .catch(function (error) {  
-                    console.log(error);
+                })
+                .catch(function (error) {
+                    console.warn(error);
                 });
 			},
 
@@ -122,9 +120,8 @@
 					headers: {"Content-Type" : "application/json"}
 				}
 				)
-                .then((response) =>  {  
-                    console.log(response)
-                    this.id = response.data.id 
+                .then((response) =>  {
+                    this.id = response.data.id
                     this.$router.push("/profile/user/" + this.user.id);
                 })
                  /* send the files to the file route */
@@ -139,16 +136,15 @@
 					})
                     /* redirect to the profile page */
 					.then((response) => {
-						console.log(response)
                         this.$router.push("/profile/user/" + this.user.id);
 					})
 				}
                 })
-                .catch(function (error) {  
-                    console.log(error);
+                .catch(function (error) {
+                    console.warn(error);
                 });
             },
 
-        }, 
+        },
     };
 </script>

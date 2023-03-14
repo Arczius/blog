@@ -27,7 +27,6 @@ export default {
             })
                 .then((response) => {
                     this.user = response.data.user
-                    console.log(this.user)
                 })
                 .catch((error) => {
                     console.warn(error)

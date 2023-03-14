@@ -124,7 +124,6 @@ class BlogController extends Controller
     */
     public function destroy (String $id) : JsonResponse
     {
-        dd($id);
         $blog = Posts::find($id);
         if($blog){
             foreach ($blog->comments as $comments) {

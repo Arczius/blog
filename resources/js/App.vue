@@ -98,7 +98,6 @@ export default {
 
     watch: {
         $route () {
-            console.log(this.$route)
             this.authorize()
             this.getUserProfilePicture()
         }
