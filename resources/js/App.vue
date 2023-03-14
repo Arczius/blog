@@ -77,9 +77,9 @@ export default {
                 axios.post("/api/auth", {
                 'token': token,
                 'userID': userID,
-            })
-            .then((response) => {
-                if(response.data.authorized) {
+                })
+                .then((response) => {
+                    if(response.data.authorized) {
                         axios.get("/api/profile/user/" + userID)
                             .then((response) => {
                                 if(response.data.users.profile_picture !== null) {
@@ -88,18 +88,26 @@ export default {
                             })
                         }
                     })
-                }
             }
         },
+        setTitle() {
+            document.title = (this.$route.name)
+                ? this.$route.name
+                    : "No Title Given"
+        }
+    },
 
     mounted(){
         this.getUserProfilePicture()
+        this.setTitle()
     },
 
     watch: {
         $route () {
             this.authorize()
             this.getUserProfilePicture()
+
+            this.setTitle()
         }
     }
 

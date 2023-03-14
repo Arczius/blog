@@ -3,12 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
         path: '/',
-        name: 'Index',
+        name: 'Login',
         component: () => import('../views/Index/Index.vue')
     },
     {
         path: '/create',
-        name: 'create',
+        name: 'Create a blog',
         component: async () => await import('../views/BlogCreate/Index.vue')
     },
     {
@@ -18,12 +18,12 @@ const routes = [
     },
     {
         path: '/blogs',
-        name: 'blogs',
+        name: 'All blogs',
         component: async () => import('../views/BlogStore/Index.vue')
     },
     {
         path: '/detail/:id',
-        name: 'detail',
+        name: 'Blog Detail',
         component: async () => await import('../views/BlogDetail/Index.vue')
     },
     {
@@ -40,7 +40,7 @@ const routes = [
     },
     {
         path: '/edit/:id',
-        name: 'edit',
+        name: 'Edit Blog',
         component: async () => await import('../views/BlogStore/Index.vue')
     },
     {
@@ -50,7 +50,7 @@ const routes = [
     },
     {
         path: '/profile/user/:id',
-        name: 'profile',
+        name: 'User Profile',
         component: async () => await import('../views/Profile/Index.vue')
     },
     {
@@ -62,6 +62,7 @@ const routes = [
     // keep this at the bottom of the array, otherwise all pages will throw an 404
     {
         path: '/:pathMatch(.*)*',
+        name: '404 - Page not found',
         component: async () => await import('../views/404/Index.vue')
     }
 ]
