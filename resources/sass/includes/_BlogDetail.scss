@@ -46,7 +46,7 @@
                     color: $blue-colour;
                     font-weight: 800;
                 }
-        
+
                 &--timestamp{
                     color: $orange-colour;
                 }
@@ -56,7 +56,7 @@
         &__content{
             display: flex;
             flex-direction: column;
-            
+
             &--image{
                 max-height: 300px;
                 object-fit: contain;
@@ -90,7 +90,7 @@
             font-size: 1rem;
             padding: 1rem;
             width: 100%;
-            
+
             &--textComment{
                 color: $orange-colour;
                 font-size: 1rem;
@@ -127,8 +127,6 @@
     &__container{
         display: grid;
         margin-left: 30%;
-        position: relative;
-        top: -1400px;
         width: 60%;
     }
 }
