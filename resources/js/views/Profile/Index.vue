@@ -35,7 +35,6 @@
                     axios.get('/api/profile/user/' + this.id)
                         .then((response) => {
                             this.users = response.data.users
-                            console.log(this.users)
                         })
                         .catch((error) => {
                             console.warn(error)

@@ -38,7 +38,6 @@
                     })
                     .then((response) => {
                         this.user = response.data.user
-                        console.log(this.user)
                     })
                     .catch((error) => {
                         console.warn(error)
@@ -50,29 +49,28 @@
                 axios.get('/api/blog')
                     .then((response) => {
                         this.blogs = response.data.blogs
-                        console.log(this.blogs)
                     })
                     .catch((error) => {
                         console.warn(error)
                     })
             },
+
             /* get all the user blogs to display at the userprofile */
             getUserBlogs(){
-                axios.get('/api/blog/user/' + this.id)
+                axios.get('/api/blog/user/' + this.$route.params.id)
                     .then((response) => {
                         this.blogs = response.data.blogs
-                        console.log(this.blogs)
                     })
                     .catch((error) => {
                         console.warn(error)
                     })
             },
+
             /* get the user data to display at the userprofile*/
             getUserProfile(){
                 axios.get('/api/profile/user/' + this.id)
                     .then((response) => {
                         this.users = response.data.users
-                        console.log(this.users)
                     })
                     .catch((error) => {
                         console.warn(error)

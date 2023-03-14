@@ -11,7 +11,6 @@
                     <img class="blog__header__image--profilePicture" :src="(blog.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
                     <span class="blog__header__text blog__header__text--username">@{{blog.handle}}</span> 
                 </div>
-
             </div>
 
             <div class="blog__header--inner-right">
@@ -87,6 +86,7 @@
             showBlogDetail(){
                 this.$router.push('/detail/' + this.blog.id);
             },
+
             /* add a comment to a blog */
             addComment() {
 			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
@@ -96,7 +96,6 @@
 				})
                  /* reload the page */
                  .then((response) =>  {  
-                    console.log(response)
                     this.$emit("refresh");
                     this.blog.id = response.data.id 
                 })
@@ -104,6 +103,7 @@
                     console.log(error);
                 });
 			},
+
             /* go to the destroy route with the id */
             deleteComment() {
                   if(this.blog.comments.length > 0){
@@ -118,7 +118,6 @@
                 },)
                 /* reload the page */
                 .then((response) =>  {  
-                    console.log(response)
                     this.$emit("refresh");
                     this.blog.id = response.data.id 
                 })
@@ -126,8 +125,9 @@
                     console.log(error);
                 });
             },
-             /* go to the destroy route with the id */
-             deleteBlog() {
+
+            /* go to the destroy route with the id */
+            deleteBlog() {
                 axios.delete('/api/blog/destroy/' + this.blog.id, {
                         'id': this.blog.id,
                     },
@@ -136,7 +136,6 @@
                     })
                     /* reload the page */
                     .then((response) =>  {  
-                        console.log(response)
                         this.$emit("refresh");
                         this.blog.id = response.data.id 
                     })
@@ -144,10 +143,11 @@
                         console.log(error);
                     });
             },
+
             /* go to the edit route */
             editBlog(){
                 this.$router.push('/edit/' + this.blog.id);
             },
-        }
+        },
     }
 </script>

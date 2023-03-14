@@ -26,10 +26,9 @@ class BlogController extends Controller
     {
         return response()->json([
             'blogs' =>
-            Posts::with(['comments' => function ($query) {
+            Posts::join('users', 'users.id', '=', 'posts.user_id')->with(['comments' => function ($query) {
                 $query->with('user');
             }])
-            // ->join('users', 'users.id', '=', 'posts.user_id')
             ->get()
         ]);
     }
@@ -38,10 +37,9 @@ class BlogController extends Controller
     {
         return response()->json([
             'blogs' =>
-            Posts::with(['comments' => function ($query) {
-                $query->with('user');
-            }])->get()
-            // Posts::where('user_id', $id)->get(),
+                Posts::where('user_id', $id)->with(['comments' => function ($query) {
+                    $query->with('user');
+                }])->get()
         ]);
     }
 
