@@ -2,13 +2,8 @@
     <div class="blog__holder">
         <div class="blog__header">
             <div class="blog__header--inner-left">
-                <!-- <template v-if="this.$route.path !== '/home' && users">
-                    <img class="blog__header__image--profilePicture" :src="(users.profile_picture !== '') ? '../../storage/ProfilePictures/' + users.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-                    <span class="blog__header__text blog__header__text--username">@{{users.handle}}</span> 
-                </template> -->
-
                 <div class="blog__header--inner-left">
-                    <img class="blog__header__image--profilePicture" :src="(blog.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
+                    <img class="blog__header__image--profilePicture" :src="(blog.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
                     <span class="blog__header__text blog__header__text--username">@{{blog.user.handle}}</span> 
                 </div>
             </div>
@@ -25,7 +20,7 @@
         </div>
 
         <div class="blog__content">
-            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? 'storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
+            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? '../../storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
             <p class="blog__content blog__content--description">{{blog.description}}</p> 
             <button @click="showBlogDetail()" class="blog__content blog__content--button">Lees verder</button>
@@ -35,7 +30,7 @@
             <div class="blog__comments__existingComment">   
                 <div v-if="blog.comment !== null">
                     <div v-for="comments in blog.comments">
-                        <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? 'storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
+                        <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
                         <span class="blog__comments blog__comments__existingComment--text">{{comments.comment}}</span>
                         <span v-if="user !== null && user.id === comments.user_id">
                             <button @click="deleteComment()"><img class="blog__header__image blog__header__image--delete" :src="defaultDeleteIcon"></button>
@@ -101,7 +96,11 @@
 				})
                  /* reload the page */
                  .then((response) =>  {  
-                    this.$emit("refresh");
+                    if (this.$route.path == '/home') {
+                        this.$emit("refreshHome");   
+                    }else{
+                        this.$emit("refreshUser");
+                    }
                     this.blog.id = response.data.id 
                 })
                 .catch(function (error) {  
@@ -123,7 +122,11 @@
                 },)
                 /* reload the page */
                 .then((response) =>  {  
-                    this.$emit("refresh");
+                    if (this.$route.path == '/home') {
+                        this.$emit("refreshHome");   
+                    }else{
+                        this.$emit("refreshUser");
+                    }
                     this.blog.id = response.data.id 
                 })
                 .catch(function (error) {  
@@ -141,7 +144,11 @@
                     })
                     /* reload the page */
                     .then((response) =>  {  
-                        this.$emit("refresh");
+                        if (this.$route.path == '/home') {
+                        this.$emit("refreshHome");   
+                    }else{
+                        this.$emit("refreshUser");
+                    }
                         this.blog.id = response.data.id 
                     })
                     .catch(function (error) {  

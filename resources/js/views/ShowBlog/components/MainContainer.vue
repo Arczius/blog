@@ -3,9 +3,8 @@
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null || user === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" :users="users" @refresh="getAllBlogs"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" :users="users" @refreshHome="getAllBlogs" @refreshUser="getUserBlogs"/>
         </div>
-        
     </main>
 </template>
 

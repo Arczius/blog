@@ -26,12 +26,7 @@ class BlogController extends Controller
     {
         return response()->json([
             'blogs' =>
-            // Posts::with(['comments' => function ($query) {
-            //     $query->with('user');
-            // }])
-            // ->get()
-
-            Posts::with(['user', 'comments.user'])->get()
+                Posts::with(['user', 'comments.user'])->get()
         ]);
     }
 
@@ -44,11 +39,7 @@ class BlogController extends Controller
     {
         return response()->json([
             'blogs' =>
-                // Posts::where('user_id', $id)->with(['comments' => function ($query) {
-                //     $query->with('user');
-                // }])->get()
-
-            Posts::where('user_id', $id)->with(['user', 'comments.user'])->get()
+                Posts::where('user_id', $id)->with(['user', 'comments.user'])->get()
         ]);
     }
 
