@@ -4,12 +4,12 @@
             <div class="blog__header--inner-left">
                 <div class="blog__header--inner-left">
                     <img class="blog__header__image--profilePicture" :src="(blog.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-                    <span class="blog__header__text blog__header__text--username">@{{blog.user.handle}}</span> 
+                    <span class="blog__header__text blog__header__text--username">@{{blog.user.handle}}</span>
                 </div>
             </div>
 
             <div class="blog__header--inner-right">
-                <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span> 
+                <span class="blog__header__text blog__header__text--timestamp">{{blog.created_at}}</span>
                 <div v-if="user !== null">
                     <div v-if="user.id === blog.user_id">
                         <button @click="editBlog()"><img class="blog__header__image blog__header__image--edit" :src="defaultEditIcon"></button>
@@ -22,12 +22,12 @@
         <div class="blog__content">
             <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? '../../storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
             <p class="blog__content blog__content--title">{{blog.title}}</p>
-            <p class="blog__content blog__content--description">{{blog.description}}</p> 
+            <p class="blog__content blog__content--description">{{blog.description}}</p>
             <button @click="showBlogDetail()" class="blog__content blog__content--button">Lees verder</button>
         </div>
 
-        <div class="blog__comments">  
-            <div class="blog__comments__existingComment">   
+        <div class="blog__comments">
+            <div class="blog__comments__existingComment">
                 <div v-if="blog.comment !== null">
                     <div v-for="comments in blog.comments">
                         <img class="blog__comments blog__comments--profilePicture" :src="(comments.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + comments.user.profile_picture : defaultBlogPicture" alt="profilePicture" loading="lazy">
@@ -80,7 +80,7 @@
                 'blogComment_id': comment_id
             };
         },
-        
+
         methods: {
             /* go to the detail route */
             showBlogDetail(){
@@ -95,16 +95,16 @@
                     'posts_id': this.posts_id
 				})
                  /* reload the page */
-                 .then((response) =>  {  
+                 .then((response) =>  {
                     if (this.$route.path == '/home') {
-                        this.$emit("refreshHome");   
+                        this.$emit("refreshHome");
                     }else{
                         this.$emit("refreshUser");
                     }
-                    this.blog.id = response.data.id 
+                    this.blog.id = response.data.id
                 })
-                .catch(function (error) {  
-                    console.log(error);
+                .catch(function (error) {
+                    console.warn(error);
                 });
 			},
 
@@ -116,21 +116,21 @@
                             comment_id = comment.id
                         });
                     }
-            
+
                 axios.delete('/api/blog/destroy/comment/' + comment_id, {
                     'id': this.blogComment_id,
                 },)
                 /* reload the page */
-                .then((response) =>  {  
+                .then((response) =>  {
                     if (this.$route.path == '/home') {
-                        this.$emit("refreshHome");   
+                        this.$emit("refreshHome");
                     }else{
                         this.$emit("refreshUser");
                     }
-                    this.blog.id = response.data.id 
+                    this.blog.id = response.data.id
                 })
-                .catch(function (error) {  
-                    console.log(error);
+                .catch(function (error) {
+                    console.warn(error);
                 });
             },
 
@@ -143,16 +143,16 @@
                         headers: { "Content-Type" : "application/json"}
                     })
                     /* reload the page */
-                    .then((response) =>  {  
+                    .then((response) =>  {
                         if (this.$route.path == '/home') {
-                        this.$emit("refreshHome");   
+                        this.$emit("refreshHome");
                     }else{
                         this.$emit("refreshUser");
                     }
-                        this.blog.id = response.data.id 
+                        this.blog.id = response.data.id
                     })
-                    .catch(function (error) {  
-                        console.log(error);
+                    .catch(function (error) {
+                        console.warn(error);
                     });
             },
 

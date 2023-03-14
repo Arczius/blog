@@ -34,7 +34,6 @@
             getBlogData(){
                 axios.get('/api/blog/detail/' + this.page_id)
                     .then(response => {
-                        console.table(response.data)
                         this.user = response.data.user
                         this.blog = response.data.blog
                     })

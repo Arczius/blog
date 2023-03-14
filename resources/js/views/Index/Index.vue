@@ -17,11 +17,5 @@ import LoginImage from '../../../assets/writing.png';
 <script>
 export default {
     name: "Index",
-    methods: {
-        callParentProfileSetter()
-        {
-            this.$parent.$options.methods.getUserProfilePicture()
-        }
-    }
 }
 </script>

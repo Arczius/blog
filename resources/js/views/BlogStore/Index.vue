@@ -14,7 +14,7 @@
 export default {
     name: "Edit blog",
     props: {
-        
+
     },
 
     data(){
@@ -24,20 +24,20 @@ export default {
             'user': null,
         }
     },
-    
+
     methods: {
         getCurrentBlogInfo(){
             axios.post('/api/blog/info/' + this.id, {
             },
             )
-            .then((response) =>  {  
-                this.blog = response.data 
+            .then((response) =>  {
+                this.blog = response.data
             })
-            .catch(function (error) {  
-                console.log(error);
+            .catch(function (error) {
+                console.warn(error);
             });
         },
-        
+
           getCurrentUserData(){
                 axios.post('/api/user/currentUser', {
                     'userID': localStorage.getItem('userID'),
@@ -45,11 +45,10 @@ export default {
                 })
                     .then((response) => {
                         this.user = response.data.user
-                        console.log(this.user)
                     })
                     .catch((error) => {
                         console.warn(error)
-                    
+
                     })
             }
     },
