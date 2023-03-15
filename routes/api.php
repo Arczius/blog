@@ -40,17 +40,22 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('/detail/{id}', 'getBlogDetail');
     Route::post('/info/{id}', 'getCurrentBlogInfo');
 
-    /* get the image from blog*/ 
+    /* get the image from blog*/
     Route::post('/file/{id}', 'getBlogImage');
 
     /* create / edit / delete for the blog post */
     Route::post('/store', 'store');
     Route::post('/edit/{id}', 'edit');
     Route::delete('/destroy/{id}', 'destroy');
-    
+
     /* create / delete the post comment */
     Route::post('/posts/{id}/comment', 'addComment');
     Route::delete('/destroy/comment/{id}', 'destroyComment');
+});
+
+Route::prefix('post')->controller(PostsController::class)->group(function () {
+    Route::get('/top/{amount}', 'topPosts');
+    Route::get('/top', 'topPosts');
 });
 
 /* route for the categories */

@@ -2,8 +2,8 @@
     <div>
         <h3>Top posts</h3>
         <div>
-            <SideBarTopPostsItemSkeleton v-if="!posts || !users"/>
-            <SideBarTopPostsItem v-else v-for="(item, index) in posts" :user="users[index]" :post="item"/>
+            <SideBarTopPostsItemSkeleton v-if="!posts"/>
+            <SideBarTopPostsItem v-else v-for="item in posts" :user="item.user" :post="item"/>
         </div>
     </div>
 
@@ -22,7 +22,6 @@ export default {
     data(){
         return {
             'posts': null,
-            'users': null,
         }
     },
     methods: {
@@ -30,7 +29,6 @@ export default {
             axios.get("/api/post/top/6")
                 .then((response) => {
                     this.posts = response.data.posts
-                    this.users = response.data.users
                 })
         }
     },
