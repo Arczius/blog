@@ -18,7 +18,7 @@
 <script>
     export default {
         name: "MainContainer",
-        
+
         data(){
             return {
                 'blogs': null,
@@ -40,7 +40,7 @@
                     })
                     .catch((error) => {
                         console.warn(error)
-                    
+
                     })
             },
             /* get all the blogs to display at the homepage */
@@ -81,14 +81,33 @@
             if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
                 this.getCurrentUserData()
             }
-            
+
             if (this.$route.path == '/home') {
                 this.getAllBlogs()
             }else{
                 this.getUserBlogs()
             }
-            
+
             this.getUserProfile()
+        },
+
+        watch: {
+            $route () {
+                this.blogs = this.user = this.comments = this.users = null
+
+                if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
+                    this.getCurrentUserData()
+                }
+
+                if (this.$route.path == '/home') {
+                    this.getAllBlogs()
+                }
+                else{
+                    this.getUserBlogs()
+                }
+
+                this.getUserProfile()
+            }
         }
     }
 </script>

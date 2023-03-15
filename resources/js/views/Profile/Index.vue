@@ -44,7 +44,7 @@
 
         mounted(){
             this.getUserProfile()
-        }
+        },
     }
 </script>
 
