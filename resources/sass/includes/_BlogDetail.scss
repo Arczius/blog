@@ -137,4 +137,12 @@
     flex: 1;
     max-width: 25%;
     padding: 3rem;
+
+    .profile_banner{
+        display: none;
+    }
+}
+
+.container{
+    display: flex;
 }
