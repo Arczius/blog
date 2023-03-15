@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
                 'email' => 'eetkinderenvoorontbijt@outlook.com',
                 'password' => Hash::make('testen'),
                 'profile_picture' => '2_profile.jpg',
+                'profile_header' => '2_banner.jpg',
             ],
             [
                 'username' => 'kebabcontact likker',

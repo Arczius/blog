@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class PostSeeder extends Seeder
@@ -16,8 +14,8 @@ class PostSeeder extends Seeder
                 'user_id' => 1,
                 'title' => "Amazing post",
                 'description' => 'This is an amazing description',
-                'coverFile' => '',
-                'file' => '',
+                'coverFile' => '1_cover.jpg',
+                'file' => '1_content.jpg',
             ],
             [
                 'user_id' => 1,
