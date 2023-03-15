@@ -21,6 +21,12 @@
                 display: flex;
                 gap: 1rem;
 
+                .new {
+                    display: flex;
+                    gap: 1rem;
+                    align-items: center;
+                }
+
                 img{
                     height: 80px;
                     object-fit: cover;
@@ -33,10 +39,6 @@
         &--profile-header {
             display: grid;
 
-            .new {
-                display: grid;
-                justify-content: center;
-            }
             img {
                 height: 220px;
                 object-fit: cover;
