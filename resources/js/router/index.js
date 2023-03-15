@@ -58,6 +58,11 @@ const routes = [
         name: 'Edit User',
         component: async () => await import('../views/user/Edit/Index.vue')
     },
+    {
+        path: '/categories',
+        name: 'Alle categories',
+        component: async () => await import('../views/Categories/Index.vue')
+    },
 
     // keep this at the bottom of the array, otherwise all pages will throw an 404
     {

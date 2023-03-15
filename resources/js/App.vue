@@ -1,6 +1,8 @@
 <template>
     <Header
-        :user-icon="profile_picture"/>
+        :user-icon="profile_picture"
+        :userID="userID"
+        />
     <router-view></router-view>
     <Footer/>
 </template>
@@ -22,6 +24,7 @@ export default {
     data(){
         return {
             profile_picture: null,
+            userID: null,
         }
     },
 
@@ -54,6 +57,9 @@ export default {
                             localStorage.clear()
 
                             this.notifyUnauthorized()
+                        }
+                        else {
+                            this.userID = userID
                         }
                     })
             }

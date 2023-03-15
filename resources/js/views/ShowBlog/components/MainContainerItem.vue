@@ -3,8 +3,10 @@
         <div class="blog__header">
             <div class="blog__header--inner-left">
                 <div class="blog__header--inner-left">
-                    <img class="blog__header__image--profilePicture" :src="(blog.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
-                    <span class="blog__header__text blog__header__text--username">@{{blog.user.handle}}</span>
+                    <router-link class="blog__header--inner-left" v-if="blog.user" :to="'/profile/user/' + blog.user.id">
+                        <img class="blog__header__image--profilePicture" :src="(blog.user.profile_picture !== '') ? '../../storage/ProfilePictures/' + blog.user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
+                        <span class="blog__header__text blog__header__text--username">@{{blog.user.handle}}</span>
+                    </router-link>
                 </div>
             </div>
 
@@ -20,8 +22,14 @@
         </div>
 
         <div class="blog__content">
-            <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? '../../storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
-            <p class="blog__content blog__content--title">{{blog.title}}</p>
+            <router-link :to="'/detail/' + blog.id">
+                <img class="blog__content blog__content--image" :src="(blog.coverFile !== '') ? '../../storage/BlogPictures/' + blog.coverFile : defaultBlogPicture" alt="coverImage" loading="lazy">
+            </router-link>
+
+            <router-link :to="'/detail/' + blog.id">
+                <p class="blog__content blog__content--title">{{blog.title}}</p>
+            </router-link>
+
             <p class="blog__content blog__content--description">{{blog.description}}</p>
             <button @click="showBlogDetail()" class="blog__content blog__content--button">Lees verder</button>
         </div>

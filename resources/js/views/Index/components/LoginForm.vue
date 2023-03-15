@@ -85,7 +85,11 @@ export default {
                             .then((response) => {
                                 console.log(response)
 
-                                this.$router.push('/home')
+                                this.$router.push(
+                                    (Math.floor(Math.random() * 10) === 4)
+                                        ? '/tyler'
+                                            : '/home'
+                                )
                             })
                     })
                     .catch((error) => {
