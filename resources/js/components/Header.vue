@@ -12,7 +12,10 @@
                 <router-link to="/posts/top">Top posts</router-link>
                 <router-link to="/user/edit">Wijzig profiel</router-link>
 
-                <router-link to="/profile/user/1">
+
+                <!-- getting you to your own profile when you click on your profile picture, if you're logged in -->
+                <img v-if="!userID" :src="userIcon" alt="default user icon">
+                <router-link v-else :to="'/profile/user/' + userID">
                     <img :src="userIcon" alt="user icon">
                 </router-link>
             </div>
@@ -29,6 +32,9 @@
         name: "Header",
         props: {
             userIcon: {
+                default: null,
+            },
+            userID: {
                 default: null,
             }
         },
