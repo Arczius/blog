@@ -20,9 +20,9 @@
 </script>
 
 <style>
-.sidebar .profile__banner {
-    display: none;
-}
+    .sidebar .profile__banner {
+        display: none;
+    }
 </style>
 
 <script>
@@ -43,7 +43,7 @@
             getBlogDetail(){
                 axios.get('/api/blog/detail/' + this.page_id)
                     .then(response => {
-                        console.table(response.data.blog)
+                        console.table(response.data.blog[0].user)
                         this.user = response.data.blog[0].user
                         this.blog = response.data.blog
                         this.comments = response.data.comments

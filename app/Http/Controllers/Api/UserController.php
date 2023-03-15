@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\JsonResponse;
 
 use App\Models\User;
+use App\Models\Posts;
 
 class UserController extends Controller
 {
@@ -55,6 +56,14 @@ class UserController extends Controller
                     'profile_header'
                 ])->first(),
             ]);
+    }
+
+    public function getUserProfileDetail(String $id) : JsonResponse
+    {
+        return response()->json([
+            'blogs' =>
+                Posts::where('id', $id)->with(['user'])->get()
+        ]);
     }
 
     public function updateUserInformation(Request $request) : JsonResponse
