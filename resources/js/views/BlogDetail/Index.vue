@@ -1,14 +1,14 @@
 <template>
     <profileBanner v-if="user" :users="user"/>
-    <div class="sidebar">
-        <!-- <profile v-if="user" :users="user"/> -->
-        <profile/>
-        <div class="home home__sidebar--top-posts">
-            <userPosts/>
+    <div class="container">
+
+        <div class="sidebar">
+            <profile v-if="user" :users="user"/>
         </div>
-    </div>
-    <div class="blog__container">
-        <mainContainer v-if="blog" :blog="blog"/>
+
+        <div class="blog__container">
+            <mainContainer v-if="blog" :blog="blog"/>
+        </div>
     </div>
 </template>
 
@@ -16,9 +16,14 @@
     import mainContainer from './components/MainContainer.vue' ;
     import profileBanner from '../Profile/components/ProfileBanner.vue';
     import profile from '../Profile/components/MainContainer.vue';
-    import userPosts from '../Home/components/SideBarTopPosts.vue'
     import axios from 'axios';
 </script>
+
+<style>
+.sidebar .profile__banner {
+    display: none;
+}
+</style>
 
 <script>
     export default {
@@ -38,7 +43,8 @@
             getBlogDetail(){
                 axios.get('/api/blog/detail/' + this.page_id)
                     .then(response => {
-                        this.user = response.data.user
+                        console.table(response.data.blog)
+                        this.user = response.data.blog[0].user
                         this.blog = response.data.blog
                         this.comments = response.data.comments
                     })
