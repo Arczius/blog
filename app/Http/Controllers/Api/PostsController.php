@@ -12,25 +12,25 @@ class PostsController extends Controller
 {
     public function topPosts(String $amount = null) : JsonResponse
     {
-        // $posts = ($amount === null)
-        //     ?  Posts::withCount('postComments')->orderBy('post_comments_count', 'desc')->get()
-        //         : Posts::withCount('postComments')->orderBy('post_comments_count', 'desc')->limit($amount)->get();
+        $posts = ($amount === null)
+            ?  Posts::with(['user' => function ($query) {
+                $query->select([
+                    'id',
+                    'handle',
+                    'profile_picture'
+                ]);
+            }])->withCount('Comments')->orderBy('comments_count', 'desc')->get()
+                : Posts::with(['user' => function ($query) {
+                    $query->select([
+                        'id',
+                        'handle',
+                        'profile_picture'
+                    ]);
+                }])->withCount('Comments')->orderBy('comments_count', 'desc')->limit($amount)->get();
 
-        // // $users = ($amount === null)
-        // //     ? true
-        // //         : false
-        // // ;
 
-        // $users = [];
-
-        // foreach($posts as $post){
-        //     array_push($users, $post->author);
-        // }
-
-        // return response()->json([
-        //     'posts' => $posts,
-        //     'users' => $users,
-        // ]);
-        return response()->json();
+        return response()->json([
+            'posts' => $posts,
+        ]);
     }
 }

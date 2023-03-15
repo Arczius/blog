@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         <div class="item__left">
-            <img class="item__left--image" :src="(user !== null && user.profile_picture !== null) ? user.profile_picture : Tyler" alt="">
+            <img class="item__left--image" :src="(user !== null && user.profile_picture !== null) ? '/storage/ProfilePictures/' + user.profile_picture : Tyler" alt="">
         </div>
         <div class="item__right">
             <h5 class="item__right--username">@{{ (user !== null) ? user.handle : "Gebruikersnaam" }}</h5>
@@ -21,9 +21,11 @@ export default {
     props: {
         user: {
             default: null,
+            type: Object,
         },
         post: {
             default: null,
+            type: Object,
         }
     }
 }

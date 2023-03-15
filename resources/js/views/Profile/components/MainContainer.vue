@@ -41,6 +41,14 @@
 
         mounted(){
             this.getUserProfile()
+        },
+
+        watch: {
+	        $route () {
+                this.users = null;
+                this.id = this.$route.params.id
+                this.getUserProfile()
+	        }
         }
     }
 </script>
