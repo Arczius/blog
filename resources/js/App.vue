@@ -32,10 +32,9 @@ export default {
         },
 
         /**
-         * @returns {void}
-         */
+        * @returns {void}
+        */
         authorize(){
-
             if(!public_routes.includes(window.location.pathname)) {
                 const token = localStorage.getItem('token')
                 const userID = localStorage.getItem('userID')
@@ -59,6 +58,7 @@ export default {
                     })
             }
         },
+
         getUserProfilePicture(){
             if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home"){
 
@@ -75,9 +75,10 @@ export default {
                 }
 
                 axios.post("/api/auth", {
-                'token': token,
-                'userID': userID,
+                    'token': token,
+                    'userID': userID,
                 })
+
                 .then((response) => {
                     if(response.data.authorized) {
                         axios.get("/api/profile/user/" + userID)
@@ -90,6 +91,7 @@ export default {
                     })
             }
         },
+
         setTitle() {
             document.title = (this.$route.name)
                 ? this.$route.name
@@ -106,7 +108,6 @@ export default {
         $route () {
             this.authorize()
             this.getUserProfilePicture()
-
             this.setTitle()
         }
     }

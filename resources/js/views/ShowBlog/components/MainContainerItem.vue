@@ -40,7 +40,7 @@
             </div>
 
             <div class="blog__comments__add">
-                <img class="blog__comments blog__comments--profilePicture" :src="defaultProfilePicture">
+                <img :src="userIcon" class="blog__comments blog__comments--profilePicture" alt="user icon">
                 <input class="blog__comments blog__comments--text" type="text" v-model="comment" placeholder="Schrijf een opmerking...">
                 <button @click="addComment()">Plaats comment</button>
             </div>
@@ -63,7 +63,8 @@
             'blog',
             'user',
             'comments',
-            'users'
+            'users',
+            'userIcon'
         ],
 
         data() {

@@ -13,27 +13,24 @@
                 <router-link to="/user/edit">Wijzig profiel</router-link>
 
                 <router-link to="/profile/user/1">
-                    <img :src="userIcon" alt="">
+                    <img :src="userIcon" alt="user icon">
                 </router-link>
             </div>
         </div>
     </header>
 </template>
 
-<style scoped>
-</style>
-
 <script setup>
-import logo from "../../assets/writing-wit.png"
+    import logo from "../../assets/writing-wit.png"
 </script>
 
 <script>
-export default {
-    name: "Header",
-    props: {
-        userIcon: {
-            default: null,
-        }
-    },
-}
+    export default {
+        name: "Header",
+        props: {
+            userIcon: {
+                default: null,
+            }
+        },
+    }
 </script>

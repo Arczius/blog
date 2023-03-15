@@ -1,9 +1,9 @@
 <template>
-    <BlogCreate/>
+    <blogCreate/>
 </template>
 
 <script setup>
-    import BlogCreate from './components/BlogCreate.vue';
+    import blogCreate from './components/MainContainer.vue';
 </script>
 
 <script>

@@ -19,7 +19,7 @@
 <script setup>
 import SideBar from './components/SideBar.vue'
 import MainSectionBottom from './components/MainSectionBottom.vue'
-import BlogCreate from "../BlogCreate/components/BlogCreate.vue";
+import BlogCreate from "../BlogCreate/components/MainContainer.vue";
 </script>
 
 <script>

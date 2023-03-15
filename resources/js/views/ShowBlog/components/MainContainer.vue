@@ -3,7 +3,7 @@
         <div class="container">
             <MainContainerItemSkeleton v-if="blogs === null || user === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" :users="users" @refreshHome="getAllBlogs" @refreshUser="getUserBlogs"/>
+            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" :users="users" @refreshHome="getAllBlogs" @refreshUser="getUserBlogs" :user-icon="profile_picture"/>
         </div>
     </main>
 </template>
@@ -11,11 +11,11 @@
 <script setup>
     import MainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
     import MainContainerItem from './MainContainerItem.vue';
-    import axios from 'axios'
+    import Tyler from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg';
 </script>
 
-
 <script>
+    import axios from 'axios'
     export default {
         name: "MainContainer",
         
@@ -24,7 +24,8 @@
                 'blogs': null,
                 'user': null,
                 'comments': null,
-                'users': null
+                'users': null,
+                profile_picture: null,
             }
         },
 
@@ -43,6 +44,7 @@
                     
                     })
             },
+            
             /* get all the blogs to display at the homepage */
             getAllBlogs(){
                 axios.get('/api/blog')
@@ -75,6 +77,38 @@
                         console.warn(error)
                     })
             },
+
+            getUserProfilePicture(){
+                if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home"){
+
+                    this.profile_picture = ( this.profile_picture === null )
+                        ? Tyler
+                            : this.profile_picture
+
+                    const token = localStorage.getItem('token')
+                    const userID = localStorage.getItem('userID')
+
+                    if(!token || !userID) {
+                        return;
+                    }
+
+                    axios.post("/api/auth", {
+                        'token': token,
+                        'userID': userID,
+                    })
+
+                    .then((response) => {
+                        if(response.data.authorized) {
+                            axios.get("/api/profile/user/" + userID)
+                                .then((response) => {
+                                    if(response.data.users.profile_picture !== null) {
+                                        this.profile_picture = '/storage/ProfilePictures/'+ response.data.users.profile_picture
+                                    }
+                                })
+                            }
+                        })
+                }
+            },
         },
 
         mounted(){
@@ -89,6 +123,7 @@
             }
             
             this.getUserProfile()
+            this.getUserProfilePicture()
         }
     }
 </script>
