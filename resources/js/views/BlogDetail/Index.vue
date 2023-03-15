@@ -22,6 +22,7 @@
 <script>
     export default {
         name: "blogs",
+        
         data(){
             return {
                 page_id: this.$route.params.id,
@@ -39,6 +40,7 @@
                     })
             }
         },
+
         mounted(){
             this.getBlogData()
         }

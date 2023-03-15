@@ -34,19 +34,22 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 
 /* route for the blogs */
 Route::prefix('blog')->controller(BlogController::class)->group(function () {
+    /* get the blogs for the home / profile and detail page */
     Route::get('', 'getAllBlogs');
     Route::get('/user/{id}', 'getUserBlogs');
     Route::get('/detail/{id}', 'getBlogDetail');
-  
-    Route::delete('/destroy/{id}', 'destroy');
+    Route::post('/info/{id}', 'getCurrentBlogInfo');
 
+    /* get the image from blog*/ 
+    Route::post('/file/{id}', 'getBlogImage');
+
+    /* create / edit / delete for the blog post */
     Route::post('/store', 'store');
     Route::post('/edit/{id}', 'edit');
-    Route::post('/info/{id}', 'getCurrentBlogInfo');
-    Route::post('/file/{id}', 'getBlogImage');
-    Route::post('/posts/{id}/comment', 'addComment');
-    
     Route::delete('/destroy/{id}', 'destroy');
+    
+    /* create / delete the post comment */
+    Route::post('/posts/{id}/comment', 'addComment');
     Route::delete('/destroy/comment/{id}', 'destroyComment');
 });
 
@@ -55,16 +58,6 @@ Route::prefix('category')->controller(CategoriesController::class)->group(functi
     Route::get('', 'getAllCategories');
     Route::get('/top', 'getTopCategories');
     Route::get('/amount/{amount}', 'getCategoriesByAmount');
-});
-
-/* route for the users */
-Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::post('/currentUser', 'getCurrentUserInfo');
-});
-
-/* route for the users */
-Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::post('/currentUser', 'getCurrentUserInfo');
 });
 
 /* route for the users */
@@ -80,11 +73,6 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
 /* route for the profile */
 Route::prefix('profile')->controller(UserController::class)->group(function () {
     Route::get('/user/{id}', 'getUserProfile');
-});
-
-/* route for the users */
-Route::prefix('user')->controller(UserController::class)->group(function () {
-    Route::post('/currentUser', 'getCurrentUserInfo');
 });
 
 /* route for the followers */

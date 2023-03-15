@@ -2,11 +2,11 @@
     <div class="create__holder">
         <div class="create__form">
             <div v-if="this.$route.path == '/home'">
-                <img class="create__image" :src="DefaultProfilePicture">
+                <img :src="userIcon" class="create__image" alt="user icon">
             </div>
-
+            
             <div v-else>
-                <img class="create__image--profile" :src="DefaultPicture">
+                <img class="create__image--profile" :src="defaultPicture">
             </div>
 
             <router-link :to="{name: 'store'}">
@@ -19,17 +19,16 @@
 </template>
 
 <script setup>
-    import DefaultProfilePicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
-    import DefaultPicture from '../../../../assets/writing.png'
+    import defaultPicture from '../../../../assets/writing.png'
 </script>
 
 <script>
     export default {
         name: "BlogCreate",
         props: {
-            'createImage': {
-                default: DefaultPicture,
+            userIcon: {
+                default: null,
             }
-        }
+        },
     }
 </script>

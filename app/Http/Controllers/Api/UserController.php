@@ -15,7 +15,6 @@ class UserController extends Controller
 {
     public function getCurrentUserInfo(Request $request) : JsonResponse
     {
-
         return ($this->AuthorizeUser($request->token, $request->userID))
             ? response()->json(
                 [
