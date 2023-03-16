@@ -7,7 +7,7 @@
         </div>
 
         <div class="blog__container">
-            <mainContainer v-if="blog" :blog="blog"/>
+            <mainContainer v-if="blog && user" :user="user" :blog="blog"/>
         </div>
     </div>
 </template>
@@ -34,8 +34,6 @@
                 page_id: this.$route.params.id,
                 user: null,
                 blog: null,
-                comments: null,
-                users: null
             }
         },
 
@@ -45,7 +43,6 @@
                     .then(response => {
                         this.user = response.data.blog[0].user
                         this.blog = response.data.blog
-                        this.comments = response.data.comments
                     })
             },
         },

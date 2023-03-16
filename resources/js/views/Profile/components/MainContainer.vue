@@ -1,13 +1,15 @@
 <template>
-    <mainContainerBanner v-if="users !== null" :users="users"/>
+    <div>
+        <mainContainerBanner v-if="users !== null" :users="users"/>
+        
+        <main class="profile__main">
+            <mainContainerItem v-if="users !== null" :users="users"/>
 
-    <main class="profile__main">
-        <mainContainerItem v-if="users !== null" :users="users"/>
-
-        <div class="profile profile__categories">
-            <sideBarCategories :users="users"/>
-        </div>
-    </main>
+            <div class="profile profile__categories">
+                <sideBarCategories v-if="users" :users="users"/>
+            </div>
+        </main>
+    </div>
 </template>
 
 <script setup>
@@ -50,15 +52,19 @@
         },
 
         mounted(){
-            this.$route.path == "/detail/" + this.id ?  this.getUserProfileDetail() :    this.getUserProfile();
+            this.$route.path == "/detail/" + this.id 
+                ? this.getUserProfileDetail() 
+                    : this.getUserProfile();
         },
 
         watch: {
 	        $route () {
-                this.$route.path == "/detail/" + this.id ?  this.getUserProfileDetail() :    this.getUserProfile();
-                
                 this.users = null;
                 this.id = this.$route.params.id
+
+                this.$route.path == "/detail/" + this.id 
+                    ? this.getUserProfileDetail() 
+                        : this.getUserProfile();
 	        }
         }
     }

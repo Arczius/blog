@@ -71,7 +71,6 @@
                     'password': this.password
                 })
                     .then((response) => {
-                        console.log(response.data)
                         localStorage.setItem('token', response.data.token)
                         localStorage.setItem('userID', response.data.id)
 
@@ -80,8 +79,6 @@
                             'userID' : localStorage.getItem('userID'),
                         })
                             .then((response) => {
-                                console.log(response)
-
                                 this.$router.push(
                                     (Math.floor(Math.random() * 10) === 4)
                                         ? '/tyler'

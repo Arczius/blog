@@ -1,13 +1,13 @@
 <template>
     <main>
         <div class="container">
-            <mainContainerItem v-if="blog" :blogs="blog" :user="user"/>
+            <MainContainerItem v-if="blog" :blogs="blog" :user="user"/>
         </div>
     </main>
 </template>
 
 <script setup>
-    import mainContainerItem from './BlogDetail.vue';
+    import MainContainerItem from './BlogDetail.vue';
 </script>
 
 <script>

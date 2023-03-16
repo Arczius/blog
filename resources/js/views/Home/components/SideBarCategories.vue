@@ -18,8 +18,8 @@
 
         <div v-else class="categories__holder">
             <template v-if="users">
-                <h3 v-if="this.$route.path == '/detail/' + this.id">{{users.username}}'s Categorieën</h3>
-                <h3 v-else>{{users[0].user.username}}'s Categorieën</h3>
+                <h3 v-if="this.$route.path == '/detail/' + this.$route.params.id">{{users[0].user.username}}'s Categorieën</h3>
+                <h3 v-else>{{users.username}}'s Categorieën</h3>
             </template>
             <div class="categories__holder">
                 <router-link to="/blogs" class="categories__item--all-categories">

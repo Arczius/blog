@@ -14,31 +14,29 @@
     </footer>
 </template>
 
-<style scoped>
-
-</style>
-
 <script>
-export default {
-    data(){
-        return {
-            'footerClassList': null,
-        }
-    },
-    methods: {
-        footerWindowHeightCheck(){
+    export default {
+        data(){
+            return {
+                'footerClassList': null,
+            }
+        },
+        methods: {
+            footerWindowHeightCheck(){
 
-            this.footerClassList = (window.innerHeight > document.body.offsetHeight)
-            ? "footer__sticky footer__sticky--bottom"
-                : null
+                this.footerClassList = (window.innerHeight > document.body.offsetHeight)
+                ? "footer__sticky footer__sticky--bottom"
+                    : null
 
+            }
+        },
+
+        mounted(){
+            this.footerWindowHeightCheck()
+        },
+        
+        updated(){
+            this.footerWindowHeightCheck()
         }
-    },
-    mounted(){
-        this.footerWindowHeightCheck()
-    },
-    updated(){
-        this.footerWindowHeightCheck()
     }
-}
 </script>

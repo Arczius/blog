@@ -1,16 +1,18 @@
 <template>
-    <header
-        :user-icon="profile_picture"/>
+    <Header
+        :user-icon="profile_picture"
+        :userID="userID"
+        />
     <router-view></router-view>
-    <footer/>
+    <Footer/>
 </template>
 
 
 <script setup>
-    import header from './components/Header.vue';
-    import footer from './components/Footer.vue';
-    import tyler from '../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
-    import public_routes from "./router/public_routes.js"
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
+import tyler from '../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+import public_routes from "./router/public_routes.js"
 </script>
 
 <script>
@@ -21,6 +23,7 @@
         data(){
             return {
                 profile_picture: null,
+                userID: null,
             }
         },
 
@@ -53,6 +56,9 @@
                                 localStorage.clear()
 
                                 this.notifyUnauthorized()
+                            }
+                            else {
+                                this.userID = userID
                             }
                         })
                 }
@@ -110,6 +116,5 @@
                 this.setTitle()
             }
         }
-
     }
 </script>

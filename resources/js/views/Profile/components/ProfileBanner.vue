@@ -1,5 +1,5 @@
 <template>
-    <div class="profile__banner">
+    <div v-if="users" class="profile__banner">
         <img class="profile__banner profile__banner--image" :src="(users.profile_header !== '') ? '../../storage/ProfileBanners/' + users.profile_header : bannerPicture" alt="profileBanner" loading="lazy">
     </div>
 </template>
@@ -11,8 +11,12 @@
 <script>
     export default {
         name: "ProfileBanner",
-        props: [
-            "users",
-        ],
+
+        props: {
+            users: {
+                default: null,
+                type: Object,
+            },
+        },
     }
 </script>
