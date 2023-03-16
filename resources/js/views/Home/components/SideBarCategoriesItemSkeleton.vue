@@ -5,18 +5,18 @@
 </template>
 
 <style lang="scss" scoped>
-.skeleton{
-    &--item {
-        background-color: gray;
-        height: 1.3rem;
-        width: 33%;
-        border-radius: 2rem;
+    .skeleton{
+        &--item {
+            background-color: gray;
+            height: 1.3rem;
+            width: 33%;
+            border-radius: 2rem;
+        }
     }
-}
 </style>
 
 <script>
-export default {
-    name: "SideBarCategoriesItemSkeleton",
-}
+    export default {
+        name: "SideBarCategoriesItemSkeleton",
+    }
 </script>

@@ -7,7 +7,7 @@
         </div>
 
         <div class="blog__container">
-            <mainContainer v-if="blog" :blog="blog"/>
+            <mainContainer v-if="blog && user" :user="user" :blog="blog"/>
         </div>
     </div>
 </template>
@@ -20,9 +20,9 @@
 </script>
 
 <style>
-.sidebar .profile__banner {
-    display: none;
-}
+    .sidebar .profile__banner {
+        display: none;
+    }
 </style>
 
 <script>
@@ -34,8 +34,6 @@
                 page_id: this.$route.params.id,
                 user: null,
                 blog: null,
-                comments: null,
-                users: null
             }
         },
 
@@ -43,10 +41,8 @@
             getBlogDetail(){
                 axios.get('/api/blog/detail/' + this.page_id)
                     .then(response => {
-                        console.table(response.data.blog)
                         this.user = response.data.blog[0].user
                         this.blog = response.data.blog
-                        this.comments = response.data.comments
                     })
             },
         },

@@ -78,12 +78,11 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
 /* route for the profile */
 Route::prefix('profile')->controller(UserController::class)->group(function () {
     Route::get('/user/{id}', 'getUserProfile');
+    Route::get('/detail/user/{id}', 'getUserProfileDetail');
 });
 
 /* route for the followers */
 Route::prefix('follow')->controller(FollowController::class)->group(function () {
     Route::get('/followers/single/{userid}' , 'getFollowersSinglePerson');
     Route::get('/following/single/{userid}', 'getFollowingSinglePerson');
-    Route::post('/check', 'userFollows');
-    Route::post('', 'follow');
 });

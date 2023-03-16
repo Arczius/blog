@@ -1,17 +1,17 @@
 <template>
     <main>
         <div class="container">
-            <MainContainerItemSkeleton v-if="blogs === null || user === null"/>
+            <mainContainerItemSkeleton v-if="blogs === null || user === null"/>
 
-            <MainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" :users="users" @refreshHome="getAllBlogs" @refreshUser="getUserBlogs" :user-icon="profile_picture"/>
+            <mainContainerItem v-else v-for="blog in blogs" :blog="blog" :user="user" :comments="comments" :users="users" @refreshHome="getAllBlogs" @refreshUser="getUserBlogs" :user-icon="profile_picture"/>
         </div>
     </main>
 </template>
 
 <script setup>
-    import MainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
-    import MainContainerItem from './MainContainerItem.vue';
-    import Tyler from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg';
+    import mainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
+    import mainContainerItem from './MainContainerItem.vue';
+    import tyler from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg';
 </script>
 
 <script>
@@ -79,10 +79,10 @@
             },
 
             getUserProfilePicture(){
-                if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home"){
+                if(this.profile_picture === null || this.profile_picture === tyler || window.location.pathname === "/home"){
 
                     this.profile_picture = ( this.profile_picture === null )
-                        ? Tyler
+                        ? tyler
                             : this.profile_picture
 
                     const token = localStorage.getItem('token')

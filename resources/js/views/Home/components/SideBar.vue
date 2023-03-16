@@ -1,16 +1,16 @@
 <template>
     <section class="home__sidebar--categories">
-        <SideBarCategories/>
+        <sideBarCategories/>
     </section>
 
     <section class="home__sidebar--top-posts">
-        <SideBarTopPosts/>
+        <sideBarTopPosts/>
     </section>
 </template>
 
 <script setup>
-    import SideBarCategories from './SideBarCategories.vue';
-    import SideBarTopPosts from './SideBarTopPosts.vue';
+    import sideBarCategories from './SideBarCategories.vue';
+    import sideBarTopPosts from './SideBarTopPosts.vue';
 </script>
 
 

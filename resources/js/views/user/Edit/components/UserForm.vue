@@ -95,7 +95,6 @@ export default {
 
     methods: {
         submitForm(){
-            console.log("submit")
             axios.post("/api/user/update", {
                 'username': this.userData.username,
                 'email': this.userData.email,
@@ -104,8 +103,6 @@ export default {
                 'userID': this.userID,
             })
                 .then((response) => {
-                    console.log(response)
-
                     if(!this.profile_picture && !this.profile_header){
                         this.$router.push("/home")
                     }

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-export default {
-    name: "MainContainerItemSkeleton"
-}
+    export default {
+        name: "MainContainerItemSkeleton"
+    }
 </script>
