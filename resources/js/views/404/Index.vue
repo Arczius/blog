@@ -4,10 +4,10 @@
             404
         </h3>
         <p class="error__description">
-            de pagina waar je voor zoekt is helaas niet vindbaar
+            de pagina waar je voor zoekt is helaas niet beschikbaar
         </p>
         <p class="error__description">
-            <router-link to="/home">klik hier om terug naar de home te gaan</router-link>
+            <router-link to="/home">klik hier om terug naar home te gaan</router-link>
         </p>
     </div>
 </template>

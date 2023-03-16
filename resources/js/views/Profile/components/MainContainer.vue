@@ -51,6 +51,7 @@
         },
 
         methods: {
+            /* get the user data of the current user profile */
             getUserProfile(){
                 axios.get('/api/profile/user/' + this.id)
                     .then((response) => {
@@ -61,6 +62,7 @@
                     })
             },
 
+            /* get the details of the current user profile */
             getUserProfileDetail(){
                 axios.get('/api/profile/detail/user/' + this.id)
                     .then((response) => {
