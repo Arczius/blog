@@ -65,7 +65,7 @@ import public_routes from "./router/public_routes.js"
             },
 
             getUserProfilePicture(){
-                if(this.profile_picture === null || this.profile_picture === tyler || window.location.pathname === "/home"){
+                if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home" || window.location.pathname === '/tyler'){
 
                     this.profile_picture = ( this.profile_picture === null )
                         ? tyler
@@ -73,7 +73,6 @@ import public_routes from "./router/public_routes.js"
 
                     const token = localStorage.getItem('token')
                     const userID = localStorage.getItem('userID')
-
 
                     if(!token || !userID) {
                         return;
