@@ -1,6 +1,6 @@
 <template>
     <aside>
-        <h5>Top categorieen</h5>
+        <h5>Top categorieën</h5>
         <div class="side-bar__holder">
             <sideBarItemSkeleton v-if="!topCategories"/>
             <sideBarItem v-else v-for="category in topCategories" :category="category"/>

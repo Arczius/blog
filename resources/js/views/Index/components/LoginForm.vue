@@ -41,8 +41,6 @@
             </div>
 
         </div>
-
-
     </div>
 </template>
 
@@ -52,33 +50,43 @@
 </script>
 
 <script>
-    export default {
-        name: "LoginForm",
+  export default {
+    name: "LoginForm",
 
-        data(){
-            return {
-                'handle': null,
-                'password': null,
-                'checkbox': false,
-                'errors': null,
-                'parent': this.$parent.$parent
-            }
-        },
+    data(){
+        return {
+            'handle': null,
+            'password': null,
+            'checkbox': false,
+            'errors': null,
+            'parent': this.$parent.$parent
+        }
+    },
 
-        methods: {
-            sendLoginRequest(){
-                if(this.checkbox) {
-                    axios.post("/api/auth/login", {
-                        'handle': this.handle,
-                        'password': this.password
-                    })
-                        .then((response) => {
-                            localStorage.setItem('token', response.data.token)
-                            localStorage.setItem('userID', response.data.id)
+    methods: {
+        sendLoginRequest(){
+            if(this.checkbox) {
+                axios.post("/api/auth/login", {
+                    'handle': this.handle,
+                    'password': this.password
+                })
+                    .then((response) => {
+                        console.log(response.data)
+                        localStorage.setItem('token', response.data.token)
+                        localStorage.setItem('userID', response.data.id)
 
-                            axios.post("/api/auth", {
-                                'token': localStorage.getItem('token'),
-                                'userID' : localStorage.getItem('userID'),
+                        axios.post("/api/auth", {
+                            'token': localStorage.getItem('token'),
+                            'userID' : localStorage.getItem('userID'),
+                        })
+                            .then((response) => {
+                                console.log(response)
+
+                                this.$router.push(
+                                    (Math.floor(Math.random() * 10) === 4)
+                                        ? '/tyler'
+                                            : '/home'
+                                )
                             })
                                 .then((response) => {
                                     this.$router.push('/home')

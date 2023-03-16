@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Categorien</h3>
+        <h3>Categorieën</h3>
         <div class="page_holder">
             <sideBar/>
             <mainContainer/>
