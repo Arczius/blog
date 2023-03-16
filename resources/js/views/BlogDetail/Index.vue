@@ -38,6 +38,7 @@
         },
 
         methods: {
+            /* get the details of the current opened blog */
             getBlogDetail(){
                 axios.get('/api/blog/detail/' + this.page_id)
                     .then(response => {

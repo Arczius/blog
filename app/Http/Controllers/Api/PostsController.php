@@ -10,6 +10,11 @@ use App\Models\Posts;
 
 class PostsController extends Controller
 {
+    /**
+    * get the top postst based on the amount of comments with a limit of 6
+    *
+    * @return
+    */
     public function topPosts(String $amount = null) : JsonResponse
     {
         $posts = ($amount === null)

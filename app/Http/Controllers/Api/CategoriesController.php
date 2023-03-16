@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 use App\Models\Categories;
@@ -24,7 +23,7 @@ class CategoriesController extends Controller
     }
 
     /**
-    * get the top categories
+    * get the top categories based on the amount of posts
     *
     * @return
     */
@@ -39,6 +38,11 @@ class CategoriesController extends Controller
         );
     }
 
+    /**
+    * get the categories with a limit
+    *
+    * @return
+    */
     public function getCategoriesByAmount(String $amount)
     {
         return response()->json([

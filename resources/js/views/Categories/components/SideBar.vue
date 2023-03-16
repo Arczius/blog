@@ -42,6 +42,7 @@ export default {
         }
     },
     methods: {
+        /* get the top categories */
         getTopCategories(){
             axios.get("/api/category/top")
                 .then((response) => {

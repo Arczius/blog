@@ -12,6 +12,11 @@ use App\Models\Following;
 
 class FollowController extends Controller
 {
+    /**
+    * get the followers of a user
+    *
+    * @return
+    */
     public function getFollowersSinglePerson($userid) : JsonResponse
     {
         $followers = User::where('id', $userid)->with('followers')->first()->followers;
@@ -22,6 +27,11 @@ class FollowController extends Controller
         ]);
     }
 
+    /**
+    * get the users a user is following
+    *
+    * @return
+    */
     public function getFollowingSinglePerson($userid) : JsonResponse
     {
         $following = User::where('id', $userid)->with('following')->first()->following;
@@ -32,6 +42,11 @@ class FollowController extends Controller
         ]);
     }
 
+    /**
+    * start to follow an user
+    *
+    * @return
+    */
     public function follow(Request $request) : JsonResponse
     {
         $action = $request->action;
@@ -83,17 +98,21 @@ class FollowController extends Controller
         ], 401);
     }
 
+    /**
+    * get the users a user is following
+    *
+    * @return
+    */
     public function userFollows(Request $request) : JsonResponse
     {
         $current_user = $request->current_user_id;
         $follow_user = $request->follow_user_id;
 
-
         return response()->json([
-            'following' =>  (Following::where([
-                            'user_id' => $current_user,
-                            'follow_id' => $follow_user
-                        ])->first() !== null)
+            'following' => (Following::where([
+                'user_id' => $current_user,
+                'follow_id' => $follow_user
+            ])->first() !== null)
         ]);
     }
 }

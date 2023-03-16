@@ -64,6 +64,7 @@
     },
 
     methods: {
+        /* send the data to the login function to login */
         sendLoginRequest(){
             if(this.checkbox) {
                 axios.post("/api/auth/login", {

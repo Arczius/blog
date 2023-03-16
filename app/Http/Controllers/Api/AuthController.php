@@ -15,6 +15,11 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    /**
+    * create a new user account
+    *
+    * @return
+    */
     public function createUser(Request $request) : JsonResponse
     {
         try {
@@ -55,6 +60,11 @@ class AuthController extends Controller
         }
     }
 
+    /**
+    * login the user
+    *
+    * @return
+    */
     public function loginUser(Request $request) : JsonResponse
     {
         try {
@@ -105,6 +115,11 @@ class AuthController extends Controller
         }
     }
 
+    /**
+    * get the token and id of the logged in user
+    *
+    * @return
+    */
     public function currentUser(Request $request)
     {
         return response()->json(

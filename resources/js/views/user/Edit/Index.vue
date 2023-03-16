@@ -19,6 +19,7 @@
             }
         },
         methods: {
+            /* get the id and token of the current logged in user */
             getCurrentUserData(){
                 axios.post('/api/user/currentUser', {
                     'userID': localStorage.getItem('userID'),
@@ -37,7 +38,6 @@
             if(localStorage.getItem('userID') !== null && localStorage.getItem('token') !== null){
                 this.getCurrentUserData()
             }
-
             else {
                 this.$router.push("/")
             }

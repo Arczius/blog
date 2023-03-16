@@ -28,14 +28,13 @@
 
 
 <script setup>
-import defaultImage from "../../../../assets/rolands-varsbergs-miKmVyq3qhE-unsplash.jpg"
-
+    import defaultImage from "../../../../assets/rolands-varsbergs-miKmVyq3qhE-unsplash.jpg"
 </script>
 
 <script>
-export default {
-    props: [
-        'category'
-    ]
-}
-</script>
+    export default {
+        props: [
+            'category'
+        ]
+    }
+    </script>

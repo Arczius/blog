@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Rules\titlePattern;
 use App\Rules\descriptionPattern;
 
 use App\Models\Posts;
 use App\Models\Comments;
-
-use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -131,6 +130,7 @@ class BlogController extends Controller
             }
 
             $blog->delete();
+            
             /* delete the file from the public folder */
             Storage::disk('public')->delete(
                 $blog->coverFile,
@@ -186,10 +186,16 @@ class BlogController extends Controller
             'description' => [new descriptionPattern(), 'max:255'],
         ]);
 
+        $data['status'] = 'failed';
+
+        if ($validator->fails()) {
+            return response()->json($data);
+        }
+
         $blog = Posts::find($id);
 
         if($blog){
-            $data = $request->validate([
+            $request->validate([
                 'title' => '',
                 'description' => '',
             ]);

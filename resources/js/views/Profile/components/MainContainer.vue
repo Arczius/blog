@@ -1,4 +1,10 @@
 <template>
+    <!-- 
+        needs 2 templates because the detail page needs an extra div so there is no warning in the console,
+        if this div is added to the profile page the styling gets destroyed  
+    -->
+
+    <!-- if the current page is the personal profile show this template -->
     <template v-if="this.$route.path === '/profile/user/' + this.$route.params.id">
         <mainContainerBanner v-if="users !== null" :users="users"/>
 
@@ -11,6 +17,7 @@
         </main>
     </template>
 
+    <!-- if the current page is the detail page show this template -->
     <template v-else>
         <div>
             <mainContainerBanner v-if="users !== null" :users="users"/>

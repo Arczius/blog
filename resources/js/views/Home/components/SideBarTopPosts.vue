@@ -23,7 +23,9 @@
                 'posts': null,
             }
         },
+
         methods: {
+            /* get the top posts */
             getTopPosts(){
                 axios.get("/api/post/top/6")
                     .then((response) => {

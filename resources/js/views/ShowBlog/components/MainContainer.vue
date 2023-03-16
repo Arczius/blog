@@ -78,6 +78,7 @@
                     })
             },
 
+            /* get the profile picture of the current logged in user */
             getUserProfilePicture(){
                 if(this.profile_picture === null || this.profile_picture === tyler || window.location.pathname === "/home"){
 
@@ -116,11 +117,9 @@
                 this.getCurrentUserData()
             }
 
-            if (this.$route.path == '/home') {
-                this.getAllBlogs()
-            }else{
-                this.getUserBlogs()
-            }
+            this.$route.path == "/home" 
+                ? this.getAllBlogs()
+                    :  this.getUserBlogs()
 
             this.getUserProfile()
             this.getUserProfilePicture()
@@ -134,12 +133,9 @@
                     this.getCurrentUserData()
                 }
 
-                if (this.$route.path == '/home') {
-                    this.getAllBlogs()
-                }
-                else{
-                    this.getUserBlogs()
-                }
+                this.$route.path == "/home" 
+                    ? this.getAllBlogs()
+                        :  this.getUserBlogs()
 
                 this.getUserProfile()
                 this.getUserProfilePicture()

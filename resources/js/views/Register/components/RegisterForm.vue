@@ -46,8 +46,6 @@
                 </router-link>
             </div>
         </div>
-
-
     </div>
 </template>
 
@@ -71,6 +69,7 @@
         },
 
         methods: {
+            /* send the data to the register controller to register a new account */
             sendRegisterRequest(){
                 if(this.checkbox){
 

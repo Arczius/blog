@@ -29,6 +29,7 @@
         },
         
         methods: {
+            /* get the id and token of the current logged in user */
             getCurrentUserData(){
                 axios.post('/api/user/currentUser', {
                     'userID': localStorage.getItem('userID'),

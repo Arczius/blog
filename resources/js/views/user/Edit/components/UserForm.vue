@@ -94,6 +94,7 @@ export default {
     },
 
     methods: {
+        /* sumbit the the form */
         submitForm(){
             axios.post("/api/user/update", {
                 'username': this.userData.username,
@@ -117,6 +118,8 @@ export default {
 
                 })
         },
+
+        /* get the local profile picture of the user */
         sendLocalProfilePicture(){
             axios.post("/api/user/update/profile_picture",
                 {
@@ -136,6 +139,8 @@ export default {
                     }
                 })
         },
+
+        /* get the local profile banner of the user*/
         sendLocalProfileHeader(){
             axios.post("/api/user/update/profile_header",
                 {
@@ -153,10 +158,14 @@ export default {
                     this.$router.push('/home')
                 })
         },
+
+        /* update the profile picture of the user */
         updateLocalProfilePicture(){
             this.profile_picture = this.$refs.ProfilePicture.files[0]
             this.local_profile_picture = URL.createObjectURL(this.profile_picture)
         },
+
+        /* update the profile banner of the user */
         updateLocalProfileHeader(){
             this.profile_header = this.$refs.ProfileHeader.files[0]
             this.local_profile_header = URL.createObjectURL(this.profile_header)

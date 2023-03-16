@@ -26,6 +26,7 @@
         },
 
         methods: {
+            /* get the old data of the blog */
             getCurrentBlogInfo(){
                 axios.post('/api/blog/info/' + this.id, {
                 },
@@ -38,19 +39,20 @@
                 });
             },
 
+            /* get the id and token of the current logged in user */
             getCurrentUserData(){
-                    axios.post('/api/user/currentUser', {
-                        'userID': localStorage.getItem('userID'),
-                        'token': localStorage.getItem('token'),
+                axios.post('/api/user/currentUser', {
+                    'userID': localStorage.getItem('userID'),
+                    'token': localStorage.getItem('token'),
+                })
+                    .then((response) => {
+                        this.user = response.data.user
                     })
-                        .then((response) => {
-                            this.user = response.data.user
-                        })
-                        .catch((error) => {
-                            console.warn(error)
+                    .catch((error) => {
+                        console.warn(error)
 
-                        })
-                }
+                    })
+            }
         },
         mounted(){
             this.getCurrentUserData()

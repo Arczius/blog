@@ -1,4 +1,5 @@
 <template>
+    <!-- if the current page is the personal profile page show this div -->
     <div class="profile">
         <div v-if="this.$route.path == '/profile/user/' + path_name">
             <div class="profile__picture">
@@ -20,6 +21,7 @@
             </div>
         </div>
 
+        <!-- if the current page is the detail page show this div  -->
         <div v-else>
             <div class="profile__picture">
                 <img class="profile__picture profile__picture--image" :src="(users[0].user.profile_picture !== '') ? '../../storage/ProfilePictures/' + users[0].user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
@@ -81,6 +83,7 @@
         },
 
         methods: {
+            /* get all the followers of the current user profile */
             getFollowers(){
                 var param = null;
                 this.$route.path == '/profile/user/' + this.$route.params.id 
@@ -93,6 +96,8 @@
                         this.followers.Users = response.data.followers
                     })
             },
+
+            /* get all the users the user of the current user profile is following */
             getFollowing(){
                 var param = null;
                 this.$route.path == '/profile/user/' + this.$route.params.id 
@@ -104,6 +109,8 @@
                         this.following.Users = response.data.following
                     })
             },
+
+            /* check if the current user is folllowing the other user */
             checkFollow(){
                 if(this.$route.params.id !== localStorage.getItem('userID'))
                 {
@@ -116,6 +123,8 @@
                         })
                 }
             },
+
+            /* follow a user when your currently not following*/
             doFollow(){
                 const item = this.followers.UserFollows
                 this.followers.UserFollows = null
@@ -131,5 +140,5 @@
                     })
             }
         },
-}
+    }
 </script>

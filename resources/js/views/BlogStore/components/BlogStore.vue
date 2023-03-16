@@ -67,6 +67,7 @@
         },
 
         methods: {
+            /* get the image files which are added to the blog */
             getFile() {
                 this.coverFile = this.$refs.coverFile.files[0]
 			    this.file = this.$refs.files.files[0]

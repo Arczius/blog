@@ -14,6 +14,11 @@ use App\Models\Posts;
 
 class UserController extends Controller
 {
+    /**
+    * get the data of the logged in user
+    *
+    * @return
+    */
     public function getCurrentUserInfo(Request $request) : JsonResponse
     {
         return ($this->AuthorizeUser($request->token, $request->userID))
@@ -58,6 +63,11 @@ class UserController extends Controller
             ]);
     }
 
+    /**
+    * get the data for the user details
+    *
+    * @return
+    */
     public function getUserProfileDetail(String $id) : JsonResponse
     {
         return response()->json([
@@ -66,10 +76,14 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+    * update the user data
+    *
+    * @return
+    */
     public function updateUserInformation(Request $request) : JsonResponse
     {
         try {
-
             $id = $request->userID;
             $validatedUser = Validator::make($request->all(),
                 [
@@ -115,6 +129,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+    * update the profile picture
+    *
+    * @return
+    */
     public function updateUserProfilePicture(Request $request)
     {
         try{
@@ -175,6 +194,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+    * update the banner image
+    *
+    * @return
+    */
     public function updateUserProfileHeader(Request $request)
     {
 

@@ -33,6 +33,7 @@ main {
             }
         },
         methods: {
+            /* get all the categories */
             getAllCategories(){
                 axios.get('/api/category')
                     .then((response) => {

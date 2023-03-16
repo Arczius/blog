@@ -25,6 +25,7 @@
         },
 
         methods: {
+            /* get the profile picture of the logged in user */
             getUserProfilePicture(){
                 if(this.profile_picture === null || this.profile_picture === tyler || window.location.pathname === "/home"){
 

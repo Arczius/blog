@@ -54,6 +54,7 @@
         },
 
         methods: {
+            /* get all the categories */
             getCategories(amount = 6){
                 axios.get(`/api/category/amount/${amount}`)
                     .then((response) => {

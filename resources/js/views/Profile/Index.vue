@@ -31,6 +31,7 @@
         },
 
         methods: {
+            /* get the personal profile of the user*/
             getUserProfile(){
                     axios.get('/api/profile/user/' + this.id)
                         .then((response) => {

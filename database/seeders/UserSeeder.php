@@ -29,13 +29,6 @@ class UserSeeder extends Seeder
                 'profile_picture' => '2_profile.jpg',
                 'profile_header' => '2_banner.jpg',
             ],
-            [
-                'username' => 'kebabcontact likker',
-                'handle' => 'broodjekebablover',
-                'email' => 'mamaikbenbangkommeophalen@help.com',
-                'password' => Hash::make('TestWachtwoordVoorTyler'),
-            ]
-
         ];
 
         foreach($data as $item) {

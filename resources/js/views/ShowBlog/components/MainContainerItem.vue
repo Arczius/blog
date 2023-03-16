@@ -128,7 +128,7 @@
                 axios.delete('/api/blog/destroy/comment/' + comment_id, {
                     'id': this.blogComment_id,
                 },)
-                /* reload the page */
+                /* reload the page based on the route */
                 .then((response) =>  {
                     this.$route.path == "home" 
                         ? this.$emit("refreshHome") 
@@ -149,9 +149,9 @@
                     {
                         headers: { "Content-Type" : "application/json"}
                     })
-                    /* reload the page */
+                    /* reload the page based on the route */
                     .then((response) =>  {
-                        this.$route.path == "home" 
+                        this.$route.path == "/home" 
                         ? this.$emit("refreshHome") 
                             : this.$emit("refreshUser");
                             
