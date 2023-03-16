@@ -117,4 +117,6 @@ import public_routes from "./router/public_routes.js"
             }
         }
     }
+
+
 </script>
