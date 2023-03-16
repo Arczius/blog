@@ -66,7 +66,7 @@ export default {
         },
 
         getUserProfilePicture(){
-            if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home"){
+            if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home" || window.location.pathname === '/tyler'){
 
                 this.profile_picture = ( this.profile_picture === null )
                     ? Tyler
