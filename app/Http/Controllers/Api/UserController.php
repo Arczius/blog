@@ -61,7 +61,7 @@ class UserController extends Controller
     public function getUserProfileDetail(String $id) : JsonResponse
     {
         return response()->json([
-            'blogs' =>
+            'users' =>
                 Posts::where('id', $id)->with(['user'])->get()
         ]);
     }

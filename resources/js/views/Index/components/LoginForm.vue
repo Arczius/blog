@@ -32,7 +32,7 @@
         <div class="login__bottom-links">
             <div>
                 <router-link class="login__bottom-links--password-forget" to="/password-forget">
-                    <img :src="PadLock">
+                    <img :src="padLock">
                     Wachtwoord vergeten
                 </router-link>
             </div>
@@ -47,59 +47,55 @@
 </template>
 
 <script setup>
-import PadLock from '../../../../assets/padlock.png'
-import axios from 'axios'
+    import padLock from '../../../../assets/padlock.png'
+    import axios from 'axios'
 </script>
 
 <script>
+    export default {
+        name: "LoginForm",
 
-export default {
-    name: "LoginForm",
+        data(){
+            return {
+                'handle': null,
+                'password': null,
+                'checkbox': false,
+                'errors': null,
+                'parent': this.$parent.$parent
+            }
+        },
 
-    data(){
-        return {
-            'handle': null,
-            'password': null,
-            'checkbox': false,
-            'errors': null,
-            'parent': this.$parent.$parent
-        }
-    },
+        methods: {
+            sendLoginRequest(){
+                if(this.checkbox) {
+                    axios.post("/api/auth/login", {
+                        'handle': this.handle,
+                        'password': this.password
+                    })
+                        .then((response) => {
+                            localStorage.setItem('token', response.data.token)
+                            localStorage.setItem('userID', response.data.id)
 
-    methods: {
-        sendLoginRequest(){
-            if(this.checkbox) {
-                axios.post("/api/auth/login", {
-                    'handle': this.handle,
-                    'password': this.password
-                })
-                    .then((response) => {
-                        console.log(response.data)
-                        localStorage.setItem('token', response.data.token)
-                        localStorage.setItem('userID', response.data.id)
-
-                        axios.post("/api/auth", {
-                            'token': localStorage.getItem('token'),
-                            'userID' : localStorage.getItem('userID'),
-                        })
-                            .then((response) => {
-                                console.log(response)
-
-                                this.$router.push('/home')
+                            axios.post("/api/auth", {
+                                'token': localStorage.getItem('token'),
+                                'userID' : localStorage.getItem('userID'),
                             })
-                    })
-                    .catch((error) => {
-                        switch(error.response.status){
-                            case 400:
-                                this.errors = error.response.data.errors
-                                break;
-                        }
-                    })
+                                .then((response) => {
+                                    this.$router.push('/home')
+                                })
+                        })
+                        .catch((error) => {
+                            switch(error.response.status){
+                                case 400:
+                                    this.errors = error.response.data.errors
+                                    break;
+                            }
+                        })
+                }
+                else {
+                    alert("je moet akkoord gaan met de privacyverklaring")
+                }
             }
-            else {
-                alert("je moet akkoord gaan met de privacyverklaring")
-            }
-        }
-    },
-}
+        },
+    }
 </script>

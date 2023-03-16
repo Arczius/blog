@@ -1,7 +1,7 @@
 <template>
     <div class="login__holder">
-        <img class="login__background-image" :src="(Math.floor(Math.random() * 5) === 3 ) ? Tyler : LoginImage" alt="">
-        <LoginForm/>
+        <img class="login__background-image" :src="(Math.floor(Math.random() * 5) === 3 ) ? tyler : loginImage" alt="">
+        <loginForm/>
     </div>
 </template>
 
@@ -9,13 +9,13 @@
 </style>
 
 <script setup>
-import LoginForm from './components/LoginForm.vue';
-import Tyler from '../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
-import LoginImage from '../../../assets/writing.png';
+    import loginForm from './components/LoginForm.vue';
+    import tyler from '../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
+    import loginImage from '../../../assets/writing.png';
 </script>
 
 <script>
-export default {
-    name: "Index",
-}
+    export default {
+        name: "Index",
+    }
 </script>

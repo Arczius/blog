@@ -50,20 +50,12 @@
         },
 
         mounted(){
-            if (this.$route.path == "/detail/" + this.id) {
-                this.getUserProfileDetail()
-            }else{
-                this.getUserProfile()
-            }
+            this.$route.path == "/detail/" + this.id ?  this.getUserProfileDetail() :    this.getUserProfile();
         },
 
         watch: {
 	        $route () {
-                if (this.$route.path == "/detail/" + this.id) {
-                    this.getUserProfileDetail()
-                }else{
-                    this.getUserProfile()
-                }
+                this.$route.path == "/detail/" + this.id ?  this.getUserProfileDetail() :    this.getUserProfile();
                 
                 this.users = null;
                 this.id = this.$route.params.id

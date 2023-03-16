@@ -1,29 +1,29 @@
 <template>
     <div class="home">
         <aside class="home__sidebar">
-            <SideBar/>
+            <sideBar/>
         </aside>
 
         <main class="home__main">
             <section class="home__main--top">
-                <BlogCreate />
+                <blogCreate />
             </section>
 
             <section class="home__main--bottom">
-                <MainSectionBottom/>
+                <mainSectionBottom/>
             </section>
         </main>
     </div>
 </template>
 
 <script setup>
-import SideBar from './components/SideBar.vue'
-import MainSectionBottom from './components/MainSectionBottom.vue'
-import BlogCreate from "../BlogCreate/components/MainContainer.vue";
+    import sideBar from './components/SideBar.vue'
+    import mainSectionBottom from './components/MainSectionBottom.vue'
+    import blogCreate from "../BlogCreate/components/MainContainer.vue";
 </script>
 
 <script>
-export default {
-    name: "Home",
-}
+    export default {
+        name: "Home",
+    }
 </script>

@@ -2,27 +2,27 @@
     <div>
         <h3>Categorien</h3>
         <div class="page_holder">
-            <SideBar/>
-            <MainContainer/>
+            <sideBar/>
+            <mainContainer/>
         </div>
     </div>
 
 </template>
 
 <script setup>
-import SideBar from './components/SideBar.vue';
-import MainContainer from './components/MainContainer.vue' ;
+    import sideBar from './components/SideBar.vue';
+    import mainContainer from './components/MainContainer.vue' ;
 </script>
 
 <style>
-.page_holder {
-    display: flex;
-    gap: 2rem;
-}
+    .page_holder {
+        display: flex;
+        gap: 2rem;
+    }
 </style>
 
 <script>
-export default {
-    name: 'Categories'
-}
+    export default {
+        name: 'Categories'
+    }
 </script>

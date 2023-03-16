@@ -2,32 +2,32 @@
     <aside>
         <h5>Top categorieen</h5>
         <div class="side-bar__holder">
-            <SideBarItemSkeleton v-if="!topCategories"/>
-            <SideBarItem v-else v-for="category in topCategories" :category="category"/>
+            <sideBarItemSkeleton v-if="!topCategories"/>
+            <sideBarItem v-else v-for="category in topCategories" :category="category"/>
         </div>
     </aside>
 </template>
 
 <style>
-aside {
-    height: 100%;
-    min-width: 20%;
-    background-color: white;
-    padding: 0.8rem;
-    display: grid;
-    gap: 1rem;
-}
+    aside {
+        height: 100%;
+        min-width: 20%;
+        background-color: white;
+        padding: 0.8rem;
+        display: grid;
+        gap: 1rem;
+    }
 
-.side-bar__holder {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-}
+    .side-bar__holder {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
 </style>
 
 <script setup>
-import SideBarItemSkeleton from './SideBarItemSkeleton.vue'
-import SideBarItem from './SideBarItem.vue'
+    import sideBarItemSkeleton from './SideBarItemSkeleton.vue'
+    import sideBarItem from './SideBarItem.vue'
 </script>
 
 

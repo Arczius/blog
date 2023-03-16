@@ -1,14 +1,14 @@
 <template>
     <div>
-        {{ category.name }}
+        {{category.name}}
     </div>
 </template>
 
 <script>
-export default {
-    name: "SideBarItem",
-    props: [
-        'category'
-    ]
-}
+    export default {
+        name: "SideBarItem",
+        props: [
+            'category'
+        ]
+    }
 </script>

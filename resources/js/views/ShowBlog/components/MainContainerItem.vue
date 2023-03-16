@@ -97,11 +97,10 @@
 				})
                  /* reload the page */
                  .then((response) =>  {
-                    if (this.$route.path == '/home') {
-                        this.$emit("refreshHome");
-                    }else{
-                        this.$emit("refreshUser");
-                    }
+                    this.$route.path == "home" 
+                        ? this.$emit("refreshHome") 
+                            : this.$emit("refreshUser");
+
                     this.blog.id = response.data.id
                 })
                 .catch(function (error) {
@@ -123,11 +122,10 @@
                 },)
                 /* reload the page */
                 .then((response) =>  {
-                    if (this.$route.path == '/home') {
-                        this.$emit("refreshHome");
-                    }else{
-                        this.$emit("refreshUser");
-                    }
+                    this.$route.path == "home" 
+                        ? this.$emit("refreshHome") 
+                            : this.$emit("refreshUser");
+
                     this.blog.id = response.data.id
                 })
                 .catch(function (error) {
@@ -145,11 +143,10 @@
                     })
                     /* reload the page */
                     .then((response) =>  {
-                        if (this.$route.path == '/home') {
-                        this.$emit("refreshHome");
-                    }else{
-                        this.$emit("refreshUser");
-                    }
+                        this.$route.path == "home" 
+                        ? this.$emit("refreshHome") 
+                            : this.$emit("refreshUser");
+                            
                         this.blog.id = response.data.id
                     })
                     .catch(function (error) {
