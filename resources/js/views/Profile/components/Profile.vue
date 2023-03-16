@@ -110,9 +110,9 @@
                     })
             },
 
-            /* check if the current user is folllowing the other user */
+            /* check if the current user is following the other user */
             checkFollow(){
-                if(this.$route.params.id !== localStorage.getItem('userID') && !(this.users[0].user.id && this.users[0].user.id !== localStorage.getItem('userID')) )
+                if(this.$route.params.id !== localStorage.getItem('userID') && !(!this.users && this.users[0].user.id && this.users[0].user.id !== localStorage.getItem('userID')) )
                 {
                     axios.post('/api/follow/check', {
                         'current_user_id': localStorage.getItem('userID'),
