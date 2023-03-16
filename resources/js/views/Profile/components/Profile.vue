@@ -105,7 +105,7 @@
                     })
             },
             checkFollow(){
-                if(this.$route.params.id !== localStorage.getItem('userID'))
+                if(this.$route.params.id !== localStorage.getItem('userID') && !(this.users[0].user.id && this.users[0].user.id !== localStorage.getItem('userID')) )
                 {
                     axios.post('/api/follow/check', {
                         'current_user_id': localStorage.getItem('userID'),
