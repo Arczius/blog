@@ -1,8 +1,8 @@
 <template>
     <main>
-        <MainContainerItemSkeleton v-if="categories === null"/>
+        <mainContainerItemSkeleton v-if="categories === null"/>
 
-        <MainContainerItem v-else v-for="category in categories" :category="category"/>
+        <mainContainerItem v-else v-for="category in categories" :category="category"/>
 
     </main>
 </template>
@@ -18,33 +18,33 @@ main {
 </style>
 
 <script setup>
-import MainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
-import MainContainerItem from './MainContainerItem.vue';
-import axios from 'axios'
+    import mainContainerItemSkeleton from './MainContainerItemSkeleton.vue'
+    import mainContainerItem from './MainContainerItem.vue';
+    import axios from 'axios'
 </script>
 
 
 <script>
-export default {
-    name: "MainContainer",
-    data(){
-        return {
-            'categories': null,
+    export default {
+        name: "MainContainer",
+        data(){
+            return {
+                'categories': null,
+            }
+        },
+        methods: {
+            getAllCategories(){
+                axios.get('/api/category')
+                    .then((response) => {
+                        this.categories = response.data.categories
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            }
+        },
+        mounted(){
+            this.getAllCategories()
         }
-    },
-    methods: {
-        getAllCategories(){
-            axios.get('/api/category')
-                .then((response) => {
-                    this.categories = response.data.categories
-                })
-                .catch((error) => {
-                    console.warn(error)
-                })
-        }
-    },
-    mounted(){
-        this.getAllCategories()
     }
-}
 </script>

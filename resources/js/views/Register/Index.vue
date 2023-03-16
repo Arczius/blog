@@ -1,15 +1,15 @@
 <template>
     <div class="register__holder">
-        <RegisterForm/>
+        <registerForm/>
     </div>
 </template>
 
 <script setup>
-import RegisterForm from "./components/RegisterForm.vue";
+    import registerForm from "./components/RegisterForm.vue";
 </script>
 
 <script>
-export default {
-    name: "Index",
-}
+    export default {
+        name: "Index",
+    }
 </script>

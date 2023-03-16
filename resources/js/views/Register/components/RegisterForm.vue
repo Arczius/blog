@@ -52,50 +52,49 @@
 </template>
 
 <script setup>
-import axios from 'axios'
+    import axios from 'axios'
 </script>
 
 <script>
+    export default {
+        name: "RegisterForm",
 
-export default {
-    name: "RegisterForm",
-
-    data(){
-        return {
-            'handle': null,
-            'password': null,
-            'checkbox': false,
-            'name': null,
-            'email': null,
-            'errors': null,
-        }
-    },
-
-    methods: {
-        sendRegisterRequest(){
-            if(this.checkbox){
-
-                axios.post("/api/auth/create", {
-                    'username': this.name,
-                    'handle': this.handle,
-                    'email': this.email,
-                    'password': this.password,
-                })
-                .then((response) => {
-
-                })
-                .catch((error) => {
-                    switch(error.response.status){
-                        case 400:
-                            this.errors = error.response.data.errors
-                            break;
-                        }
-                    })
-                }
-                else {
-
-                }
+        data(){
+            return {
+                'handle': null,
+                'password': null,
+                'checkbox': false,
+                'name': null,
+                'email': null,
+                'errors': null,
             }
-    },
-}
+        },
+
+        methods: {
+            sendRegisterRequest(){
+                if(this.checkbox){
+
+                    axios.post("/api/auth/create", {
+                        'username': this.name,
+                        'handle': this.handle,
+                        'email': this.email,
+                        'password': this.password,
+                    })
+                    .then((response) => {
+
+                    })
+                    .catch((error) => {
+                        switch(error.response.status){
+                            case 400:
+                                this.errors = error.response.data.errors
+                                break;
+                            }
+                        })
+                    }
+                    else {
+
+                    }
+                }
+        },
+    }
 </script>

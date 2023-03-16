@@ -1,13 +1,15 @@
 <template>
-    <mainContainerBanner v-if="users !== null" :users="users"/>
+    <div>
+        <mainContainerBanner v-if="users !== null" :users="users"/>
+        
+        <main class="profile__main">
+            <mainContainerItem v-if="users !== null" :users="users"/>
 
-    <main class="profile__main">
-        <mainContainerItem v-if="users !== null" :users="users"/>
-
-        <div class="profile profile__categories">
-            <sideBarCategories :users="users"/>
-        </div>
-    </main>
+            <div class="profile profile__categories">
+                <sideBarCategories v-if="users" :users="users"/>
+            </div>
+        </main>
+    </div>
 </template>
 
 <script setup>
@@ -37,17 +39,32 @@
                         console.warn(error)
                     })
             },
+
+            getUserProfileDetail(){
+                axios.get('/api/profile/detail/user/' + this.id)
+                    .then((response) => {
+                        this.users = response.data.users
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            },
         },
 
         mounted(){
-            this.getUserProfile()
+            this.$route.path == "/detail/" + this.id 
+                ? this.getUserProfileDetail() 
+                    : this.getUserProfile();
         },
 
         watch: {
 	        $route () {
                 this.users = null;
                 this.id = this.$route.params.id
-                this.getUserProfile()
+
+                this.$route.path == "/detail/" + this.id 
+                    ? this.getUserProfileDetail() 
+                        : this.getUserProfile();
 	        }
         }
     }

@@ -78,6 +78,7 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
 /* route for the profile */
 Route::prefix('profile')->controller(UserController::class)->group(function () {
     Route::get('/user/{id}', 'getUserProfile');
+    Route::get('/detail/user/{id}', 'getUserProfileDetail');
 });
 
 /* route for the followers */

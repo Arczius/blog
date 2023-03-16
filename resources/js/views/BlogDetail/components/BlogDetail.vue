@@ -10,8 +10,6 @@
 
             <div class="blog__detail__header--inner-right">
                 <span class="blog__header__text blog__header__text--timestamp">{{blogs[0].created_at}}</span>
-                <!-- <button @click="editBlog()"><img class="blog__detail__header__image blog__detail__header__image--edit" :src="defaultEditIcon"></button>
-                <button @click="deleteBlog()"><img class="blog__detail__header__image blog__detail__header__image--delete" :src="defaultDeleteIcon"></button> -->
             </div>
         </div>
 
@@ -47,7 +45,6 @@
 <script setup>
     import defaultBlogPicture from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg'
     import defaultCommentIcon from '../../../../assets/writing.png'
-    import defaultEditIcon from '../../../../assets/draw.png'
     import defaultDeleteIcon from '../../../../assets/bin.png'
 </script>
 
@@ -60,30 +57,13 @@
             'user'
         ],
 
+        data(){
+            return{
+                comment: []
+            }
+        },
+
         methods: {
-            /* go to the destroy route with the id */
-            deleteBlog() {
-            axios.delete('/api/blog/destroy/' + this.blogs[0].id, {
-                    'id': this.id,
-                },
-                {
-                    headers: { "Content-Type" : "application/json"}
-                })
-                /* reload the page */
-                .then((response) =>  {
-                    location.reload();
-                    this.blogs[0].id = response.data.id
-                })
-                .catch(function (error) {
-                    console.warn(error);
-                });
-            },
-
-            /* go to the edit route */
-            editBlog(){
-                this.$router.push('/edit/' + this.blogs[0].id);
-            },
-
             /* add a comment to a blog */
             addComment() {
 			    axios.post('/api/blog/posts/' + this.posts_id + '/comment', {
