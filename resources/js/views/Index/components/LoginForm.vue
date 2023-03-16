@@ -32,7 +32,7 @@
         <div class="login__bottom-links">
             <div>
                 <router-link class="login__bottom-links--password-forget" to="/password-forget">
-                    <img :src="PadLock">
+                    <img :src="padLock">
                     Wachtwoord vergeten
                 </router-link>
             </div>
@@ -41,19 +41,16 @@
             </div>
 
         </div>
-
-
     </div>
 </template>
 
 <script setup>
-import PadLock from '../../../../assets/padlock.png'
-import axios from 'axios'
+    import padLock from '../../../../assets/padlock.png'
+    import axios from 'axios'
 </script>
 
 <script>
-
-export default {
+  export default {
     name: "LoginForm",
 
     data(){
@@ -91,19 +88,22 @@ export default {
                                             : '/home'
                                 )
                             })
-                    })
-                    .catch((error) => {
-                        switch(error.response.status){
-                            case 400:
-                                this.errors = error.response.data.errors
-                                break;
-                        }
-                    })
+                                .then((response) => {
+                                    this.$router.push('/home')
+                                })
+                        })
+                        .catch((error) => {
+                            switch(error.response.status){
+                                case 400:
+                                    this.errors = error.response.data.errors
+                                    break;
+                            }
+                        })
+                }
+                else {
+                    alert("je moet akkoord gaan met de privacyverklaring")
+                }
             }
-            else {
-                alert("je moet akkoord gaan met de privacyverklaring")
-            }
-        }
-    },
-}
+        },
+    }
 </script>

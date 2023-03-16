@@ -6,7 +6,7 @@
 
 <script setup>
     import blogCreate from './BlogCreate.vue';
-    import Tyler from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg';
+    import tyler from '../../../../assets/tyler-nix-PQeoQdkU9jQ-unsplash.jpg';
 </script>
 
 <script>
@@ -26,10 +26,10 @@
 
         methods: {
             getUserProfilePicture(){
-                if(this.profile_picture === null || this.profile_picture === Tyler || window.location.pathname === "/home"){
+                if(this.profile_picture === null || this.profile_picture === tyler || window.location.pathname === "/home"){
 
                     this.profile_picture = ( this.profile_picture === null )
-                        ? Tyler
+                        ? tyler
                             : this.profile_picture
 
                     const token = localStorage.getItem('token')

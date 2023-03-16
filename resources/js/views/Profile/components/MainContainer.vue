@@ -37,17 +37,28 @@
                         console.warn(error)
                     })
             },
+
+            getUserProfileDetail(){
+                axios.get('/api/profile/detail/user/' + this.id)
+                    .then((response) => {
+                        this.users = response.data.users
+                    })
+                    .catch((error) => {
+                        console.warn(error)
+                    })
+            },
         },
 
         mounted(){
-            this.getUserProfile()
+            this.$route.path == "/detail/" + this.id ?  this.getUserProfileDetail() :    this.getUserProfile();
         },
 
         watch: {
 	        $route () {
+                this.$route.path == "/detail/" + this.id ?  this.getUserProfileDetail() :    this.getUserProfile();
+                
                 this.users = null;
                 this.id = this.$route.params.id
-                this.getUserProfile()
 	        }
         }
     }

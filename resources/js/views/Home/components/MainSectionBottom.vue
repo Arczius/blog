@@ -1,7 +1,7 @@
 <template>
-    <MainContainer/>
+    <mainContainer/>
 </template>
 
 <script setup>
-import MainContainer from '../../ShowBlog/components/MainContainer.vue';
+    import mainContainer from '../../ShowBlog/components/MainContainer.vue';
 </script>
