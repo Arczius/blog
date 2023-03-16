@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <template v-if="this.$route.path === '/profile/user/' + this.$route.params.id">
         <mainContainerBanner v-if="users !== null" :users="users"/>
-        
+
         <main class="profile__main">
             <mainContainerItem v-if="users !== null" :users="users"/>
 
@@ -9,7 +9,21 @@
                 <sideBarCategories v-if="users" :users="users"/>
             </div>
         </main>
-    </div>
+    </template>
+
+    <template v-else>
+        <div>
+            <mainContainerBanner v-if="users !== null" :users="users"/>
+            
+            <main class="profile__main">
+                <mainContainerItem v-if="users !== null" :users="users"/>
+        
+                <div class="profile profile__categories">
+                    <sideBarCategories v-if="users" :users="users"/>
+                </div>
+            </main>
+        </div>
+    </template>
 </template>
 
 <script setup>
