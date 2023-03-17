@@ -22,6 +22,7 @@
             }
         },
         methods: {
+            /* check the window height for the footer */
             footerWindowHeightCheck(){
 
                 this.footerClassList = (window.innerHeight > document.body.offsetHeight)

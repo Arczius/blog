@@ -40,7 +40,7 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::get('/detail/{id}', 'getBlogDetail');
     Route::post('/info/{id}', 'getCurrentBlogInfo');
 
-    /* get the image from blog*/
+    /* get the image from the blog */
     Route::post('/file/{id}', 'getBlogImage');
 
     /* create / edit / delete for the blog post */
@@ -53,6 +53,7 @@ Route::prefix('blog')->controller(BlogController::class)->group(function () {
     Route::delete('/destroy/comment/{id}', 'destroyComment');
 });
 
+/* route for the top posts */ 
 Route::prefix('post')->controller(PostsController::class)->group(function () {
     Route::get('/top/{amount}', 'topPosts');
     Route::get('/top', 'topPosts');

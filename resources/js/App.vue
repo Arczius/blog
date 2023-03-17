@@ -52,17 +52,18 @@ import public_routes from "./router/public_routes.js"
                         'token': token,
                         'userID': userID
                     })
-                        .then((response) => {
+                    
+                    .then((response) => {
 
-                            if(!response.data.authorized) {
-                                localStorage.clear()
+                        if(!response.data.authorized) {
+                            localStorage.clear()
 
-                                this.notifyUnauthorized()
-                            }
-                            else {
-                                this.userID = userID
-                            }
-                        })
+                            this.notifyUnauthorized()
+                        }
+                        else {
+                            this.userID = userID
+                        }
+                    })
                 }
             },
 

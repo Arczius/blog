@@ -55,6 +55,12 @@ class BlogController extends Controller
             'user_id' => ['required']
         ]);
 
+        $data['status'] = 'failed';
+
+        if ($validator->fails()) {
+            return response()->json($data);
+        }
+
         $blog = new Posts();
         $blog->title = $request->title;
         $blog->description = $request->description;
@@ -64,10 +70,6 @@ class BlogController extends Controller
         $response = [
             'id' => $blog->id
         ];
-
-        if ($validator->fails()) {
-            return response()->json($response);
-        }
 
         return response()->json($response);
     }
