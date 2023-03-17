@@ -12,6 +12,7 @@
                 <router-link to="/posts/top">Top posts</router-link>
                 <router-link to="/user/edit">Wijzig profiel</router-link>
 
+                <span v-if="userID" @click="logout()" class="logout">Uitloggen</span>
                 <!-- getting you to your own profile when you click on your profile picture, if you're logged in -->
                 <img v-if="!userID" :src="userIcon" alt="default user icon">
                 <router-link v-else :to="'/profile/user/' + userID">
@@ -38,5 +39,12 @@
                 default: null,
             }
         },
+        methods: {
+            logout(){
+                localStorage.clear()
+                this.$router.push("/")
+                location.reload()
+            }
+        }
     }
 </script>

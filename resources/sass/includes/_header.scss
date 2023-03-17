@@ -33,7 +33,12 @@
         gap: 1.8rem;
 
         a {
-            color: #fff;
+            color: $white-colour;
+        }
+
+        .logout {
+            color: $white-colour;   
+            cursor: pointer;
         }
 
         img {
