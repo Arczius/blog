@@ -103,9 +103,9 @@
                     'user_id': this.user_id,
                     'posts_id': this.posts_id
 				})
-                 /* reload the page */
+                /* reload the page based on the route */
                  .then((response) =>  {
-                    this.$route.path == "home" 
+                    this.$route.path === "/home" 
                         ? this.$emit("refreshHome") 
                             : this.$emit("refreshUser");
 
@@ -130,7 +130,7 @@
                 },)
                 /* reload the page based on the route */
                 .then((response) =>  {
-                    this.$route.path == "home" 
+                    this.$route.path === "/home" 
                         ? this.$emit("refreshHome") 
                             : this.$emit("refreshUser");
 
