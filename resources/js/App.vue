@@ -28,12 +28,14 @@ import public_routes from "./router/public_routes.js"
         },
 
         methods: {
+            /* show an alert if the user is not logged in */
             notifyUnauthorized(){
                 alert('you must be logged in to view this page')
                 this.$router.push("/")
             },
 
             /**
+            * authorize the user
             * @returns {void}
             */
             authorize(){
@@ -64,6 +66,7 @@ import public_routes from "./router/public_routes.js"
                 }
             },
 
+            /* get the profile picture of the current logged in user */
             getUserProfilePicture(){
                 if(this.profile_picture === null || this.profile_picture === tyler || window.location.pathname === "/home"){
 
@@ -97,6 +100,7 @@ import public_routes from "./router/public_routes.js"
                 }
             },
 
+            /* set the title of the window tab based on the current used route */
             setTitle() {
                 document.title = (this.$route.name)
                     ? this.$route.name

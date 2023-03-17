@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <!-- if the current page is the detail page show this div  -->
+        <!-- if the current page is the detail page show this div (the users[] array does not exist on the personal profile) -->
         <div v-else>
             <div class="profile__picture">
                 <img class="profile__picture profile__picture--image" :src="(users[0].user.profile_picture !== '') ? '../../storage/ProfilePictures/' + users[0].user.profile_picture : defaultProfilePicture" alt="profileImage" loading="lazy">
@@ -68,6 +68,7 @@
                     ShowUsers: false,
                     UserFollows: null,
                 },
+
                 following: {
                     Amount: 0,
                     Users: null,
