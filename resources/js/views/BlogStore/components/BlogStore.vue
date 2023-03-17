@@ -110,7 +110,7 @@
 
             /* go to the edit route */
             sendEditRequest() {
-			    axios.post('/api/blog/edit/' + this.id, {
+			    axios.post('/api/blog/edit/' + this.$route.params.id, {
                     'title': this.title,
                     'description': this.description,
 				},
@@ -120,12 +120,11 @@
 				)
                 .then((response) =>  {
                     this.id = response.data.id
-                    this.$router.push("/profile/user/" + this.user.id);
                 })
                  /* send the files to the file route */
                 .then(() => {
                     if(this.coverFile) {
-					axios.post('/api/blog/file/' + this.id, {
+					axios.post('/api/blog/file/' + this.$route.params.id, {
 						'coverFile': this.coverFile,
                         'file': this.file
 					},

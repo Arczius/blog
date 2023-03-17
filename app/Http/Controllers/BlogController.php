@@ -188,12 +188,6 @@ class BlogController extends Controller
             'description' => [new descriptionPattern(), 'max:255'],
         ]);
 
-        $data['status'] = 'failed';
-
-        if ($validator->fails()) {
-            return response()->json($data);
-        }
-
         $blog = Posts::find($id);
 
         if($blog){

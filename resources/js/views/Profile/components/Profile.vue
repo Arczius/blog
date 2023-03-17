@@ -104,6 +104,7 @@
                 this.$route.path == '/profile/user/' + this.$route.params.id 
                     ? param = this.users.id 
                         : param = this.users[0].user.id;
+
                 axios.get("/api/follow/following/single/" + param)
                     .then((response) => {
                         this.following.Amount = response.data.following_amount
@@ -139,6 +140,7 @@
             doFollow(){
                 const item = this.followers.UserFollows
                 this.followers.UserFollows = null
+                
                 axios.post('/api/follow', {
                     'token': localStorage.getItem('token'),
                     'userid': localStorage.getItem('userID'),
