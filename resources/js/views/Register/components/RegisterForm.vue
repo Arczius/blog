@@ -80,7 +80,7 @@
                         'password': this.password,
                     })
                     .then((response) => {
-
+                        this.$router.push("/")
                     })
                     .catch((error) => {
                         switch(error.response.status){
